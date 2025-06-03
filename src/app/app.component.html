@@ -1,0 +1,90 @@
+<div>
+  <div>
+    <p-menubar [model]="items">
+      <ng-template #start>
+        <!-- Ícono SVG de ejemplo funcional -->
+        <img src="assets/images.png" width="35" height="35" alt="Logo" />
+      </ng-template>
+
+      <ng-template #item let-item let-root="root">
+        <a pRipple class="flex items-center p-menubar-item-link">
+          <span>{{ item.label }}</span>
+          <p-badge *ngIf="item.badge" [ngClass]="{ 'ml-auto': !root, 'ml-2': root }" [value]="item.badge" />
+          <span *ngIf="item.shortcut" class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1">{{ item.shortcut }}</span>
+          <i *ngIf="item.items" [ngClass]="['ml-auto pi', root ? 'pi-angle-down' : 'pi-angle-right']"></i>
+        </a>
+      </ng-template>
+
+      <ng-template #end>
+        <div class="flex items-center gap-2">
+          <p-floatlabel variant="on">
+            <p-iconfield>
+              <p-inputicon class="pi pi-search" />
+              <input pInputText id="on_label" [(ngModel)]="value3" autocomplete="off" />
+            </p-iconfield>
+            <label for="on_label">¿Qué estás buscando?</label>
+          </p-floatlabel>
+        </div>
+      </ng-template>
+    </p-menubar>
+  </div>
+
+  <div>
+
+  </div>
+
+  <!-- Pie de página -->
+<footer class="bg-black text-white py-10 mt-10">
+  <div class="footer-grid max-w-7xl mx-auto px-6 text-sm">
+    <!-- Columna 1 -->
+    <div>
+      <h5 class="font-bold mb-4">Alianza Universidad</h5>
+      <p class="mb-2">Obtén un 10% de descuento en tu primer pedido</p>
+      <input type="email" placeholder="Ingresa tu correo electrónico" class="mt-2 p-2 w-full text-black rounded" />
+    </div>
+
+    <!-- Columna 2 -->
+    <div>
+      <h5 class="font-bold mb-4">Soporte</h5>
+      <p>Av. Universitaria Nº501</p>
+      <p>alianzauniversidadshop.com</p>
+      <p>+0801-68888-9299</p>
+    </div>
+
+    <!-- Columna 3 -->
+    <div>
+      <h5 class="font-bold mb-4">Cuenta</h5>
+      <p class="mb-1">Mi cuenta</p>
+      <p class="mb-1">Iniciar sesión / Registrarse</p>
+      <p class="mb-1">Carrito</p>
+      <p class="mb-1">Lista de deseos</p>
+    </div>
+
+    <!-- Columna 4 -->
+    <div>
+      <h5 class="font-bold mb-4">Enlace rápido</h5>
+      <p class="mb-1">Política de privacidad</p>
+      <p class="mb-1">Términos de uso</p>
+      <p class="mb-1">Preguntas frecuentes</p>
+      <p class="mb-1">Contacto</p>
+    </div>
+
+    <!-- Columna 5 -->
+    <div>
+      <h5 class="font-bold mb-4">Descargar la aplicación</h5>
+      <p class="mb-2">Escanea el código QR para descargar.</p>
+      <div class="flex items-start space-x-4">
+        <img src="assets/frame.png" alt="QR" class="footer-img-qr" />
+        <img src="assets/pngegga.png" alt="App Store" class="footer-img-store" />
+        <img src="assets/pngegg.png" alt="Play Store" class="footer-img-store" />
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center text-gray-400 mt-8">
+    © 2025 Alianza Universidad. Todos los derechos reservados.
+  </div>
+</footer>
+
+</div>
+    <router-outlet />

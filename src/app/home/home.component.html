@@ -1,0 +1,43 @@
+<div class="card">
+    <p-galleria [value]="images" [showIndicators]="true"
+    [showThumbnails]="false" [changeItemOnIndicatorHover]="true"
+    [containerStyle]="{ 'max-width': '900px' }">
+        <ng-template #item let-item>
+            <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+        </ng-template>
+    </p-galleria>
+
+</div>
+<div>
+  <h1>Crear Cuenta</h1>
+  <p>Ingrese sus datos:</p>
+</div>
+ <div class="card flex justify-center">
+    <div pFocusTrap class="w-full sm:w-80 flex flex-col gap-6">
+        <p-iconfield>
+            <p-inputicon>
+                <i class="pi pi-user"></i>
+            </p-inputicon>
+            <input type="text" pInputText id="input" [(ngModel)]="name" type="text" placeholder="Name" [pAutoFocus]="true" [fluid]="true" />
+        </p-iconfield>
+
+        <p-iconfield>
+            <p-inputicon>
+                <i class="pi pi-envelope"> </i>
+            </p-inputicon>
+            <input type="text" pInputText id="email" [(ngModel)]="email" type="email" placeholder="Email" [fluid]="true" />
+        </p-iconfield>
+        <p-iconfield>
+            <p-inputicon>
+                <i class="pi pi-user"> </i>
+            </p-inputicon>
+            <input type="password" pInputText id="password" [(ngModel)]="password" type="password" placeholder="Contraseña" [fluid]="true" />
+        </p-iconfield>
+
+        <p-button type="submit" label="Crear cuenta" class="mt-2 " styleClass="w-full" />
+        <!---->
+        <div>
+            <p>¿Ya tienes cuenta?</p>
+            <p-button label="Acceder" [raised]="true" severity="secondary" />
+        </div>
+</div>

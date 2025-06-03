@@ -1,0 +1,16 @@
+.footer-img-qr {
+  width: 64px; /* equivalente a w-16 */
+  height: 64px; /* equivalente a h-16 */
+  object-fit: contain;
+}
+
+.footer-img-store {
+  height: 32px; /* equivalente a h-8 */
+  object-fit: contain;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
