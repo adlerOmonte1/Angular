@@ -1,43 +1,50 @@
 <div class="card">
     <p-galleria [value]="images" [showIndicators]="true"
     [showThumbnails]="false" [changeItemOnIndicatorHover]="true"
-    [containerStyle]="{ 'max-width': '900px' }">
+    [containerStyle]="{ 'max-width': '1000px' }">
         <ng-template #item let-item>
             <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
         </ng-template>
     </p-galleria>
+</div>
 
+<div class="card flex justify-center align-center gap-4">
+    <p-message severity="success">
+        <ng-template #icon>
+            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+        </ng-template>
+        <span class="ml-2">OFERTAS</span>
+    </p-message>
 </div>
 <div>
-  <h1>Crear Cuenta</h1>
-  <p>Ingrese sus datos:</p>
-</div>
- <div class="card flex justify-center">
-    <div pFocusTrap class="w-full sm:w-80 flex flex-col gap-6">
-        <p-iconfield>
-            <p-inputicon>
-                <i class="pi pi-user"></i>
-            </p-inputicon>
-            <input type="text" pInputText id="input" [(ngModel)]="name" type="text" placeholder="Name" [pAutoFocus]="true" [fluid]="true" />
-        </p-iconfield>
-
-        <p-iconfield>
-            <p-inputicon>
-                <i class="pi pi-envelope"> </i>
-            </p-inputicon>
-            <input type="text" pInputText id="email" [(ngModel)]="email" type="email" placeholder="Email" [fluid]="true" />
-        </p-iconfield>
-        <p-iconfield>
-            <p-inputicon>
-                <i class="pi pi-user"> </i>
-            </p-inputicon>
-            <input type="password" pInputText id="password" [(ngModel)]="password" type="password" placeholder="Contraseña" [fluid]="true" />
-        </p-iconfield>
-
-        <p-button type="submit" label="Crear cuenta" class="mt-2 " styleClass="w-full" />
-        <!---->
-        <div>
-            <p>¿Ya tienes cuenta?</p>
-            <p-button label="Acceder" [raised]="true" severity="secondary" />
+  <h2>Ventas Relampago</h2>
+    <p-fluid class="card flex flex-wrap gap-4">
+        <div class="flex-auto">
+            <label for="calendar-12h" class="font-bold block mb-2"> 12h Format </label>
+            <p-datepicker inputId="calendar-12h" [(ngModel)]="datetime12h" [showTime]="true" [hourFormat]="'12'" />
         </div>
+    </p-fluid>
+</div>
+
+<div class="card">
+    <p-carousel [value]="productos" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+        <ng-template let-product #item>
+            <div class="border border-surface rounded-border m-2 p-4">
+                <div class="mb-4">
+                    <div class="relative mx-auto">
+                        <img width="200" height="200" src="https://primefaces.org/cdn/primeng/images/demo/producto/{{ product.image }}" [alt]="product.name" class="w-full rounded-border" />
+
+                    </div>
+                </div>
+                <div class="mb-4 font-medium">{{ product.name }}</div>
+                <div class="flex justify-between items-center">
+                    <div class="mt-0 font-semibold text-xl">{{ '$' + product.price }}</div>
+                    <span>
+                        <p-button icon="pi pi-heart" severity="secondary" [outlined]="true" />
+                        <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
+                    </span>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
 </div>

@@ -26,7 +26,6 @@ import { HomeComponent } from './home/home.component';
 import { FocusTrapModule } from 'primeng/focustrap';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { CheckboxModule } from 'primeng/checkbox';
-import { PortadaComponent } from './portada/portada.component';
 import { MessageModule } from 'primeng/message';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DatePicker } from 'primeng/datepicker';
@@ -40,7 +39,6 @@ import { ListaproductosComponent } from './listaproductos/listaproductos.compone
     AppComponent,
     LoginComponent,
     HomeComponent,
-    PortadaComponent,
     ListaproductosComponent,
   ],
   imports: [

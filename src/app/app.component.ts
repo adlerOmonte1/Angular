@@ -23,7 +23,7 @@ export class AppComponent {
                 label: 'Inicio',
                 icon: 'pi pi-home',
                 command: () => {
-                    this.router.navigate(['/portada']);
+                    this.router.navigate(['/inicio']);
                 }
             },
 
@@ -99,7 +99,7 @@ export class AppComponent {
                 label: 'Mi cuenta',
                 icon: 'pi pi-home',
                 command: () => {
-                    this.router.navigate(['/inicio']);
+                    this.router.navigate(['/login']);
                 }
             },
             {
