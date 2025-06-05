@@ -23,7 +23,7 @@ export class AppComponent {
                 label: 'Inicio',
                 icon: 'pi pi-home',
                 command: () => {
-                    this.router.navigate(['/installation']);
+                    this.router.navigate(['/portada']);
                 }
             },
 
@@ -61,6 +61,13 @@ export class AppComponent {
                           this.router.navigate(['/installation']);
                         }
                     },
+                    {
+                        label: 'Productos',
+                        icon: 'pi pi-pencil',
+                        command: () => {
+                          this.router.navigate(['/productos']);
+                        }
+                    },
                 ],
             },
 
@@ -81,7 +88,7 @@ export class AppComponent {
             },
 
             {
-                label: 'Histiria',
+                label: 'Historia',
                 icon: 'pi pi-home',
                 command: () => {
                     this.router.navigate(['/installation']);
@@ -92,7 +99,7 @@ export class AppComponent {
                 label: 'Mi cuenta',
                 icon: 'pi pi-home',
                 command: () => {
-                    this.router.navigate(['/installation']);
+                    this.router.navigate(['/inicio']);
                 }
             },
             {

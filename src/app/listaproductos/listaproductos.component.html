@@ -1,0 +1,47 @@
+
+
+<div>
+  <div>
+    <h1>LISTA DE PRODUCTOS</h1>
+  </div>
+
+  <p-table
+  [value]="produc"
+  stripedRows
+  [tableStyle]="{ 'min-width': '60rem' }">
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Talla</th>
+      <th>Stock</th>
+      <th>Imagen</th>
+      <th>Usuario</th>
+      <th>Categoría</th>
+      <th>Almacén</th>
+      <th>Proveedor</th>
+      <th>Promoción</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-producto>
+    <tr>
+      <td>{{ producto.id_producto }}</td>
+      <td>{{ producto.nombre }}</td>
+      <td>{{ producto.descripcion }}</td>
+      <td>{{ producto.precio }}</td>
+      <td>{{ producto.talla }}</td>
+      <td>{{ producto.stock }}</td>
+      <td>{{ producto.imagen }}</td>
+      <td>{{ producto.usuario }}</td>
+      <td>{{ producto.categoria }}</td>
+      <td>{{ producto.almacen }}</td>
+      <td>{{ producto.proveedor }}</td>
+      <td>{{ producto.promocion }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+</div>

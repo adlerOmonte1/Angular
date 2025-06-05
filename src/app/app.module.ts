@@ -33,6 +33,7 @@ import { DatePicker } from 'primeng/datepicker';
 import { Fluid } from 'primeng/fluid';
 import { CalendarModule } from 'primeng/calendar';
 import { CarouselModule } from 'primeng/carousel';
+import { ListaproductosComponent } from './listaproductos/listaproductos.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CarouselModule } from 'primeng/carousel';
     LoginComponent,
     HomeComponent,
     PortadaComponent,
+    ListaproductosComponent,
   ],
   imports: [
     CarouselModule,
