@@ -14,3 +14,9 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
 }
+/* Aplica la fuente a todo el cuerpo de la página */
+footer {
+  font-family: 'Roboto',serif
+
+
+}

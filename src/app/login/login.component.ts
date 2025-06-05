@@ -19,7 +19,7 @@ export class LoginComponent {
       // Simula autenticación
       localStorage.setItem('token', 'DESARROLLOWEB');
 
-      // Redirige a inicio (o donde tú quieras)
+      // Redirige a inicio
       this.router.navigate(['/inicio']).then(() => {
         window.location.reload(); // Para que AppComponent se actualice
       });
