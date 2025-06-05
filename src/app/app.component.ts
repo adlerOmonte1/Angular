@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,14 @@ export class AppComponent {
 
   value3: string | undefined;
 
-  constructor(private router: Router) {}
+  loggedIn: boolean = false;
+
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
+
+        this.loggedIn = this.authService.isAuthenticated();
+
         this.items = [
             {
                 label: 'Inicio',
@@ -100,6 +106,14 @@ export class AppComponent {
                 icon: 'pi pi-home',
                 command: () => {
                     this.router.navigate(['/login']);
+                }
+            },
+            {
+                label: 'Cerrar Sesión',
+                icon: 'pi pi-sign-out',
+                command: () => {
+                  localStorage.removeItem('token');
+                  window.location.href = '/login';
                 }
             },
             {

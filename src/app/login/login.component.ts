@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { imagenServicio } from '../../service/imagenServicio';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,30 +7,24 @@ import { imagenServicio } from '../../service/imagenServicio';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit{
-  images: any[] =[];
-  // Definicion de las propiedades del formulario
-  name: string = '';
-  email: string = '';
-  password: string = '';
-  accept: boolean = false;
-  constructor(private imagenServicio: imagenServicio){
-    this.images = [
-      {
-        itemImageSrc: 'https://www.radionacional.gob.pe/sites/default/files/udh.jpg',
-        alt:'Imagen1',
-        Title:'Titulo1'
-      },
-      {
-        itemImageSrc: 'https://cdn.futbolperuano.com/sdi/2025/01/24/los-delanteros-de-alianza-universidad-para-la-liga-1-del-2025-1270620.jpg',
-        alt: 'Descripción 2',
-        title: 'Título 2'
+
+export class LoginComponent {
+  username: string = "";
+  password: string = "";
+
+  constructor(private router: Router) {}
+
+  login() {
+    if (this.username && this.password) {
+      // Simula autenticación
+      localStorage.setItem('token', 'DESARROLLOWEB');
+
+      // Redirige a inicio (o donde tú quieras)
+      this.router.navigate(['/inicio']).then(() => {
+        window.location.reload(); // Para que AppComponent se actualice
+      });
+    } else {
+      alert("Por favor completa todos los campos.");
     }
-    ]
-
   }
-  ngOnInit(){
-  }
-
-
 }

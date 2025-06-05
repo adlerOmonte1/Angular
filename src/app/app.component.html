@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="loggedIn; else loginOnly">
   <div>
     <p-menubar [model]="items">
       <ng-template #start>
@@ -43,48 +43,51 @@
       <input type="email" placeholder="Ingresa tu correo electrónico" class="mt-2 p-2 w-full text-black rounded" />
     </div>
 
-    <!-- Columna 2 -->
-    <div>
-      <h5 class="font-bold mb-4">Soporte</h5>
-      <p>Av. Universitaria Nº501</p>
-      <p>alianzauniversidadshop.com</p>
-      <p>+0801-68888-9299</p>
-    </div>
-
-    <!-- Columna 3 -->
-    <div>
-      <h5 class="font-bold mb-4">Cuenta</h5>
-      <p class="mb-1">Mi cuenta</p>
-      <p class="mb-1">Iniciar sesión / Registrarse</p>
-      <p class="mb-1">Carrito</p>
-      <p class="mb-1">Lista de deseos</p>
-    </div>
-
-    <!-- Columna 4 -->
-    <div>
-      <h5 class="font-bold mb-4">Enlace rápido</h5>
-      <p class="mb-1">Política de privacidad</p>
-      <p class="mb-1">Términos de uso</p>
-      <p class="mb-1">Preguntas frecuentes</p>
-      <p class="mb-1">Contacto</p>
-    </div>
-
-    <!-- Columna 5 -->
-    <div>
-      <h5 class="font-bold mb-4">Descargar la aplicación</h5>
-      <p class="mb-2">Escanea el código QR para descargar.</p>
-      <div class="flex items-start space-x-4">
-        <img src="assets/frame.png" alt="QR" class="footer-img-qr" />
-        <img src="assets/pngegga.png" alt="App Store" class="footer-img-store" />
-        <img src="assets/pngegg.png" alt="Play Store" class="footer-img-store" />
+      <!-- Columna 2 -->
+      <div>
+        <h5 class="font-bold mb-4">Soporte</h5>
+        <p>Av. Universitaria Nº501</p>
+        <p>alianzauniversidadshop.com</p>
+        <p>+0801-68888-9299</p>
       </div>
-    </div>
+
+      <!-- Columna 3 -->
+      <div>
+        <h5 class="font-bold mb-4">Cuenta</h5>
+        <p class="mb-1">Mi cuenta</p>
+        <p class="mb-1">Iniciar sesión / Registrarse</p>
+        <p class="mb-1">Carrito</p>
+        <p class="mb-1">Lista de deseos</p>
+      </div>
+
+      <!-- Columna 4 -->
+      <div>
+        <h5 class="font-bold mb-4">Enlace rápido</h5>
+        <p class="mb-1">Política de privacidad</p>
+        <p class="mb-1">Términos de uso</p>
+        <p class="mb-1">Preguntas frecuentes</p>
+        <p class="mb-1">Contacto</p>
+      </div>
+
+      <!-- Columna 5 -->
+      <div>
+        <h5 class="font-bold mb-4">Descargar la aplicación</h5>
+        <p class="mb-2">Escanea el código QR para descargar.</p>
+        <div class="flex items-start space-x-4">
+          <img src="assets/frame.png" alt="QR" class="footer-img-qr" />
+          <img src="assets/pngegga.png" alt="App Store" class="footer-img-store" />
+          <img src="assets/pngegg.png" alt="Play Store" class="footer-img-store" />
+        </div>
+      </div>
   </div>
 
-  <div class="text-center text-gray-400 mt-8">
-    © 2025 Alianza Universidad. Todos los derechos reservados.
-  </div>
-</footer>
+    <div class="text-center text-gray-400 mt-8">
+      © 2025 Alianza Universidad. Todos los derechos reservados.
+    </div>
+  </footer>
 
 </div>
 
+<ng-template #loginOnly>
+  <app-login></app-login>
+</ng-template>
