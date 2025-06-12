@@ -33,13 +33,16 @@ import { Fluid } from 'primeng/fluid';
 import { CalendarModule } from 'primeng/calendar';
 import { CarouselModule } from 'primeng/carousel';
 import { ListaproductosComponent } from './listaproductos/listaproductos.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from '../service/token.iterceptor';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    ListaproductosComponent,
+    //ListaproductosComponent,
   ],
   imports: [
     CarouselModule,
@@ -70,6 +73,7 @@ import { ListaproductosComponent } from './listaproductos/listaproductos.compone
     MessageModule
   ],
   providers: [
+  { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     providePrimeNG({
       theme: {
           preset: Aura

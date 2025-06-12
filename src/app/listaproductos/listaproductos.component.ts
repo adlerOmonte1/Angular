@@ -10,14 +10,14 @@ import { ProductoService } from '../../service/producto.service';
   providers: [ProductoService]
 })
 export class ListaproductosComponent {
-  constructor(private api: ProductoService) { }
+  //constructor(private api: ProductoService) { }
 
   produc: Producto[];
-
+/*
   ngOnInit() {
     this.api.getProductos().subscribe(res => {
       this.produc = res;
       console.log(this.produc);
     });
-    }
+    }*/
 }
