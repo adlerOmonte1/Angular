@@ -112,7 +112,7 @@ export class AppComponent {
                 label: 'Cerrar Sesión',
                 icon: 'pi pi-sign-out',
                 command: () => {
-                  localStorage.removeItem('token');
+                  localStorage.removeItem('token'); // Eliminar el token del almacenamiento local
                   window.location.href = '/login';
                 }
             },

@@ -20,7 +20,9 @@ export class LoginComponent {
     this.auth.login(this.username, this.password).subscribe({
       next: (res: any) => {
         localStorage.setItem('token', res.token);
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/inicio']).then(() => {
+        window.location.reload(); // Para que AppComponent se actualice
+      });
       },
       error: () => {
         this.error = 'Credenciales incorrectas';
@@ -32,7 +34,7 @@ export class LoginComponent {
 /*
 export class LoginComponent {
   //constructor(private router: Router) {}
-  constructor(private authcServ:AuthcService){} 
+  constructor(private authcServ:AuthcService){}
   username: string = "";
   password: string = "";
   login(){
@@ -40,9 +42,6 @@ export class LoginComponent {
   }
 
   */
-
-
-
   /*
   HECHO POR NOSOTROS
   login() {
