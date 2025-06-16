@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthCService } from '../../service/authc.service';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: false,
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  providers : [AuthCService]
+  providers : [AuthService]
 })
 export class LoginComponent {
   username = '';
   password = '';
   error = '';
 
-  constructor(private auth: AuthCService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   login() {
     this.auth.login(this.username, this.password).subscribe({

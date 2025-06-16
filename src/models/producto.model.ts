@@ -1,5 +1,5 @@
 export class Producto {
-  id_producto: number;
+  id: number;
   nombre: string;
   descripcion: string;
   precio: number;
@@ -7,8 +7,8 @@ export class Producto {
   stock: number;
   imagen_url: string;
   usuario: number;
-  id_categoria: number;
-  id_almacen: number;
-  id_proveedor: number;
-  id_promocion: number;
+  categoria: number;
+  almacen: number;
+  proveedor: number;
+  promocion: number;
 }

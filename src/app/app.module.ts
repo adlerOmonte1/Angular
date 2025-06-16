@@ -32,9 +32,8 @@ import { DatePicker } from 'primeng/datepicker';
 import { Fluid } from 'primeng/fluid';
 import { CalendarModule } from 'primeng/calendar';
 import { CarouselModule } from 'primeng/carousel';
-import { ListaproductosComponent } from './listaproductos/listaproductos.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from '../service/token.iterceptor';
+import { TokenInterceptor } from '../service/token.interceptor';
 
 
 @NgModule({

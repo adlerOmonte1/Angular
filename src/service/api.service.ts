@@ -32,11 +32,11 @@ export class apiService {
     // cambiar el id en el modelo de python
     public putProducto(producto:Producto): Observable<Producto>{
         let body = JSON.stringify(producto);
-        return this.http.put<Producto>(this.ApiUrl + 'productos/' + producto.id_producto + "/",body,this.httpOptions);
+        return this.http.put<Producto>(this.ApiUrl + 'productos/' + producto.id + "/",body,this.httpOptions);
     }
 
     //POST Producto
-    public postArea(producto:Producto): Observable<Producto>{
+    public postProducto(producto:Producto): Observable<Producto>{
         let body = JSON.stringify(producto);
         return this.http.post<Producto>(this.ApiUrl + 'productos/',body,this.httpOptions);
     }

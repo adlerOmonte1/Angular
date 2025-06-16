@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
-import { AuthCService } from '../service/authc.service';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -18,11 +18,11 @@ export class AppComponent {
 
   loggedIn: boolean = false;
 
-  constructor(private router: Router, private authCService: AuthCService) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
 
-        this.loggedIn = this.authCService.isAuthenticated();
+        this.loggedIn = this.authService.isAuthenticated();
 
         this.items = [
             {
