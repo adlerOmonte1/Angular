@@ -105,7 +105,7 @@ export class AppComponent {
                 label: 'Mi cuenta',
                 icon: 'pi pi-home',
                 command: () => {
-                    this.router.navigate(['/login']);
+                    this.router.navigate(['/micuenta']);
                 }
             },
             {

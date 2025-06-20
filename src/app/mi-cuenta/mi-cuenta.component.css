@@ -1,0 +1,8 @@
+.general {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* ocupa toda la altura de la pantalla */
+  padding: 1rem;
+  box-sizing: border-box;
+}

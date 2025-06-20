@@ -34,6 +34,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { CarouselModule } from 'primeng/carousel';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../service/token.interceptor';
+import { MiCuentaComponent } from './mi-cuenta/mi-cuenta.component';
+import { CardModule } from 'primeng/card';
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import { TokenInterceptor } from '../service/token.interceptor';
     AppComponent,
     LoginComponent,
     HomeComponent,
+    MiCuentaComponent,
     //ListaproductosComponent,
   ],
   imports: [
@@ -69,7 +72,9 @@ import { TokenInterceptor } from '../service/token.interceptor';
     TableModule,
     AutoFocusModule,
     CheckboxModule,
-    MessageModule
+    MessageModule,
+    CardModule,
+
   ],
   providers: [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

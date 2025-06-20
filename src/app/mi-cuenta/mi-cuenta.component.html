@@ -1,0 +1,28 @@
+<div class="general">
+  <div class="mb-4 p-8 flex items-center justify-center">
+      <p-card [style]="{ width: '50rem', overflow: 'hidden' }">
+          <ng-template #header>
+            <div>
+                <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+                <div>
+                    <h2>Adler Omonte</h2>
+                    <p>Alias:ADklin</p>
+                </div>
+            </div>
+          </ng-template>
+          <div class="perfil-datos">
+                <p><strong>Teléfono:</strong> +51 987654321</p>
+                <p><strong>DNI:</strong> 12345678</p>
+                <p><strong>Dirección:</strong> Jr. Los Olivos 123, Huánuco</p>
+                <p><strong>Fecha de nacimiento:</strong> 20/06/1995</p>
+          </div>
+          <ng-template #footer>
+            <div class="acciones-footer">
+              <p-button label="Editar perfil" icon="pi pi-user-edit" styleClass="p-button-primary" />
+              <p-button label="Cambiar contraseña" icon="pi pi-lock" styleClass="p-button-secondary" />
+              <p-button label="Cerrar sesión" icon="pi pi-sign-out" styleClass="p-button-danger" />
+            </div>
+          </ng-template>
+      </p-card>
+  </div>
+</div>
