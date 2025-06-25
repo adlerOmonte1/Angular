@@ -4,6 +4,9 @@ import { Observable } from "rxjs";
 import { Producto } from "../models/producto.model";
 import { Categoria } from "../models/categoria.model";
 import { Noticias } from "../models/noticias.model";
+import { UnidadMedida } from "../models/unidadmedida";
+import { Almacen } from "../models/almacen.model";
+import { Proveedor } from "../models/proveedor.models";
 
 
 @Injectable({
@@ -45,24 +48,24 @@ export class apiService {
 
 
     // CRUD DE CATEGORIAS
-        //GET Productos
+        //GET CATEGORIAS
     public getCategoria(): Observable<Categoria[]> {
         return this.http.get<Categoria[]>(this.ApiUrl + 'categorias/');
     }
 
-    //DELETE Producto
+    //DELETE CATEGORIAS
     public deleteCategoria(id:string): Observable<void>{
         return this.http.delete<void>(this.ApiUrl + 'categorias/' + id + "/");
     }
 
-    //PUT Producto
+    //PUT CATEGORIAS
     // cambiar el id en el modelo de python
     public putCategoria(categoria:Categoria): Observable<Categoria>{
         let body = JSON.stringify(categoria);
         return this.http.put<Categoria>(this.ApiUrl + 'categorias/' + categoria.id + "/",body,this.httpOptions);
     }
 
-    //POST Producto
+    //POST CATEGORIAS
     public postCategoria(categoria:Categoria): Observable<Categoria>{
         let body = JSON.stringify(categoria);
         return this.http.post<Categoria>(this.ApiUrl + 'categorias/',body,this.httpOptions);
@@ -87,4 +90,57 @@ export class apiService {
         let body = JSON.stringify(noticia);
         return this.http.post<Noticias>(this.ApiUrl + 'noticias/',body,this.httpOptions);
     }
+
+    //CRUD DE TALLAS(UNIDAD DE MEDIDAS)
+    // GET TALLAS
+    public getTallas():Observable<UnidadMedida[]>{
+        return this.http.get<UnidadMedida[]>(this.ApiUrl+'tallas/');
+    }
+    // DELETE TALLAS
+    public deleteTallas(id:string):Observable<void>{
+        return this.http.delete<void>(this.ApiUrl+'tallas/'+id+"/");
+    }
+    public putTallas(unidadMedida:UnidadMedida):Observable<UnidadMedida>{
+        let body = JSON.stringify(unidadMedida);
+        return this.http.put<UnidadMedida>(this.ApiUrl+'tallas' + unidadMedida.id + "/" ,body,this.httpOptions)
+    }
+    public postTallas(unidadMedida:UnidadMedida):Observable<UnidadMedida>{
+        let body = JSON.stringify(unidadMedida)
+        return this.http.post<UnidadMedida>(this.ApiUrl + 'tallas/',body,this.httpOptions)
+    }
+    //CRUD DE TALLAS(UNIDAD DE MEDIDAS)
+        // GET TALLAS
+    public getAlmacen():Observable<Almacen[]>{
+        return this.http.get<Almacen[]>(this.ApiUrl+'almacenes/');
+    }
+    // DELETE TALLAS
+    public deleteAlmacen(id:string):Observable<void>{
+        return this.http.delete<void>(this.ApiUrl+'almacenes/'+id+"/");
+    }
+    public putAlmacen(almacen:Almacen):Observable<Almacen>{
+        let body = JSON.stringify(almacen);
+        return this.http.put<Almacen>(this.ApiUrl+'almacenes' + almacen.id + "/" ,body,this.httpOptions)
+    }
+    public postAlmacen(almacen:Almacen):Observable<Almacen>{
+        let body = JSON.stringify(Almacen)
+        return this.http.post<Almacen>(this.ApiUrl + 'almacenes/',body,this.httpOptions)
+    }
+        //CRUD DE PROVEEDORES
+        // GET TALLAS
+    public getProveedor():Observable<Proveedor[]>{
+        return this.http.get<Proveedor[]>(this.ApiUrl+'proveedores/');
+    }
+    // DELETE TALLAS
+    public deleteProveedor(id:string):Observable<void>{
+        return this.http.delete<void>(this.ApiUrl+'proveedores/'+id+"/");
+    }
+    public putProveedor(proveedor:Proveedor):Observable<Proveedor>{
+        let body = JSON.stringify(proveedor);
+        return this.http.put<Proveedor>(this.ApiUrl+'proveedores' + proveedor.id + "/" ,body,this.httpOptions)
+    }
+    public postProveedor(proveedor:Proveedor):Observable<Proveedor>{
+        let body = JSON.stringify(Proveedor)
+        return this.http.post<Proveedor>(this.ApiUrl + 'proveedores/',body,this.httpOptions)
+    }
+
 }

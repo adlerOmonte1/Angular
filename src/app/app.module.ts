@@ -41,6 +41,9 @@ import { SelectModule } from 'primeng/select';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { NoticiasComponent } from './noticias/noticias.component';
+import { TallasComponent } from './tallas/tallas.component';
+import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { AlmacenesComponent } from './almacenes/almacenes.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +52,9 @@ import { NoticiasComponent } from './noticias/noticias.component';
     MiCuentaComponent,
     CategoriasComponent,
     NoticiasComponent,
+    TallasComponent,
+    ProveedoresComponent,
+    AlmacenesComponent,
     //ListaproductosComponent,
   ],
   imports: [

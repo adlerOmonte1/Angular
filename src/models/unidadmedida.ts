@@ -1,4 +1,4 @@
 export class UnidadMedida {
   id: number;
-  nombre: string;
+  unidad: string;
 }
