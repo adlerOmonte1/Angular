@@ -1,0 +1,75 @@
+<!--read ->Tabla -->
+<h1>Categorias</h1>
+
+<p-button label="Nueva categoria" icon="pi pi-plus" class="mr-2" (onClick)="abrirDialogo()" />
+
+<!-- value es mi lista de objetos (cada uno de los elementos), datakey = la PK de mi Objeto-->
+<p-table [value]="categorias" dataKey="id" [tableStyle]="{'min-width': '50rem'}">
+  <!--Encabezado de la tabla-->
+    <ng-template #header>
+        <tr>
+            <th style="width:20%">#</th>
+            <th style="width:20%">Nombre</th>
+            <th style="width:20%">Descripcion</th>
+            <th style="width:20%"></th> <!--columna para edit y eliminar -->
+        </tr>
+    </ng-template>
+    <ng-template #body let-categoria let-ri="rowIndex"> <!--Let-Objetos es como un for(una linea por objeto) y el Let-ri ES PARA EL ORDEN (1RA,2DA FILA ...) -->
+        <tr [pEditableRow]="categoria">
+            <td>
+              {{categoria.id}}
+            </td>
+            <td>
+              {{categoria.nombre}}
+            </td>
+            <td>
+              {{categoria.descripcion}}
+            </td>
+            <td>
+                <div class="flex items-center justify-center gap-2">
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-check"
+                        (click)="editarCategoria(categoria)"
+                        text
+                        rounded
+                        severity="secondary"
+                    ></button>
+                    <!--Delete ->Boton -->
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-times"
+                        (click)="eliminarCategoria(categoria)"
+                        text
+                        rounded
+                        severity="secondary"
+                    ></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+<!-- create y update ->Formulario -->
+<p-dialog header="{{tituloDialogo}}" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+    <div class="flex items-center gap-4 mb-4">
+        <label for="nombre" class="font-semibold w-24">Categoria</label>
+        <input type="text" pInputText [(ngModel)]="tipoCategoriaDialogo.nombre" />
+        <!--<input pInputText id="categoria" class="flex-auto" autocomplete="off" />-->
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+        <label for="descripcion" class="font-semibold w-24">Descripcion</label>
+        <input type="text" pInputText [(ngModel)]="tipoCategoriaDialogo.descripcion" />
+        <!--<input pInputText id="descripcion" class="flex-auto" autocomplete="off" />-->
+    </div>
+    <div class="flex justify-end gap-2">
+        <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
+        <!--<p-button label="Guardar" (click)="guardar" />-->
+        <p-button label="Guardar" (click)="guardar()" />
+    </div>
+  </p-dialog>

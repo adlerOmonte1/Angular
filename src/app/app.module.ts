@@ -36,14 +36,19 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../service/token.interceptor';
 import { MiCuentaComponent } from './mi-cuenta/mi-cuenta.component';
 import { CardModule } from 'primeng/card';
-
-
+import { CategoriasComponent } from './categorias/categorias.component';
+import { SelectModule } from 'primeng/select';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { NoticiasComponent } from './noticias/noticias.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
     MiCuentaComponent,
+    CategoriasComponent,
+    NoticiasComponent,
     //ListaproductosComponent,
   ],
   imports: [
@@ -74,7 +79,9 @@ import { CardModule } from 'primeng/card';
     CheckboxModule,
     MessageModule,
     CardModule,
-
+    SelectModule,
+    DialogModule,
+    ConfirmDialogModule
   ],
   providers: [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

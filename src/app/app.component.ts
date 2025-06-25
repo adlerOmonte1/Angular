@@ -37,7 +37,7 @@ export class AppComponent {
                 label: 'Jugadores',
                 icon: 'pi pi-home',
                 command: () => {
-                    this.router.navigate(['/installation']);
+                    this.router.navigate(['/categorias']);
                 }
             },
 
@@ -81,7 +81,7 @@ export class AppComponent {
                 label: 'Noticias',
                 icon: 'pi pi-home',
                 command: () => {
-                    this.router.navigate(['/installation']);
+                    this.router.navigate(['/noticias']);
                 }
             },
 
