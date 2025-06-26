@@ -53,10 +53,5 @@ export class TallasComponent {
     }
     this.visible=false;
   }
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> d282dd0 (Integracion de la rama de Kenny)
 
 }

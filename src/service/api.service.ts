@@ -5,11 +5,6 @@ import { Producto } from "../models/producto.model";
 import { Categoria } from "../models/categoria.model";
 import { Noticias } from "../models/noticias.model";
 import { UnidadMedida } from "../models/unidadmedida";
-<<<<<<< HEAD
-import { Almacen } from "../models/almacen.model";
-import { Proveedor } from "../models/proveedor.models";
-=======
->>>>>>> d282dd0 (Integracion de la rama de Kenny)
 
 
 @Injectable({
@@ -93,12 +88,6 @@ export class apiService {
         let body = JSON.stringify(noticia);
         return this.http.post<Noticias>(this.ApiUrl + 'noticias/',body,this.httpOptions);
     }
-<<<<<<< HEAD
-
-    //CRUD DE TALLAS(UNIDAD DE MEDIDAS)
-=======
-     //CRUD DE TALLAS(UNIDAD DE MEDIDAS)
->>>>>>> d282dd0 (Integracion de la rama de Kenny)
     // GET TALLAS
     public getTallas():Observable<UnidadMedida[]>{
         return this.http.get<UnidadMedida[]>(this.ApiUrl+'tallas/');
@@ -115,42 +104,4 @@ export class apiService {
         let body = JSON.stringify(unidadMedida)
         return this.http.post<UnidadMedida>(this.ApiUrl + 'tallas/',body,this.httpOptions)
     }
-<<<<<<< HEAD
-    //CRUD DE TALLAS(UNIDAD DE MEDIDAS)
-        // GET TALLAS
-    public getAlmacen():Observable<Almacen[]>{
-        return this.http.get<Almacen[]>(this.ApiUrl+'almacenes/');
-    }
-    // DELETE TALLAS
-    public deleteAlmacen(id:string):Observable<void>{
-        return this.http.delete<void>(this.ApiUrl+'almacenes/'+id+"/");
-    }
-    public putAlmacen(almacen:Almacen):Observable<Almacen>{
-        let body = JSON.stringify(almacen);
-        return this.http.put<Almacen>(this.ApiUrl+'almacenes' + almacen.id + "/" ,body,this.httpOptions)
-    }
-    public postAlmacen(almacen:Almacen):Observable<Almacen>{
-        let body = JSON.stringify(Almacen)
-        return this.http.post<Almacen>(this.ApiUrl + 'almacenes/',body,this.httpOptions)
-    }
-        //CRUD DE PROVEEDORES
-        // GET TALLAS
-    public getProveedor():Observable<Proveedor[]>{
-        return this.http.get<Proveedor[]>(this.ApiUrl+'proveedores/');
-    }
-    // DELETE TALLAS
-    public deleteProveedor(id:string):Observable<void>{
-        return this.http.delete<void>(this.ApiUrl+'proveedores/'+id+"/");
-    }
-    public putProveedor(proveedor:Proveedor):Observable<Proveedor>{
-        let body = JSON.stringify(proveedor);
-        return this.http.put<Proveedor>(this.ApiUrl+'proveedores' + proveedor.id + "/" ,body,this.httpOptions)
-    }
-    public postProveedor(proveedor:Proveedor):Observable<Proveedor>{
-        let body = JSON.stringify(Proveedor)
-        return this.http.post<Proveedor>(this.ApiUrl + 'proveedores/',body,this.httpOptions)
-    }
-
-=======
->>>>>>> d282dd0 (Integracion de la rama de Kenny)
 }

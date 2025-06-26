@@ -47,6 +47,7 @@ import { PromocionComponent } from './promocion/promocion.component';
 import { ProductoComponent } from './producto/producto.component';
 import { PasarelaComponent } from './pasarela/pasarela.component';
 import { TallasComponent } from './tallas/tallas.component';
+import { AlmacenComponent } from './almacen/almacen.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,13 +56,13 @@ import { TallasComponent } from './tallas/tallas.component';
     MiCuentaComponent,
     CategoriasComponent,
     NoticiasComponent,
-    TallasComponent,
     ProveedoresComponent,
     PedidoComponent,
     PromocionComponent,
     ProductoComponent,
     PasarelaComponent,
     TallasComponent,
+    AlmacenComponent
     //ListaproductosComponent,
   ],
   imports: [
