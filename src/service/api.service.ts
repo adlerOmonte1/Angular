@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { Producto } from "../models/producto.model";
 import { Categoria } from "../models/categoria.model";
 import { Noticias } from "../models/noticias.model";
+import { UnidadMedida } from "../models/unidadmedida";
 
 
 @Injectable({
@@ -86,5 +87,22 @@ export class apiService {
     public postNoticias(noticia:Noticias): Observable<Noticias>{
         let body = JSON.stringify(noticia);
         return this.http.post<Noticias>(this.ApiUrl + 'noticias/',body,this.httpOptions);
+    }
+     //CRUD DE TALLAS(UNIDAD DE MEDIDAS)
+    // GET TALLAS
+    public getTallas():Observable<UnidadMedida[]>{
+        return this.http.get<UnidadMedida[]>(this.ApiUrl+'tallas/');
+    }
+    // DELETE TALLAS
+    public deleteTallas(id:string):Observable<void>{
+        return this.http.delete<void>(this.ApiUrl+'tallas/'+id+"/");
+    }
+    public putTallas(unidadMedida:UnidadMedida):Observable<UnidadMedida>{
+        let body = JSON.stringify(unidadMedida);
+        return this.http.put<UnidadMedida>(this.ApiUrl+'tallas' + unidadMedida.id + "/" ,body,this.httpOptions)
+    }
+    public postTallas(unidadMedida:UnidadMedida):Observable<UnidadMedida>{
+        let body = JSON.stringify(unidadMedida)
+        return this.http.post<UnidadMedida>(this.ApiUrl + 'tallas/',body,this.httpOptions)
     }
 }

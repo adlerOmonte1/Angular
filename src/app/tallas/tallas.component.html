@@ -1,0 +1,66 @@
+<!--read ->Tabla -->
+<h1>Medidas de los Productos</h1>
+
+<p-button label="Nueva categoria" icon="pi pi-plus" class="mr-2" (onClick)="abrirModal()" />
+
+<!-- value es mi lista de objetos (cada uno de los elementos), datakey = la PK de mi Objeto-->
+<p-table [value]="unidadMedida" dataKey="id" [tableStyle]="{'min-width': '50rem'}">
+  <!--Encabezado de la tabla-->
+    <ng-template #header>
+        <tr>
+            <th style="width:20%">#</th>
+            <th style="width:20%">Unidad</th>
+            <th style="width:20%"></th> <!--columna para edit y eliminar -->
+        </tr>
+    </ng-template>
+    <ng-template #body let-unidadMedida let-ri="rowIndex"> <!--Let-Objetos es como un for(una linea por objeto) y el Let-ri ES PARA EL ORDEN (1RA,2DA FILA ...) -->
+        <tr [pEditableRow]="unidadMedida">
+            <td>
+              {{unidadMedida.id}}
+            </td>
+            <td>
+              {{unidadMedida.unidad}}
+            </td>
+            <td>
+                <div class="flex items-center justify-center gap-2">
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-check"
+                        (click)="editarTalla(unidadMedida)"
+                        text
+                        rounded
+                        severity="secondary"
+                    ></button>
+                    <!--Delete ->Boton -->
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-times"
+                        (click)="eliminarTalla(unidadMedida)"
+                        text
+                        rounded
+                        severity="secondary"
+                    ></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+<!-- create y update ->Formulario -->
+<p-dialog header="{{tituloDialogo}}" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+    <div class="flex items-center gap-4 mb-4">
+        <label for="unidad" class="font-semibold w-24">Unidad</label>
+        <input type="text" pInputText [(ngModel)]="talla.unidad" />
+        <!--<input pInputText id="categoria" class="flex-auto" autocomplete="off" />-->
+    </div>
+    <div class="flex justify-end gap-2">
+        <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
+        <!--<p-button label="Guardar" (click)="guardar" />-->
+        <p-button label="Guardar" (click)="guardar()" />
+    </div>
+  </p-dialog>

@@ -11,6 +11,7 @@ import { PasarelaComponent } from './pasarela/pasarela.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { ProductoComponent } from './producto/producto.component';
 import { PromocionComponent } from './promocion/promocion.component';
+import { TallasComponent } from './tallas/tallas.component';
 
 
 const routes: Routes = [
@@ -18,14 +19,24 @@ const routes: Routes = [
     {path: 'inicio',component:HomeComponent, canActivate: [AuthGuard]},
     {path: 'micuenta', component:MiCuentaComponent},
     {path: 'categorias',component:CategoriasComponent},
-    {path: 'noticias', component:NoticiasComponent},
+
+    // VISTA DE ADMINISTRADOR
 
     // By Kenny
     {path: 'almacenes', component: AlmacenComponent, canActivate: [AuthGuard]},
     {path: 'pasarelas', component: PasarelaComponent, canActivate: [AuthGuard]},
     {path: 'pedidos', component: PedidoComponent, canActivate: [AuthGuard]},
     {path: 'productos', component: ProductoComponent, canActivate: [AuthGuard]},
-    {path: 'promociones', component: PromocionComponent, canActivate: [AuthGuard]}
+    {path: 'promociones', component: PromocionComponent, canActivate: [AuthGuard]},
+
+    // By Adler
+    {path: 'categorias',component:CategoriasComponent, canActivate: [AuthGuard]},
+    {path: 'tallas',component:TallasComponent, canActivate: [AuthGuard]},
+
+
+    //VISTA DE USUARIO
+
+
   ];
 
 @NgModule({
