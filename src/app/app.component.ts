@@ -34,10 +34,38 @@ export class AppComponent {
             },
 
             {
-                label: 'Jugadores',
+                label: 'Categorias',
                 icon: 'pi pi-home',
                 command: () => {
                     this.router.navigate(['/categorias']);
+                }
+            },
+            {
+                label: 'Tallas',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/tallas']);
+                }
+            },
+            {
+                label: 'Productos',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/productos']);
+                }
+            },
+            {
+                label: 'Promociones',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/promociones']);
+                }
+            },
+            {
+                label: 'Pasarelas',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/pasarelas']);
                 }
             },
 
