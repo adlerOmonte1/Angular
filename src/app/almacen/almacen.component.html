@@ -1,0 +1,99 @@
+<h1>TIPOS DE ALMACENES</h1>
+<!-- READ -> TABLA -->
+<p-button
+    label="Crear Almacen"
+    icon="pi pi-plus"
+    class="mr-2"
+    (click)="abrirDialogo()"/>
+
+<p-table [value]="almacenes" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template #header>
+        <tr>
+            <th style="width:20%">ID</th>
+            <th style="width:20%">NOMBRE</th>
+            <th style="width:20%">TIPO</th>
+            <th style="width:20%">DESCRIPCION</th>
+            <th style="width:20%">DIRECCION</th>
+            <th style="width:20%">ESTADO</th>
+            <th style="width:20%">OPCIONES</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-almacen let-ri="rowIndex">
+        <tr [pEditableRow]="almacen">
+            <td>
+              {{almacen.id}}
+            </td>
+            <td>
+              {{almacen.nombre}}
+            </td>
+            <td>
+              {{almacen.tipo_almacen}}
+            </td>
+            <td>
+              {{almacen.descripcion}}
+            </td>
+            <td>
+              {{almacen.direccion}}
+            </td>
+            <td>
+              {{almacen.estado}}
+            </td>
+            <td>
+                <div class="flex items-center justify-center gap-2">
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-pencil"
+                        (click)="editarAlmacen(almacen)"
+                        text
+                        rounded
+                        severity="secondary"
+                        title="Editar almacen"
+                    ></button>
+                    <!-- DELETE -> BOTON -->
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-times"
+                        (click)="eliminarAlmacen(almacen)"
+                        text
+                        rounded
+                        severity="secondary"
+                        title="Eliminar almacen"
+                    ></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+<!-- CREATE Y UPDATE -> FORMULARIO -->
+<p-dialog header="{{tituloDialogo}}" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+    <div class="flex items-center gap-4 mb-4">
+        <label for="almacen" class="font-semibold w-24">Nombre</label>
+        <input pInputText id="almacen" class="flex-auto" autocomplete="off" [(ngModel)]="almacenDialogo.nombre" />
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="tipo_almacen" class="font-semibold w-24">Tipo</label>
+        <input pInputText id="tipo_almacen" class="flex-auto" autocomplete="off" [(ngModel)]="almacenDialogo.tipo_almacen" />
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="descripcion" class="font-semibold w-24">Descripcion</label>
+        <input pInputText id="descripcion" class="flex-auto" autocomplete="off" [(ngModel)]="almacenDialogo.descripcion" />
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="direccion" class="font-semibold w-24">Direccion</label>
+        <input pInputText id="direccion" class="flex-auto" autocomplete="off" [(ngModel)]="almacenDialogo.direccion" />
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="estado" class="font-semibold w-24">Estado</label>
+        <input pInputText id="estado" class="flex-auto" autocomplete="off" [(ngModel)]="almacenDialogo.estado" />
+    </div>
+    <div class="flex justify-end gap-2">
+        <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
+        <p-button label="Guardar" (click)="guardarAlmacen()" />
+    </div>
+</p-dialog>

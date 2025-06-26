@@ -1,0 +1,91 @@
+<h1>TIPOS DE PASARELAS</h1>
+<!-- READ -> TABLA -->
+<p-button
+    label="Crear Pasarela"
+    icon="pi pi-plus"
+    class="mr-2"
+    (click)="abrirDialogo()"/>
+
+<p-table [value]="pasarelas" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template #header>
+        <tr>
+            <th style="width:20%">ID</th>
+            <th style="width:20%">NOMBRE</th>
+            <th style="width:20%">URL API</th>
+            <th style="width:20%">TIPO</th>
+            <th style="width:20%">ESTADO</th>
+            <th style="width:20%">OPCIONES</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-pasarela let-ri="rowIndex">
+        <tr [pEditableRow]="pasarela">
+            <td>
+              {{pasarela.id}}
+            </td>
+            <td>
+              {{pasarela.nombre}}
+            </td>
+            <td>
+              {{pasarela.url_api}}
+            </td>
+            <td>
+              {{pasarela.tipo}}
+            </td>
+            <td>
+              {{pasarela.estado}}
+            </td>
+            <td>
+                <div class="flex items-center justify-center gap-2">
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-pencil"
+                        (click)="editarPasarela(pasarela)"
+                        text
+                        rounded
+                        severity="secondary"
+                        title="Editar pasarela"
+                    ></button>
+                    <!-- DELETE -> BOTON -->
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-times"
+                        (click)="eliminarPasarela(pasarela)"
+                        text
+                        rounded
+                        severity="secondary"
+                        title="Eliminar pasarela"
+                    ></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+<!-- CREATE Y UPDATE -> FORMULARIO -->
+<p-dialog header="{{tituloDialogo}}" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+    <div class="flex items-center gap-4 mb-4">
+        <label for="pasarela" class="font-semibold w-24">Nombre</label>
+        <input pInputText id="pasarela" class="flex-auto" autocomplete="off" [(ngModel)]="pasarelaDialogo.nombre" />
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="tipo_almacen" class="font-semibold w-24">URL</label>
+        <input pInputText id="tipo_almacen" class="flex-auto" autocomplete="off" [(ngModel)]="pasarelaDialogo.url_api" />
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="descripcion" class="font-semibold w-24">TIPO</label>
+        <input pInputText id="descripcion" class="flex-auto" autocomplete="off" [(ngModel)]="pasarelaDialogo.tipo" />
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="estado" class="font-semibold w-24">Estado</label>
+        <input pInputText id="estado" class="flex-auto" autocomplete="off" [(ngModel)]="pasarelaDialogo.estado" />
+    </div>
+    <div class="flex justify-end gap-2">
+        <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
+        <p-button label="Guardar" (click)="guardarPasarela()" />
+    </div>
+</p-dialog>

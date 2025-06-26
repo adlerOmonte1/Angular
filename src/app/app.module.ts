@@ -43,7 +43,10 @@ import { DialogModule } from 'primeng/dialog';
 import { NoticiasComponent } from './noticias/noticias.component';
 import { TallasComponent } from './tallas/tallas.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
-import { AlmacenesComponent } from './almacenes/almacenes.component';
+import { PedidoComponent } from './pedido/pedido.component';
+import { PromocionComponent } from './promocion/promocion.component';
+import { ProductoComponent } from './producto/producto.component';
+import { PasarelaComponent } from './pasarela/pasarela.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +57,10 @@ import { AlmacenesComponent } from './almacenes/almacenes.component';
     NoticiasComponent,
     TallasComponent,
     ProveedoresComponent,
-    AlmacenesComponent,
+    PedidoComponent,
+    PromocionComponent,
+    ProductoComponent,
+    PasarelaComponent,
     //ListaproductosComponent,
   ],
   imports: [

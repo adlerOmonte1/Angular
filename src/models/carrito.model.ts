@@ -1,10 +1,10 @@
-import { CarritoProducto } from "./carritoproducto";
+import { Producto } from "./producto.model";
+import { Usuario } from "./usuario.model";
 
 export class Carrito {
   id: number;
-  usuarioId: number;
-  productos: CarritoProducto[];
+  usuario: Usuario [];
+  producto: Producto [];
   fecha_creacion: Date;
   total: number;
-
 }
