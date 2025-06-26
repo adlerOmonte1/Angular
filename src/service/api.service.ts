@@ -5,8 +5,11 @@ import { Producto } from "../models/producto.model";
 import { Categoria } from "../models/categoria.model";
 import { Noticias } from "../models/noticias.model";
 import { UnidadMedida } from "../models/unidadmedida";
+<<<<<<< HEAD
 import { Almacen } from "../models/almacen.model";
 import { Proveedor } from "../models/proveedor.models";
+=======
+>>>>>>> d282dd0 (Integracion de la rama de Kenny)
 
 
 @Injectable({
@@ -90,8 +93,12 @@ export class apiService {
         let body = JSON.stringify(noticia);
         return this.http.post<Noticias>(this.ApiUrl + 'noticias/',body,this.httpOptions);
     }
+<<<<<<< HEAD
 
     //CRUD DE TALLAS(UNIDAD DE MEDIDAS)
+=======
+     //CRUD DE TALLAS(UNIDAD DE MEDIDAS)
+>>>>>>> d282dd0 (Integracion de la rama de Kenny)
     // GET TALLAS
     public getTallas():Observable<UnidadMedida[]>{
         return this.http.get<UnidadMedida[]>(this.ApiUrl+'tallas/');
@@ -108,6 +115,7 @@ export class apiService {
         let body = JSON.stringify(unidadMedida)
         return this.http.post<UnidadMedida>(this.ApiUrl + 'tallas/',body,this.httpOptions)
     }
+<<<<<<< HEAD
     //CRUD DE TALLAS(UNIDAD DE MEDIDAS)
         // GET TALLAS
     public getAlmacen():Observable<Almacen[]>{
@@ -143,4 +151,6 @@ export class apiService {
         return this.http.post<Proveedor>(this.ApiUrl + 'proveedores/',body,this.httpOptions)
     }
 
+=======
+>>>>>>> d282dd0 (Integracion de la rama de Kenny)
 }

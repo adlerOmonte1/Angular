@@ -19,9 +19,8 @@ const routes: Routes = [
     {path: 'login',component:LoginComponent},
     {path: 'inicio',component:HomeComponent, canActivate: [AuthGuard]},
     {path: 'micuenta', component:MiCuentaComponent},
-    {path: 'noticias', component:NoticiasComponent},
-    {path: 'proveedores', component:ProveedoresComponent},
 
+    // VISTA DE ADMINISTRADOR
 
     // By Kenny
     {path: 'almacenes', component: AlmacenComponent, canActivate: [AuthGuard]},
@@ -29,10 +28,13 @@ const routes: Routes = [
     {path: 'pedidos', component: PedidoComponent, canActivate: [AuthGuard]},
     {path: 'productos', component: ProductoComponent, canActivate: [AuthGuard]},
     {path: 'promociones', component: PromocionComponent, canActivate: [AuthGuard]},
-    // By Adler
-    {path: 'tallas', component: TallasComponent, canActivate: [AuthGuard]},
-    {path: 'categorias',component:CategoriasComponent}
 
+    // By Adler
+    {path: 'categorias',component:CategoriasComponent, canActivate: [AuthGuard]},
+    {path: 'tallas',component:TallasComponent, canActivate: [AuthGuard]},
+
+
+    //VISTA DE USUARIO
 
 
   ];
