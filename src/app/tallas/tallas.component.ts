@@ -54,5 +54,4 @@ export class TallasComponent {
     this.visible=false;
   }
 
-
 }

@@ -34,10 +34,38 @@ export class AppComponent {
             },
 
             {
-                label: 'Jugadores',
+                label: 'Categorias',
                 icon: 'pi pi-home',
                 command: () => {
                     this.router.navigate(['/categorias']);
+                }
+            },
+            {
+                label: 'Tallas',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/tallas']);
+                }
+            },
+            {
+                label: 'Productos',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/productos']);
+                }
+            },
+            {
+                label: 'Promociones',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/promociones']);
+                }
+            },
+            {
+                label: 'Pasarelas',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/pasarelas']);
                 }
             },
 
@@ -76,7 +104,20 @@ export class AppComponent {
                     },
                 ],
             },
-
+            {
+                label: 'Productos',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/productos']);
+                }
+            },
+            {
+                label: 'Tallas ',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/tallas']);
+                }
+            },
             {
                 label: 'Noticias',
                 icon: 'pi pi-home',
@@ -100,7 +141,20 @@ export class AppComponent {
                     this.router.navigate(['/installation']);
                 }
             },
-
+            {
+                label: 'Almacenes',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/almacenes']);
+                }
+            },
+            {
+                label: 'Proveedores',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/proveedores']);
+                }
+            },
             {
                 label: 'Mi cuenta',
                 icon: 'pi pi-home',

@@ -46,24 +46,24 @@ export class apiService {
 
 
     // CRUD DE CATEGORIAS
-        //GET Productos
+        //GET CATEGORIAS
     public getCategoria(): Observable<Categoria[]> {
         return this.http.get<Categoria[]>(this.ApiUrl + 'categorias/');
     }
 
-    //DELETE Producto
+    //DELETE CATEGORIAS
     public deleteCategoria(id:string): Observable<void>{
         return this.http.delete<void>(this.ApiUrl + 'categorias/' + id + "/");
     }
 
-    //PUT Producto
+    //PUT CATEGORIAS
     // cambiar el id en el modelo de python
     public putCategoria(categoria:Categoria): Observable<Categoria>{
         let body = JSON.stringify(categoria);
         return this.http.put<Categoria>(this.ApiUrl + 'categorias/' + categoria.id + "/",body,this.httpOptions);
     }
 
-    //POST Producto
+    //POST CATEGORIAS
     public postCategoria(categoria:Categoria): Observable<Categoria>{
         let body = JSON.stringify(categoria);
         return this.http.post<Categoria>(this.ApiUrl + 'categorias/',body,this.httpOptions);
@@ -88,7 +88,10 @@ export class apiService {
         let body = JSON.stringify(noticia);
         return this.http.post<Noticias>(this.ApiUrl + 'noticias/',body,this.httpOptions);
     }
+<<<<<<< HEAD
      //CRUD DE TALLAS(UNIDAD DE MEDIDAS)
+=======
+>>>>>>> e6ca47d34bdcfacaca73704ef961450b9f1b61cc
     // GET TALLAS
     public getTallas():Observable<UnidadMedida[]>{
         return this.http.get<UnidadMedida[]>(this.ApiUrl+'tallas/');
