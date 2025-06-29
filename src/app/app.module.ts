@@ -41,13 +41,18 @@ import { SelectModule } from 'primeng/select';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { NoticiasComponent } from './noticias/noticias.component';
-import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PromocionComponent } from './promocion/promocion.component';
 import { ProductoComponent } from './producto/producto.component';
 import { PasarelaComponent } from './pasarela/pasarela.component';
 import { TallasComponent } from './tallas/tallas.component';
 import { AlmacenComponent } from './almacen/almacen.component';
+import { AdministradorComponent } from './administrador/administrador.component';
+import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { TipoAdminComponent } from './tiposadmin/tiposadmin.component';
+import { JugadorComponent } from './jugador/jugador.component';
+import { DropdownModule } from 'primeng/dropdown';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,14 +61,17 @@ import { AlmacenComponent } from './almacen/almacen.component';
     MiCuentaComponent,
     CategoriasComponent,
     NoticiasComponent,
-    ProveedoresComponent,
     PedidoComponent,
     PromocionComponent,
     ProductoComponent,
     PasarelaComponent,
     TallasComponent,
-    AlmacenComponent
-    //ListaproductosComponent,
+    AlmacenComponent,
+    AdministradorComponent,
+    AdministradorComponent,
+    ProveedoresComponent,
+    TipoAdminComponent,
+    JugadorComponent
   ],
   imports: [
     CarouselModule,
@@ -95,7 +103,8 @@ import { AlmacenComponent } from './almacen/almacen.component';
     CardModule,
     SelectModule,
     DialogModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DropdownModule
   ],
   providers: [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

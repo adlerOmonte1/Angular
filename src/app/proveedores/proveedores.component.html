@@ -1,1 +1,78 @@
-<p>proveedores works!</p>
+<h1>Proveedores</h1>
+
+<p-button label="Crear Proveedor" icon="pi pi-plus" class="mr-2" (click)="abrirDialogo()"></p-button>
+
+<p-table [value]="proveedores" [tableStyle]="{'min-width': '50rem'}">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width:10%">ID</th>
+      <th style="width:20%">Nombre</th>
+      <th style="width:20%">Razón Social</th>
+      <th style="width:20%">RUC</th>
+      <th style="width:20%">Email</th>
+      <th style="width:20%">nombreContacto</th>
+      <th style="width:20%">Teléfono</th>
+      <th style="width:20%">Estado</th>
+      <th style="width:20%">Acciones</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-proveedor let-ri="rowIndex">
+    <tr>
+      <td>{{ proveedor.id }}</td>
+      <td>{{ proveedor.nombreProveedor }}</td>
+      <td>{{ proveedor.razonSocial }}</td>
+      <td>{{ proveedor.ruc }}</td>
+      <td>{{ proveedor.email }}</td>
+      <td>{{ proveedor.nombreContacto }}</td>
+      <td>{{ proveedor.telefono }}</td>
+      <td>{{ proveedor.estado }}</td>
+      <td>
+        <div class="flex items-center justify-center gap-2">
+          <button pButton pRipple type="button" icon="pi pi-pencil" (click)="editarProveedor(proveedor)" text rounded severity="secondary" title="Editar proveedor"></button>
+          <button pButton pRipple type="button" icon="pi pi-times" (click)="eliminarProveedor(proveedor)" text rounded severity="secondary" title="Eliminar proveedor"></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- Dialogo para crear o editar proveedor -->
+<p-dialog header="Creación/Edición de Proveedores" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+  <div class="flex items-center gap-4 mb-4">
+    <label for="nombreProveedor" class="font-semibold w-24">Nombre Proveedor</label>
+    <input pInputText id="nombreProveedor" class="flex-auto" autocomplete="off" [(ngModel)]="proveedorDialogo.nombreProveedor"/>
+  </div>
+  
+  <div class="flex items-center gap-4 mb-4">
+    <label for="razonSocial" class="font-semibold w-24">Razón Social</label>
+    <input pInputText id="razonSocial" class="flex-auto" autocomplete="off" [(ngModel)]="proveedorDialogo.razonSocial"/>
+  </div>
+  
+  <div class="flex items-center gap-4 mb-4">
+    <label for="ruc" class="font-semibold w-24">RUC</label>
+    <input pInputText id="ruc" class="flex-auto" autocomplete="off" [(ngModel)]="proveedorDialogo.ruc"/>
+  </div>
+  <div class="flex items-center gap-4 mb-4">
+    <label for="nombreContacto" class="font-semibold w-24">nombreContacto</label>
+    <input pInputText id="nombreContacto" class="flex-auto" autocomplete="off" [(ngModel)]="proveedorDialogo.nombreContacto"/>
+  </div>
+  <div class="flex items-center gap-4 mb-4">
+    <label for="email" class="font-semibold w-24">Email</label>
+    <input pInputText id="email" class="flex-auto" autocomplete="off" [(ngModel)]="proveedorDialogo.email"/>
+  </div>
+  
+  <div class="flex items-center gap-4 mb-4">
+    <label for="telefono" class="font-semibold w-24">Teléfono</label>
+    <input pInputText id="telefono" class="flex-auto" autocomplete="off" [(ngModel)]="proveedorDialogo.telefono"/>
+  </div>
+
+  <div class="flex items-center gap-4 mb-4">
+    <label for="estado" class="font-semibold w-24">Estado</label>
+    <input pInputText id="estado" class="flex-auto" autocomplete="off" [(ngModel)]="proveedorDialogo.estado"/>
+  </div>
+
+  <div class="flex justify-end gap-2">
+    <p-button label="Cancelar" severity="secondary" (click)="visible = false"></p-button>
+    <p-button label="Guardar" (click)="guardarProveedor()"></p-button>
+  </div>
+</p-dialog>

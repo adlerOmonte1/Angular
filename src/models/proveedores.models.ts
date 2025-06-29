@@ -1,4 +1,4 @@
-export class Proveedor {
+export class Proveedores {
   id: number;
   nombreProveedor: string;
   razonSocial: string;

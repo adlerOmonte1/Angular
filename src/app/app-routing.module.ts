@@ -13,6 +13,9 @@ import { PasarelaComponent } from './pasarela/pasarela.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { ProductoComponent } from './producto/producto.component';
 import { PromocionComponent } from './promocion/promocion.component';
+import { AdministradorComponent } from './administrador/administrador.component';
+import { TipoAdminComponent } from './tiposadmin/tiposadmin.component';
+import { JugadorComponent } from './jugador/jugador.component';
 
 
 const routes: Routes = [
@@ -32,6 +35,13 @@ const routes: Routes = [
     // By Adler
     {path: 'categorias',component:CategoriasComponent, canActivate: [AuthGuard]},
     {path: 'tallas',component:TallasComponent, canActivate: [AuthGuard]},
+
+
+    // By Sidanne
+    {path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard]},
+    {path: 'administradores', component: AdministradorComponent, canActivate: [AuthGuard]},
+    {path: 'tiposadmin', component: TipoAdminComponent, canActivate: [AuthGuard]},
+    {path: 'jugadores', component: JugadorComponent, canActivate: [AuthGuard]}, // Asumiendo que el componente Jugador es el mismo que Administrador
 
 
     //VISTA DE USUARIO

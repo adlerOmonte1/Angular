@@ -3,14 +3,14 @@ import { ProductoService } from '../../service/producto.service';
 import { UsuarioService } from '../../service/usuario.service';
 import { apiService } from '../../service/api.service';
 import { AlmacenService } from '../../service/almacen.service';
-import { ProveedorService } from '../../service/proveedor.service';
+import { ProveedorService } from '../../service/proveedores.service';
 import { PromocionService } from '../../service/promocion.service';
 import { Producto } from '../../models/producto.model';
 import { Usuario } from '../../models/usuario.model';
 import { Categoria } from '../../models/categoria.model';
 import { Almacen } from '../../models/almacen.model';
-import { Proveedor } from '../../models/proveedor.models';
 import { promocion } from '../../models/promocion.model';
+import { Proveedores } from '../../models/proveedores.models';
 
 @Component({
   selector: 'app-producto',
@@ -38,8 +38,8 @@ export class ProductoComponent {
   almacen: Almacen[];
   almacenSeleccionado:Almacen;
 
-  proveedor: Proveedor[];
-  proveedorSeleccionado:Proveedor;
+  proveedor: Proveedores[];
+  proveedorSeleccionado:Proveedores;
 
   promocion: promocion[];
   promocionSeleccionada:promocion;
