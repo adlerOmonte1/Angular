@@ -61,6 +61,7 @@ import { PosthistoriasComponent } from './posthistorias/posthistorias.component'
 import { ProductohinchaComponent } from './productohincha/productohincha.component';
 import { Splitter } from 'primeng/splitter';
 import { DataView } from 'primeng/dataview';
+import { JugadorHinchaComponent } from './jugador-hincha/jugador-hincha.component';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { DataView } from 'primeng/dataview';
     HistoriaComponent,
     PosthistoriasComponent,
     ProductohinchaComponent,
+    JugadorHinchaComponent,
 
   ],
   imports: [

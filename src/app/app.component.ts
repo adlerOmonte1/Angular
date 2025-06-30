@@ -156,6 +156,11 @@ export class AppComponent {
             command: () => this.router.navigate(['/inicio'])
         },
         {
+            label: 'Jugadores',
+            icon: 'pi pi-users',
+            command: () => this.router.navigate(['/jugadoreshincha'])
+        },
+        {
             label: 'Mi Cuenta',
             icon: 'pi pi-user',
             items: [
