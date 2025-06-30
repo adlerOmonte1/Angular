@@ -40,7 +40,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { SelectModule } from 'primeng/select';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
-import { NoticiasComponent } from './noticias/noticias.component';
+import { NoticiaComponent } from './noticias/noticias.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PromocionComponent } from './promocion/promocion.component';
 import { ProductoComponent } from './producto/producto.component';
@@ -51,7 +51,12 @@ import { AdministradorComponent } from './administrador/administrador.component'
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { TipoAdminComponent } from './tiposadmin/tiposadmin.component';
 import { JugadorComponent } from './jugador/jugador.component';
+import { Partido } from '../models/partidos.model';
 import { DropdownModule } from 'primeng/dropdown';
+import { PartidoComponent } from './partidos/partidos.component';
+import { HistoriaComponent } from './historias/historias.component';
+import { PosthistoriasComponent } from './posthistorias/posthistorias.component';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +65,7 @@ import { DropdownModule } from 'primeng/dropdown';
     HomeComponent,
     MiCuentaComponent,
     CategoriasComponent,
-    NoticiasComponent,
+    NoticiaComponent,
     PedidoComponent,
     PromocionComponent,
     ProductoComponent,
@@ -71,7 +76,11 @@ import { DropdownModule } from 'primeng/dropdown';
     AdministradorComponent,
     ProveedoresComponent,
     TipoAdminComponent,
-    JugadorComponent
+    JugadorComponent,
+    PartidoComponent,
+    HistoriaComponent,
+    PosthistoriasComponent,
+
   ],
   imports: [
     CarouselModule,

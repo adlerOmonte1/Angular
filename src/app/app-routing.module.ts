@@ -5,7 +5,7 @@ import { HomeComponent} from './home/home.component';
 import { AuthGuard } from '../service/auth.guard';
 import { MiCuentaComponent } from './mi-cuenta/mi-cuenta.component';
 import { CategoriasComponent } from './categorias/categorias.component';
-import { NoticiasComponent } from './noticias/noticias.component';
+import { NoticiaComponent } from './noticias/noticias.component';
 import { TallasComponent } from './tallas/tallas.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AlmacenComponent } from './almacen/almacen.component';
@@ -16,6 +16,9 @@ import { PromocionComponent } from './promocion/promocion.component';
 import { AdministradorComponent } from './administrador/administrador.component';
 import { TipoAdminComponent } from './tiposadmin/tiposadmin.component';
 import { JugadorComponent } from './jugador/jugador.component';
+import { PartidoComponent } from './partidos/partidos.component';
+import { HistoriaComponent } from './historias/historias.component';
+import { PosthistoriasComponent } from './posthistorias/posthistorias.component';
 
 
 const routes: Routes = [
@@ -35,6 +38,12 @@ const routes: Routes = [
     // By Adler
     {path: 'categorias',component:CategoriasComponent, canActivate: [AuthGuard]},
     {path: 'tallas',component:TallasComponent, canActivate: [AuthGuard]},
+
+    // By kennet
+    {path: 'partidos',component:PartidoComponent, canActivate: [AuthGuard]},
+    {path: 'noticias',component:NoticiaComponent, canActivate: [AuthGuard]},
+    {path: 'historias',component:HistoriaComponent, canActivate: [AuthGuard]},
+    {path: 'posthistorias',component:PosthistoriasComponent, canActivate: [AuthGuard]},
 
 
     // By Sidanne

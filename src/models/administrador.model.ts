@@ -1,4 +1,4 @@
 export class administrador {
-  id: number;
-  tipo_admin: number; 
+  id: string;
+  tipo_admin: string;
 }
