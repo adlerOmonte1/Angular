@@ -2,7 +2,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Proveedor } from "../models/proveedor.models";
+import { Proveedores } from "../models/proveedores.models";
 
 @Injectable({
   providedIn: "root"
@@ -20,8 +20,8 @@ export class ProveedorService {
     }
 
     //GET Proveedor
-    public getProveedor(): Observable<Proveedor[]> {
-        return this.http.get<Proveedor[]>(this.ApiUrl + 'proveedores/');
+    public getProveedor(): Observable<Proveedores[]> {
+        return this.http.get<Proveedores[]>(this.ApiUrl + 'proveedores/');
     }
 
     //DELETE Proveedor

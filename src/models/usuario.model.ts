@@ -7,4 +7,5 @@ export class Usuario {
   direccion: string;
   ciudad: string;
   fechaNac:Date;
+  rol: string;
 }

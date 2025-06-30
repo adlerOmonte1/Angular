@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs';
+import { Token } from '@angular/compiler';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -8,15 +10,30 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
-    return this.http.post(this.loginUrl, { username, password });
+    return this.http.post<any>(this.loginUrl, { username, password }).pipe(
+      tap(res=>{
+        localStorage.setItem('token',res.token);
+        localStorage.setItem('rol',res.usuario.rol.toUpperCase()); // toUpperCase() para que la comparacion sea entre mayusculas
+      })
+    );
   }
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
   }
+  getRol():string | null {
+    return localStorage.getItem('rol');}
+
+  esAdmin():boolean {
+    return this.getRol() === 'ADMINISTRADOR'; // para comparar el rol
+  }
+  esEspectador():boolean {
+    return this.getRol() === 'HINCHA';
+  }
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('rol');
   }
 }
 

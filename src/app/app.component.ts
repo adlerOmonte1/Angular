@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { Menu } from 'primeng/menu';
 
 @Component({
   selector: 'app-root',
@@ -23,8 +24,15 @@ export class AppComponent {
   ngOnInit() {
 
         this.loggedIn = this.authService.isAuthenticated();
-
-        this.items = [
+        const rol = this.authService.getRol();
+        if(rol == 'ADMINISTRADOR') {
+            this.items = this.obtenerBarraAdmin();
+        }else if(rol == 'HINCHA') {
+            this.items = this.obtenerBarraHincha();
+        }
+  }
+        obtenerBarraAdmin(): MenuItem[] {
+          return [
             {
                 label: 'Inicio',
                 icon: 'pi pi-home',
@@ -66,49 +74,6 @@ export class AppComponent {
                 icon: 'pi pi-home',
                 command: () => {
                     this.router.navigate(['/pasarelas']);
-                }
-            },
-
-            {
-                label: 'Tienda',
-                icon: 'pi pi-search',
-                badge: '3',
-                items: [
-                    {
-                        label: 'Hombres',
-                        icon: 'pi pi-bolt',
-                        command: () => {
-                          this.router.navigate(['/installation']);
-                        }
-                    },
-                    {
-                        label: 'Mujeres',
-                        icon: 'pi pi-server',
-                        command: () => {
-                          this.router.navigate(['/installation']);
-                        }
-                    },
-                    {
-                        label: 'Niños',
-                        icon: 'pi pi-pencil',
-                        command: () => {
-                          this.router.navigate(['/installation']);
-                        }
-                    },
-                    {
-                        label: 'Productos',
-                        icon: 'pi pi-pencil',
-                        command: () => {
-                          this.router.navigate(['/productos']);
-                        }
-                    },
-                ],
-            },
-            {
-                label: 'Productos',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/productos']);
                 }
             },
             {
@@ -170,22 +135,37 @@ export class AppComponent {
                   window.location.href = '/login';
                 }
             },
+        ]
+      }
+      obtenerBarraHincha(): MenuItem[] {
+        return [
+        {
+            label: 'Inicio',
+            icon: 'pi pi-home',
+            command: () => this.router.navigate(['/inicio'])
+        },
+        {
+            label: 'Mi Cuenta',
+            icon: 'pi pi-user',
+            items: [
             {
-              icon: 'pi pi-heart',
-              label: '',
-              tooltip: 'Favoritos',
-              command: () => {
-                this.router.navigate(['/favoritos']);
-              }
-            },
-            {
-              icon: 'pi pi-shopping-cart',
-              label: '',
-              tooltip: 'Carrito',
-              command: () => {
-                this.router.navigate(['/carrito']);
-              }
+                label: 'Perfil',
+                icon: 'pi pi-id-card',
+                command: () => this.router.navigate(['/micuenta'])
             }
+            ]
+        },
+        {
+            label: 'Entradas',
+            icon: 'pi pi-ticket',
+            command: () => this.router.navigate(['/entradas'])
+        },
+        {
+            label: 'Cerrar Sesión',
+            icon: 'pi pi-sign-out',
+            command: () => {localStorage.removeItem('token'); // Eliminar el token del almacenamiento local
+                  window.location.href = '/login';}
+        }
         ];
-    }
-}
+      }
+  }

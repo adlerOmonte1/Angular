@@ -88,10 +88,6 @@ export class apiService {
         let body = JSON.stringify(noticia);
         return this.http.post<Noticias>(this.ApiUrl + 'noticias/',body,this.httpOptions);
     }
-<<<<<<< HEAD
-     //CRUD DE TALLAS(UNIDAD DE MEDIDAS)
-=======
->>>>>>> e6ca47d34bdcfacaca73704ef961450b9f1b61cc
     // GET TALLAS
     public getTallas():Observable<UnidadMedida[]>{
         return this.http.get<UnidadMedida[]>(this.ApiUrl+'tallas/');
