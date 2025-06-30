@@ -18,4 +18,6 @@ export class Producto {
   promocion: promocion;
   precio_final: number;
   unidadSeleccionada: UnidadMedida;
+  cantidadSeleccionada: number;
+
 }

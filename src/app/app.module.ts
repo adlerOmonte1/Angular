@@ -62,6 +62,7 @@ import { ProductohinchaComponent } from './productohincha/productohincha.compone
 import { Splitter } from 'primeng/splitter';
 import { DataView } from 'primeng/dataview';
 import { JugadorHinchaComponent } from './jugador-hincha/jugador-hincha.component';
+import { InputNumber } from 'primeng/inputnumber';
 
 
 @NgModule({
@@ -124,7 +125,8 @@ import { JugadorHinchaComponent } from './jugador-hincha/jugador-hincha.componen
     ConfirmDialogModule,
     DropdownModule,
     Splitter,
-    DataView
+    DataView,
+    InputNumber
   ],
   providers: [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

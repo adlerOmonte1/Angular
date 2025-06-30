@@ -1,0 +1,128 @@
+/* Asegura que el dataview no desborde el panel */
+:host ::ng-deep p-dataview {
+  width: 100%;
+}
+
+/* Asegura que los productos se distribuyan como tarjetas ordenadas */
+:host ::ng-deep .grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* Cada tarjeta de producto */
+:host ::ng-deep .col-span-12,
+:host ::ng-deep .sm\:col-span-6,
+:host ::ng-deep .md\:col-span-4,
+:host ::ng-deep .xl\:col-span-6 {
+  flex: 1 1 calc(25% - 1rem); /* 4 columnas con espacio entre ellas */
+  max-width: calc(25% - 1rem);
+  box-sizing: border-box;
+}
+
+/* Responsive: 3 columnas en pantallas medianas */
+@media (max-width: 1024px) {
+  :host ::ng-deep .col-span-12,
+  :host ::ng-deep .sm\:col-span-6,
+  :host ::ng-deep .md\:col-span-4,
+  :host ::ng-deep .xl\:col-span-6 {
+    flex: 1 1 calc(33.333% - 1rem);
+    max-width: calc(33.333% - 1rem);
+  }
+}
+
+/* Responsive: 2 columnas en pantallas pequeñas */
+@media (max-width: 768px) {
+  :host ::ng-deep .col-span-12,
+  :host ::ng-deep .sm\:col-span-6,
+  :host ::ng-deep .md\:col-span-4,
+  :host ::ng-deep .xl\:col-span-6 {
+    flex: 1 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+  }
+}
+
+/* Responsive: 1 columna en pantallas muy pequeñas */
+@media (max-width: 480px) {
+  :host ::ng-deep .col-span-12,
+  :host ::ng-deep .sm\:col-span-6,
+  :host ::ng-deep .md\:col-span-4,
+  :host ::ng-deep .xl\:col-span-6 {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+/* Estilo para el nombre del producto */
+:host ::ng-deep .producto-nombre {
+  text-align: center;
+  font-size: 1.25rem; /* Más grande */
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* Ajustar p-dropdown (talla) */
+:host ::ng-deep p-dropdown.w-full {
+  width: 6rem !important;
+  font-size: 0.85rem;
+}
+
+/* Ajustar p-inputNumber (cantidad) */
+:host ::ng-deep p-inputnumber.w-full {
+  width: 5rem !important;
+  font-size: 0.85rem;
+}
+
+/* Ajustar el botón de Agregar */
+:host ::ng-deep button.p-button {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  white-space: nowrap;
+}
+
+/* Organiza los inputs y botón en una sola fila */
+:host ::ng-deep .flex.gap-2 {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+/* Dropdown de tallas */
+:host ::ng-deep p-dropdown {
+  width: 5rem !important;
+  font-size: 0.75rem !important;
+  height: 2rem !important;
+}
+
+/* Input de cantidad (p-inputNumber) */
+:host ::ng-deep p-inputnumber,
+:host ::ng-deep p-inputnumber input {
+  width: 5rem !important;
+  font-size: 0.75rem !important;
+  height: 2rem !important;
+  padding: 2px 4px !important;
+  text-align: center;
+}
+
+/* Botones + y - del inputNumber */
+:host ::ng-deep .p-inputnumber-button {
+  padding: 0 !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  font-size: 0.65rem !important;
+}
+
+/* Botón "Agregar" */
+:host ::ng-deep button.p-button {
+  font-size: 0.75rem !important;
+  padding: 0.3rem 0.6rem !important;
+  height: 2rem !important;
+  line-height: 1rem !important;
+}
+
+/* Organizar inputs y botón horizontalmente sin romper */
+:host ::ng-deep .flex.gap-2 {
+  gap: 0.4rem !important;
+  flex-wrap: nowrap !important;
+  justify-content: space-between !important;
+}

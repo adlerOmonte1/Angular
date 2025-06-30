@@ -5,20 +5,23 @@ import { Producto } from '../../models/producto.model';
 import { CarritoProducto } from '../../models/carritoproducto';
 import { ProductoService } from '../../service/producto.service';
 import { UnidadMedida } from '../../models/unidadmedida';
+import { Carrito } from '../../models/carrito.model';
+import { CarritoService } from '../../service/carrito.service';
 
 @Component({
   selector: 'app-productohincha',
   standalone: false,
   templateUrl: './productohincha.component.html',
   styleUrl: './productohincha.component.css',
-  providers: [apiService, MessageService, ConfirmationService,ProductoService]
+  providers: [apiService, MessageService, ConfirmationService,ProductoService,CarritoService]
 })
 export class ProductohinchaComponent {
   constructor(private api:apiService, private conf:ConfirmationService,
-    private msg:MessageService,private productoService:ProductoService) {}
+    private msg:MessageService,private productoService:ProductoService,private carritoService:CarritoService) {}
 
   Listaproductos:Producto[];
   tallas: UnidadMedida[];
+  carrito: Carrito [];
   detalles:CarritoProducto[] = [];
   totalPedido:number = 0;
 
@@ -32,12 +35,27 @@ export class ProductohinchaComponent {
       this.tallas = res;
     });
   }
+  obtenerCarritos(){
+    this.carritoService.getCarrito().subscribe(res => {
+      this.carrito = res;
+    });
+  }
 
   ngOnInit(){
     this.obtenerProductos();
     this.obtenerUnidadMedida();
   }
-
+  calcularTotal(){
+    this.totalPedido = 0;
+    this.detalles.forEach(detalle => {
+      detalle.subtotal = detalle.cantidad * detalle.subtotalxunidad;
+      this.totalPedido += Number(detalle.subtotal);
+    });
+  }
+    actualizarSubtotal(detalle: CarritoProducto) {
+    detalle.subtotal = detalle.subtotalxunidad * detalle.cantidad;
+    this.calcularTotal(); // Para actualizar el total general
+  }
   agregarProducto(producto: Producto, unidadMedida: UnidadMedida) {
     const detalle = new CarritoProducto();
     detalle.carrito = 1;
@@ -45,9 +63,11 @@ export class ProductohinchaComponent {
     detalle.unidadMedida = unidadMedida.id;
     detalle.producto_nombre = producto.nombre;
     detalle.producto_precio = producto.precio;
-    detalle.subtotal = producto.precio_final;
+    detalle.subtotalxunidad = producto.precio_final;
     detalle.imagen_url = producto.imagen_url;
-    detalle.cantidad = 1;
+    detalle.cantidad = producto.cantidadSeleccionada || 1;
+    detalle.subtotal = detalle.subtotalxunidad * detalle.cantidad;
     this.detalles.push(detalle);
+    this.calcularTotal();
   }
 }
