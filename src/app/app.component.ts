@@ -29,138 +29,124 @@ export class AppComponent {
         }
   }
         obtenerBarraAdmin(): MenuItem[] {
-          return [
-            {
-                label: 'Inicio',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/inicio']);
-                }
-            },
-
-            {
-                label: 'Categorias',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/categorias']);
-                }
-            },
-            {
+        return [
+          {
+            label: 'Inicio',
+            icon: 'pi pi-home',
+            command: () => {
+              this.router.navigate(['/inicio']);
+            }
+          },
+          {
+            label: 'Productos',
+            icon: 'pi pi-box',
+            items: [
+              {
+                label: 'Categorías',
+                icon: 'pi pi-tags',
+                command: () => this.router.navigate(['/categorias'])
+              },
+              {
                 label: 'Tallas',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/tallas']);
-                }
-            },
-            {
+                icon: 'pi pi-sort-size-down',
+                command: () => this.router.navigate(['/tallas'])
+              },
+              {
                 label: 'Productos',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/productos']);
-                }
-            },
-            {
+                icon: 'pi pi-box',
+                command: () => this.router.navigate(['/productos'])
+              },
+              {
                 label: 'Promociones',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/promociones']);
-                }
-            },
-            {
+                icon: 'pi pi-percentage',
+                command: () => this.router.navigate(['/promociones'])
+              },
+              {
                 label: 'Pasarelas',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/pasarelas']);
-                }
-            },
-            {
-                label: 'Tallas ',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/tallas']);
-                }
-            },
-            {
-                label: 'Noticias',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/noticias']);
-                }
-            },
-
-            {
-                label: 'Partidos',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/partidos']);
-                }
-            },
-
-            {
-                label: 'Historia',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/historias']);
-                }
-            },
-            {
-                label: 'PostHistoria',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/posthistorias']);
-                }
-            },
-            {
+                icon: 'pi pi-credit-card',
+                command: () => this.router.navigate(['/pasarelas'])
+              },
+              {
                 label: 'Almacenes',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/almacenes']);
-                }
-            },
-            {
+                icon: 'pi pi-building',
+                command: () => this.router.navigate(['/almacenes'])
+              },
+              {
                 label: 'Proveedores',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/proveedores']);
-                }
-            },
-            {
-                label: 'Administradores',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/administradores']);
-                }
-            },
-            {
-                label: 'Tipos de Administradores',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/tiposadmin']);
-                }
-            },
-            {
+                icon: 'pi pi-truck',
+                command: () => this.router.navigate(['/proveedores'])
+              },
+            ]
+          },
+          {
+            label: 'Noticias y Contenido',
+            icon: 'pi pi-megaphone',
+            items: [
+              {
+                label: 'Noticias',
+                icon: 'pi pi-book',
+                command: () => this.router.navigate(['/noticias'])
+              },
+              {
+                label: 'Historias',
+                icon: 'pi pi-calendar',
+                command: () => this.router.navigate(['/historias'])
+              },
+              {
+                label: 'Post Historia',
+                icon: 'pi pi-pencil',
+                command: () => this.router.navigate(['/posthistorias'])
+              }
+            ]
+          },
+          {
+            label: 'Partidos y Jugadores',
+            icon: 'pi pi-sitemap',
+            items: [
+              {
+                label: 'Partidos',
+                icon: 'pi pi-calendar',
+                command: () => this.router.navigate(['/partidos'])
+              },
+              {
                 label: 'Jugadores',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/jugadores']);
-                }
-            },
-            {
-                label: 'Mi cuenta',
-                icon: 'pi pi-home',
-                command: () => {
-                    this.router.navigate(['/micuenta']);
-                }
-            },
-            {
-                label: 'Cerrar Sesión',
-                icon: 'pi pi-sign-out',
-                command: () => {
-                  localStorage.removeItem('token'); // Eliminar el token del almacenamiento local
-                  window.location.href = '/login';
-                }
-            },
-        ]
+                icon: 'pi pi-users',
+                command: () => this.router.navigate(['/jugadores'])
+              }
+            ]
+          },
+          {
+            label: 'Usuarios y Seguridad',
+            icon: 'pi pi-shield',
+            items: [
+              {
+                label: 'Administradores',
+                icon: 'pi pi-user-edit',
+                command: () => this.router.navigate(['/administradores'])
+              },
+              {
+                label: 'Tipos de Administradores',
+                icon: 'pi pi-user-plus',
+                command: () => this.router.navigate(['/tiposadmin'])
+              }
+            ]
+          },
+          {
+            label: 'Mi Cuenta',
+            icon: 'pi pi-user',
+            command: () => {
+              this.router.navigate(['/micuenta']);
+            }
+          },
+          {
+            label: 'Cerrar Sesión',
+            icon: 'pi pi-sign-out',
+            command: () => {
+              localStorage.removeItem('token');
+              window.location.href = '/login';
+            }
+          },
+        ];
       }
       obtenerBarraHincha(): MenuItem[] {
         return [
