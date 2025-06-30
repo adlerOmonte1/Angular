@@ -92,7 +92,7 @@ export class AppComponent {
                 label: 'Partidos',
                 icon: 'pi pi-home',
                 command: () => {
-                    this.router.navigate(['/installation']);
+                    this.router.navigate(['/partidos']);
                 }
             },
 
@@ -100,7 +100,14 @@ export class AppComponent {
                 label: 'Historia',
                 icon: 'pi pi-home',
                 command: () => {
-                    this.router.navigate(['/installation']);
+                    this.router.navigate(['/historias']);
+                }
+            },
+            {
+                label: 'PostHistoria',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/posthistorias']);
                 }
             },
             {
@@ -115,6 +122,27 @@ export class AppComponent {
                 icon: 'pi pi-home',
                 command: () => {
                     this.router.navigate(['/proveedores']);
+                }
+            },
+            {
+                label: 'Administradores',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/administradores']);
+                }
+            },
+            {
+                label: 'Tipos de Administradores',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/tiposadmin']);
+                }
+            },
+            {
+                label: 'Jugadores',
+                icon: 'pi pi-home',
+                command: () => {
+                    this.router.navigate(['/jugadores']);
                 }
             },
             {

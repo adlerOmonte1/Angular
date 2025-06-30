@@ -71,7 +71,7 @@ export class HistoriaComponent implements OnInit {
       return;
     }
 
-    // ✅ Solo asignamos el ID del administrador
+    //  Solo asignamos el ID del administrador
     this.historiaDialogo.administrador = this.administradorSeleccionado.id;
 
     if (this.nuevaHistoria) {
