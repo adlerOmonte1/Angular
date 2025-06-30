@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 
+// Models
 import { Producto } from "../models/producto.model";
 import { Categoria } from "../models/categoria.model";
 import { Noticia } from "../models/noticias.model";
@@ -15,11 +16,6 @@ import { PostHistoria } from "../models/post-historia.model";
 })
 export class apiService {
   private ApiUrl = "http://127.0.0.1:8000/api/";
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
 
   constructor(private http: HttpClient) {}
 
@@ -29,13 +25,15 @@ export class apiService {
   }
 
   public postProducto(producto: Producto): Observable<Producto> {
-    let body = JSON.stringify(producto);
-    return this.http.post<Producto>(this.ApiUrl + 'productos/', body, this.httpOptions);
+    return this.http.post<Producto>(this.ApiUrl + 'productos/', producto, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
   public putProducto(producto: Producto): Observable<Producto> {
-    let body = JSON.stringify(producto);
-    return this.http.put<Producto>(this.ApiUrl + 'productos/' + producto.id + "/", body, this.httpOptions);
+    return this.http.put<Producto>(this.ApiUrl + 'productos/' + producto.id + "/", producto, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
   public deleteProducto(id: string): Observable<void> {
@@ -48,13 +46,15 @@ export class apiService {
   }
 
   public postCategoria(categoria: Categoria): Observable<Categoria> {
-    let body = JSON.stringify(categoria);
-    return this.http.post<Categoria>(this.ApiUrl + 'categorias/', body, this.httpOptions);
+    return this.http.post<Categoria>(this.ApiUrl + 'categorias/', categoria, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
   public putCategoria(categoria: Categoria): Observable<Categoria> {
-    let body = JSON.stringify(categoria);
-    return this.http.put<Categoria>(this.ApiUrl + 'categorias/' + categoria.id + "/", body, this.httpOptions);
+    return this.http.put<Categoria>(this.ApiUrl + 'categorias/' + categoria.id + "/", categoria, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
   public deleteCategoria(id: string): Observable<void> {
@@ -62,37 +62,39 @@ export class apiService {
   }
 
   // ------------------ CRUD NOTICIAS ------------------
-  public getNoticias(): Observable<Noticia[]> {
-    return this.http.get<Noticia[]>(this.ApiUrl + 'noticias/');
-  }
+ // ------------------ CRUD NOTICIAS ------------------
+public getNoticias(): Observable<Noticia[]> {
+  return this.http.get<Noticia[]>(this.ApiUrl + 'noticias/');
+}
 
-  public postNoticias(noticia: Noticia): Observable<Noticia> {
-    let body = JSON.stringify(noticia);
-    return this.http.post<Noticia>(this.ApiUrl + 'noticias/', body, this.httpOptions);
-  }
+public postNoticiasForm(data: FormData): Observable<Noticia> {
+  return this.http.post<Noticia>(this.ApiUrl + 'noticias/', data);
+}
 
-  public putNoticias(noticia: Noticia): Observable<Noticia> {
-    let body = JSON.stringify(noticia);
-    return this.http.put<Noticia>(this.ApiUrl + 'noticias/' + noticia.id + "/", body, this.httpOptions);
-  }
+public putNoticiasForm(id: number, data: FormData): Observable<Noticia> {
+  return this.http.put<Noticia>(this.ApiUrl + 'noticias/' + id + "/", data);
+}
 
-  public deleteNoticias(id: string): Observable<void> {
-    return this.http.delete<void>(this.ApiUrl + 'noticias/' + id + "/");
-  }
+public deleteNoticias(id: number): Observable<void> {
+  return this.http.delete<void>(this.ApiUrl + 'noticias/' + id + "/");
+}
 
-  // ------------------ CRUD TALLAS (UnidadMedida) ------------------
+
+  // ------------------ CRUD TALLAS ------------------
   public getTallas(): Observable<UnidadMedida[]> {
     return this.http.get<UnidadMedida[]>(this.ApiUrl + 'tallas/');
   }
 
   public postTallas(unidadMedida: UnidadMedida): Observable<UnidadMedida> {
-    let body = JSON.stringify(unidadMedida);
-    return this.http.post<UnidadMedida>(this.ApiUrl + 'tallas/', body, this.httpOptions);
+    return this.http.post<UnidadMedida>(this.ApiUrl + 'tallas/', unidadMedida, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
   public putTallas(unidadMedida: UnidadMedida): Observable<UnidadMedida> {
-    let body = JSON.stringify(unidadMedida);
-    return this.http.put<UnidadMedida>(this.ApiUrl + 'tallas/' + unidadMedida.id + "/", body, this.httpOptions);
+    return this.http.put<UnidadMedida>(this.ApiUrl + 'tallas/' + unidadMedida.id + "/", unidadMedida, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
   public deleteTallas(id: string): Observable<void> {
@@ -109,13 +111,15 @@ export class apiService {
   }
 
   public postPartido(partido: Partido): Observable<Partido> {
-    let body = JSON.stringify(partido);
-    return this.http.post<Partido>(this.ApiUrl + 'partidos/', body, this.httpOptions);
+    return this.http.post<Partido>(this.ApiUrl + 'partidos/', partido, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
-  public putPartido(partido: Partido): Observable<Partido> {
-    let body = JSON.stringify(partido);
-    return this.http.put<Partido>(this.ApiUrl + 'partidos/' + partido.id + '/', body, this.httpOptions);
+  public putPartido(id: number, partido: any): Observable<Partido> {
+    return this.http.put<Partido>(this.ApiUrl + 'partidos/' + id + '/', partido, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
   public deletePartido(id: number): Observable<void> {
@@ -128,36 +132,39 @@ export class apiService {
   }
 
   public postHistoria(historia: Historia): Observable<Historia> {
-    let body = JSON.stringify(historia);
-    return this.http.post<Historia>(this.ApiUrl + 'historias/', body, this.httpOptions);
+    return this.http.post<Historia>(this.ApiUrl + 'historias/', historia, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
   public putHistoria(historia: Historia): Observable<Historia> {
-    let body = JSON.stringify(historia);
-    return this.http.put<Historia>(this.ApiUrl + 'historias/' + historia.id + '/', body, this.httpOptions);
+    return this.http.put<Historia>(this.ApiUrl + 'historias/' + historia.id + '/', historia, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
   public deleteHistoria(id: number): Observable<void> {
     return this.http.delete<void>(this.ApiUrl + 'historias/' + id + '/');
   }
 
-// ------------------ CRUD POST_HISTORIA ------------------
-public getPostHistorias(): Observable<PostHistoria[]> {
-  return this.http.get<PostHistoria[]>(this.ApiUrl + 'post-historias/');
-}
+  // ------------------ CRUD POST_HISTORIA ------------------
+  public getPostHistorias(): Observable<PostHistoria[]> {
+    return this.http.get<PostHistoria[]>(this.ApiUrl + 'post-historias/');
+  }
 
-public postPostHistoria(postHistoria: PostHistoria): Observable<PostHistoria> {
-  let body = JSON.stringify(postHistoria);
-  return this.http.post<PostHistoria>(this.ApiUrl + 'post-historias/', body, this.httpOptions);
-}
+  public postPostHistoria(postHistoria: PostHistoria): Observable<PostHistoria> {
+    return this.http.post<PostHistoria>(this.ApiUrl + 'post-historias/', postHistoria, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
 
-public putPostHistoria(postHistoria: PostHistoria): Observable<PostHistoria> {
-  let body = JSON.stringify(postHistoria);
-  return this.http.put<PostHistoria>(this.ApiUrl + 'post-historias/' + postHistoria.id + '/', body, this.httpOptions);
-}
+  public putPostHistoria(postHistoria: PostHistoria): Observable<PostHistoria> {
+    return this.http.put<PostHistoria>(this.ApiUrl + 'post-historias/' + postHistoria.id + '/', postHistoria, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
 
-public deletePostHistoria(id: number): Observable<void> {
-  return this.http.delete<void>(this.ApiUrl + 'post-historias/' + id + '/');
-}
-
+  public deletePostHistoria(id: number): Observable<void> {
+    return this.http.delete<void>(this.ApiUrl + 'post-historias/' + id + '/');
+  }
 }

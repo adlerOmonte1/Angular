@@ -21,6 +21,9 @@ export class NoticiaComponent implements OnInit {
   nuevaNoticia: boolean = true;
   noticiaDialogo: Noticia = new Noticia();
 
+  imagenSeleccionada: File | null = null;
+  imagenTemporal: string | null = null;
+
   constructor(
     private noticiaService: apiService,
     private administradorService: AdministradorService
@@ -47,6 +50,8 @@ export class NoticiaComponent implements OnInit {
     this.nuevaNoticia = true;
     this.noticiaDialogo = new Noticia();
     this.administradorSeleccionado = undefined;
+    this.imagenSeleccionada = null;
+    this.imagenTemporal = null;
     this.visible = true;
   }
 
@@ -54,14 +59,27 @@ export class NoticiaComponent implements OnInit {
     this.nuevaNoticia = false;
     this.noticiaDialogo = { ...noticia };
     this.administradorSeleccionado = this.administradores.find(adm => adm.id === noticia.administrador);
+    this.imagenTemporal = noticia.imagen_url ? `http://127.0.0.1:8000${noticia.imagen_url}` : null;
+    this.imagenSeleccionada = null;  // Reset file input on edit
     this.visible = true;
   }
 
   eliminarNoticia(noticia: Noticia): void {
     if (noticia.id !== undefined && confirm('¿Estás seguro de eliminar esta noticia?')) {
-      this.noticiaService.deleteNoticias(noticia.id.toString()).subscribe(() => {
+      this.noticiaService.deleteNoticias(noticia.id).subscribe(() => {
         this.obtenerNoticias();
       });
+    }
+  }
+
+  onImagenSeleccionada(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.imagenSeleccionada = file;
+
+      const reader = new FileReader();
+      reader.onload = () => this.imagenTemporal = reader.result as string;
+      reader.readAsDataURL(file);
     }
   }
 
@@ -71,17 +89,27 @@ export class NoticiaComponent implements OnInit {
       return;
     }
 
-    this.noticiaDialogo.administrador = this.administradorSeleccionado.id;
+    const formData = new FormData();
+    formData.append('titulo', this.noticiaDialogo.titulo || '');
+    formData.append('contenido', this.noticiaDialogo.contenido || '');
+    formData.append('fecha_publicacion', this.noticiaDialogo.fecha_publicacion || '');
+    formData.append('administrador_id', this.administradorSeleccionado.id.toString());  // <-- Corregido aquí
+
+    if (this.imagenSeleccionada) {
+      formData.append('imagen', this.imagenSeleccionada);
+    }
 
     if (this.nuevaNoticia) {
-      this.noticiaService.postNoticias(this.noticiaDialogo).subscribe(() => {
+      this.noticiaService.postNoticiasForm(formData).subscribe(() => {
         this.obtenerNoticias();
         this.visible = false;
+        this.imagenTemporal = null;
       });
     } else {
-      this.noticiaService.putNoticias(this.noticiaDialogo).subscribe(() => {
+      this.noticiaService.putNoticiasForm(this.noticiaDialogo.id!, formData).subscribe(() => {
         this.obtenerNoticias();
         this.visible = false;
+        this.imagenTemporal = null;
       });
     }
   }

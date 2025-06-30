@@ -1,7 +1,12 @@
 <h1>Partidos</h1>
 
 <!-- Botón para abrir el diálogo -->
-<p-button label="Nuevo Partido" icon="pi pi-plus" class="mb-3" (onClick)="abrirDialogo()" />
+<p-button 
+  label="Nuevo Partido" 
+  icon="pi pi-plus" 
+  class="mb-3" 
+  (onClick)="abrirDialogo()">
+</p-button>
 
 <!-- Tabla de partidos -->
 <p-table [value]="partidos" [tableStyle]="{'min-width': '60rem'}">
@@ -20,7 +25,7 @@
   <ng-template pTemplate="body" let-partido>
     <tr>
       <td>{{ partido.id }}</td>
-      <td>{{ partido.administrador?.id }}</td>
+      <td>{{ partido.administrador?.nombre_usuario }}</td>
       <td>{{ partido.nombre_partido }}</td>
       <td>{{ partido.lugar_partido }}</td>
       <td>{{ partido.fecha_partido }}</td>
@@ -28,8 +33,19 @@
       <td>{{ partido.resultado }}</td>
       <td>
         <div class="flex gap-2">
-          <button pButton icon="pi pi-pencil" (click)="editarPartido(partido)" title="Editar" text></button>
-          <button pButton icon="pi pi-trash" (click)="eliminarPartido(partido)" title="Eliminar" text></button>
+          <button pButton 
+                  icon="pi pi-pencil" 
+                  (click)="editarPartido(partido)" 
+                  title="Editar" 
+                  text>
+          </button>
+          <button pButton 
+                  icon="pi pi-trash" 
+                  (click)="eliminarPartido(partido)" 
+                  title="Eliminar" 
+                  text 
+                  class="p-button-danger">
+          </button>
         </div>
       </td>
     </tr>
@@ -38,16 +54,16 @@
 
 <!-- Diálogo para crear/editar -->
 <p-dialog header="Crear/Editar Partido" [(visible)]="visible" [modal]="true" [style]="{ width: '30rem' }">
+
   <div class="field mb-3">
     <label for="administrador">Administrador</label>
     <p-dropdown
       [options]="administradores"
       [(ngModel)]="administradorSeleccionado"
-      optionLabel="id"
+      optionLabel="nombre_usuario"
       placeholder="Selecciona un administrador"
       [filter]="true"
-      inputId="administrador">
-    </p-dropdown>
+      inputId="administrador" />
   </div>
 
   <div class="field mb-3">
@@ -79,4 +95,5 @@
     <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
     <p-button label="Guardar" (click)="guardarPartido()" />
   </div>
+  
 </p-dialog>

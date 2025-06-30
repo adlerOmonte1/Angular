@@ -53,7 +53,7 @@ export class PartidoComponent implements OnInit {
   editarPartido(partido: Partido): void {
     this.nuevoPartido = false;
     this.partidoDialogo = { ...partido };
-    this.administradorSeleccionado = this.administradores.find(adm => adm.id === partido.administrador);
+    this.administradorSeleccionado = this.administradores.find(adm => adm.id === (partido.administrador as any)?.id || partido.administrador);
     this.visible = true;
   }
 
@@ -71,16 +71,22 @@ export class PartidoComponent implements OnInit {
       return;
     }
 
-    // Enviar solo el ID del administrador
-    this.partidoDialogo.administrador = this.administradorSeleccionado.id;
+    // Enviar el ID correcto como administrador_id, no como objeto completo
+    const data: any = {
+      ...this.partidoDialogo,
+      administrador_id: this.administradorSeleccionado.id
+    };
+
+    // Limpieza opcional del objeto si tiene campos extra
+    delete data.administrador;
 
     if (this.nuevoPartido) {
-      this.partidoService.postPartido(this.partidoDialogo).subscribe(() => {
+      this.partidoService.postPartido(data).subscribe(() => {
         this.obtenerPartidos();
         this.visible = false;
       });
     } else {
-      this.partidoService.putPartido(this.partidoDialogo).subscribe(() => {
+      this.partidoService.putPartido(this.partidoDialogo.id!, data).subscribe(() => {
         this.obtenerPartidos();
         this.visible = false;
       });

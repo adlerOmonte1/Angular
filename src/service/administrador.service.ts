@@ -34,7 +34,7 @@ export class AdministradorService {
     } 
 
     // DELETE Administrador
-    public deleteAdministrador(id: string): Observable<void> {  // <--- CORREGIDO A string
+    public deleteAdministrador(id: number): Observable<void> {  // <--- CORREGIDO A string
         return this.http.delete<void>(this.ApiUrl + 'administradores/' + id + "/");
     }
 }

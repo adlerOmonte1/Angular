@@ -1,6 +1,6 @@
 export class Partido {
   id: number;
-  administrador: string;
+  administrador: number;
   nombre_partido: string;
   lugar_partido: string;
   fecha_partido: string;
