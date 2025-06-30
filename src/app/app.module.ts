@@ -40,6 +40,8 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { SelectModule } from 'primeng/select';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
+import { FileUploadModule } from 'primeng/fileupload';
+
 import { NoticiaComponent } from './noticias/noticias.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PromocionComponent } from './promocion/promocion.component';
@@ -83,6 +85,7 @@ import { PosthistoriasComponent } from './posthistorias/posthistorias.component'
 
   ],
   imports: [
+    FileUploadModule,
     CarouselModule,
     CalendarModule,
     DatePicker,

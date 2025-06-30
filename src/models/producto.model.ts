@@ -10,9 +10,9 @@ export class Producto {
   descripcion: string;
   precio: number;
   imagen_url: string;
-  usuario: Usuario [];
-  categoria: Categoria [];
-  almacen: Almacen [];
-  proveedor: Proveedores [];
-  promocion: promocion [];
+  usuario: Usuario;
+  categoria: Categoria;
+  almacen: Almacen;
+  proveedor: Proveedores;
+  promocion: promocion;
 }

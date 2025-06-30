@@ -30,9 +30,9 @@
             <td>
                 {{ producto.precio }}
             </td>
-<!--             <td>
-                <img src="{{producto.imagen_url}}" style="width:20%; height:auto;"/>
-            </td> -->
+            <td>
+                <img src="{{producto.imagen_url}}" class="producto-imagen" alt="Imagen de {{ producto.nombre }}" />
+            </td>
             <td>
                 {{ producto.usuario }}
             </td>
@@ -95,27 +95,27 @@
     </div>
     <div class="flex items-center gap-4 mb-4">
         <label for="imagen" class="font-semibold w-24">Imagen</label>
-        <input pInputText id="imagen" class="flex-auto" autocomplete="off" [(ngModel)]="productoDialogo.imagen_url"/>
+        <p-fileupload mode="basic" name="demo[]" chooseIcon="pi pi-upload" accept="image/*" (onSelect)="onBasicUploadAuto($event)" chooseLabel="Elegir Imagen" />
     </div>
     <div class="flex items-center gap-4 mb-4">
         <label for="usuario" class="font-semibold w-24">Usuario</label>
-        <input pInputText id="usuario" class="flex-auto" autocomplete="off" [(ngModel)]="productoDialogo.usuario"/>
+        <p-select id="usuario" [options]="usuario" [(ngModel)]="usuarioSeleccionado" optionLabel="nombre" placeholder="Seleccione un usuario" class="w-full md:w-56" />
     </div>
     <div class="flex items-center gap-4 mb-4">
         <label for="categoria" class="font-semibold w-24">Categoría</label>
-        <input pInputText id="categoria" class="flex-auto" autocomplete="off" [(ngModel)]="productoDialogo.categoria"/>
+        <p-select id="categoria" [options]="categorria" [(ngModel)]="categoriaSeleccionada" optionLabel="nombre" placeholder="Seleccione una categoría" class="w-full md:w-56" />
     </div>
     <div class="flex items-center gap-4 mb-4">
         <label for="almacen" class="font-semibold w-24">Almacén</label>
-        <input pInputText id="almacen" class="flex-auto" autocomplete="off" [(ngModel)]="productoDialogo.almacen"/>
+        <p-select id="almacen" [options]="almacen" [(ngModel)]="almacenSeleccionado" optionLabel="nombre" placeholder="Seleccione un almacén" class="w-full md:w-56" />
     </div>
     <div class="flex items-center gap-4 mb-4">
         <label for="proveedor" class="font-semibold w-24">Proveedor</label>
-        <input pInputText id="proveedor" class="flex-auto" autocomplete="off" [(ngModel)]="productoDialogo.proveedor"/>
+        <p-select id="proveedor" [options]="proveedor" [(ngModel)]="proveedorSeleccionado" optionLabel="nombre" placeholder="Seleccione un proveedor" class="w-full md:w-56" />
     </div>
     <div class="flex items-center gap-4 mb-4">
         <label for="promocion" class="font-semibold w-24">Promoción</label>
-        <input pInputText id="promocion" class="flex-auto" autocomplete="off" [(ngModel)]="productoDialogo.promocion"/>
+        <p-select id="promocion" [options]="promocion" [(ngModel)]="promocionSeleccionada" optionLabel="nombre" placeholder="Seleccione una promoción" class="w-full md:w-56" />
     </div>
     <div class="flex justify-end gap-2">
         <p-button label="Cancelar" severity="secondary" (click)="visible = false" />

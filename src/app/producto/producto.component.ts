@@ -22,69 +22,73 @@ import { Proveedores } from '../../models/proveedores.models';
 export class ProductoComponent {
   constructor(private productoService: ProductoService, private usuarioService: UsuarioService,
     private apiService: apiService, private almacenService: AlmacenService,
-    private proveedorService: ProveedorService, private promocionService: PromocionService) {}
+    private proveedorService: ProveedorService, private promocionService: PromocionService) { }
 
-  productos:Producto[];
-  visible:boolean = false;
-  nuevoProducto:boolean = true;
-  productoDialogo:Producto = new Producto();
+  productos: Producto[];
+  visible: boolean = false;
+  nuevoProducto: boolean = true;
+  productoDialogo: Producto = new Producto();
 
-  usuario:Usuario[];
-  usuarioSeleccionado:Usuario;
+  imagenSeleccionada: File | null = null;
+
+  usuario: Usuario[];
+  usuarioSeleccionado: Usuario;
 
   categorria: Categoria[];
-  categoriaSeleccionada:Categoria;
+  categoriaSeleccionada: Categoria;
 
   almacen: Almacen[];
-  almacenSeleccionado:Almacen;
+  almacenSeleccionado: Almacen;
 
   proveedor: Proveedores[];
-  proveedorSeleccionado:Proveedores;
+  proveedorSeleccionado: Proveedores;
 
   promocion: promocion[];
-  promocionSeleccionada:promocion;
+  promocionSeleccionada: promocion;
 
-  abrirDialogo(){
+  abrirDialogo() {
     this.visible = true;
+    this.nuevoProducto = true;
+    this.productoDialogo = new Producto();
   }
 
-  obtenerProductos(){
+  obtenerProductos() {
     this.productoService.getProducto().subscribe(res => {
       this.productos = res;
     });
   }
 
-  obtenerUsuarios(){
+  obtenerUsuarios() {
     this.usuarioService.getUsuario().subscribe(res => {
       this.usuario = res;
     });
   }
 
-  obtenerCategorias(){
+  obtenerCategorias() {
     this.apiService.getCategoria().subscribe(res => {
       this.categorria = res;
     });
   }
 
-  obtenerAlmacenes(){
+  obtenerAlmacenes() {
     this.almacenService.getAlmacen().subscribe(res => {
       this.almacen = res;
     });
   }
 
-  obtenerProveedores(){
+  obtenerProveedores() {
     this.proveedorService.getProveedor().subscribe(res => {
       this.proveedor = res;
     });
   }
 
-  obtenerPromociones(){
+  obtenerPromociones() {
     this.promocionService.getPromocion().subscribe(res => {
       this.promocion = res;
     });
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.obtenerProductos();
     this.obtenerUsuarios();
     this.obtenerCategorias();
@@ -93,33 +97,50 @@ export class ProductoComponent {
     this.obtenerPromociones();
   }
 
-  editarProducto(producto:Producto){
-
+  editarProducto(producto: Producto) {
+    this.visible = true;
+    this.nuevoProducto = false;
+    this.productoDialogo = producto;
+    this.usuarioSeleccionado = this.usuario.find(u => u.id === producto.usuario.id)!;
+    this.categoriaSeleccionada = this.categorria.find(c => c.id === producto.categoria.id)!;
+    this.almacenSeleccionado = this.almacen.find(a => a.id === producto.almacen.id)!;
+    this.proveedorSeleccionado = this.proveedor.find(p => p.id === producto.proveedor.id)!;
+    this.promocionSeleccionada = this.promocion.find(pr => pr.id === producto.promocion.id)!;
   }
 
-  eliminarProducto(producto:Producto){
-
+  eliminarProducto(producto: Producto) {
+    this.productoService.deleteProducto(producto.id.toString()).subscribe(() => {
+      this.obtenerProductos();
+    });
   }
 
-  guardarProducto(){
-    this.productoDialogo.usuario = [this.usuarioSeleccionado];
-    this.productoDialogo.categoria = [this.categoriaSeleccionada];
-    this.productoDialogo.almacen = [this.almacenSeleccionado];
-    this.productoDialogo.proveedor = [this.proveedorSeleccionado];
-    this.productoDialogo.promocion = [this.promocionSeleccionada];
-    if (this.nuevoProducto){
-      this.productoService.postProducto(this.productoDialogo).subscribe(res => {
+  guardarProducto() {
+    const formDataProducto = new FormData();
+    formDataProducto.append('nombre', this.productoDialogo.nombre);
+    formDataProducto.append('descripcion', this.productoDialogo.descripcion);
+    formDataProducto.append('precio', this.productoDialogo.precio.toString());
+    formDataProducto.append('usuario', this.usuarioSeleccionado.id.toString());
+    formDataProducto.append('categoria', this.categoriaSeleccionada.id.toString());
+    formDataProducto.append('almacen', this.almacenSeleccionado.id.toString());
+    formDataProducto.append('proveedor', this.proveedorSeleccionado.id.toString());
+    formDataProducto.append('promocion', this.promocionSeleccionada.id.toString());
+
+    if (this.imagenSeleccionada) {
+      formDataProducto.append('imagen_url', this.imagenSeleccionada);
+    }
+    if (this.nuevoProducto) {
+      this.productoService.postProductoConImagen(formDataProducto).subscribe(res => {
         this.obtenerProductos();
+        this.visible = false;
       });
     } else {
-      this.productoService.putProducto(this.productoDialogo).subscribe(res => {
+      this.productoService.putProductoConImagen(formDataProducto, this.productoDialogo.id.toString()).subscribe(res => {
         this.obtenerProductos();
+        this.visible = false;
       });
     }
-    this.visible = false;
   }
-
-  onBasicUploadAuto(event:any){
-
+  onBasicUploadAuto(event: any) {
+    this.imagenSeleccionada = event.files[0];
   }
 }
