@@ -1,0 +1,95 @@
+<h1>Pedidos</h1>
+<p-splitter [style]="{ height: '100vh' }" styleClass="mb-8">
+    <ng-template #panel>
+        <div class="flex items-center justify-center h-full">
+            <p-dataview #dv [value]="Listaproductos" layout="grid">
+                <ng-template #grid let-productos>
+                    <div class="grid grid-cols-12 gap-4">
+                        <div *ngFor="let producto of productos" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-6 p-2">
+                            <div
+                                class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded flex flex-col"
+                            >
+                                <div class="bg-surface-50 flex justify-center rounded p-4">
+                                    <div class="relative mx-auto">
+                                        <img
+                                            class="rounded w-full"
+                                            [src]="producto.imagen_url"
+                                            [alt]="productos.producto_nombre"
+                                            style="max-width: 150px"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="flex flex-row justify-between products-start gap-2">
+                                    <div>
+                                        <div class="text-lg font-medium mt-1">{{ producto.producto_nombre }}</div>
+                                    </div>
+                                </div>
+                                <div class="pt-6">
+                                    <div class="flex flex-col gap-6 mt-6">
+                                        <span class="text-2xl font-semibold">{{ producto.precio | currency: 'PEN' }}</span>
+                                        <div class="flex gap-2">
+                                            <p-dropdown
+                                              [options]="tallas"
+                                              [(ngModel)]="producto.unidadSeleccionada"
+                                              optionLabel="unidad"
+                                              placeholder="Selecciona talla"
+                                              class="w-full"
+                                            />
+                                            <button
+                                                pButton
+                                                icon="pi pi-shopping-cart"
+                                                label="Agregar"
+                                                class="flex-auto whitespace-nowrap"
+                                                (click)="agregarProducto(producto, producto.unidadSeleccionada)"
+                                            ></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-dataview>
+        </div>
+    </ng-template>
+    <ng-template #panel>
+        <div class="flex items-center justify-center h-full">
+            <p-table [value]="detalles" [tableStyle]="{'min-width': '50rem'}">
+                <ng-template #header>
+                    <tr>
+                        <th style="width:20%">Producto</th>
+                        <th style="width:20%">Cantidad</th>
+                        <th style="width:20%">Precio</th>
+                        <th style="width:20%">Precio con Descuento</th>
+                        <th style="width:20%">Subtotal</th>
+                    </tr>
+                </ng-template>
+                <ng-template #body let-detalle let-ri="rowIndex">
+                    <tr>
+                        <td>
+                            {{ detalle.producto_nombre }}
+                        </td>
+                        <td>
+                            {{ detalle.cantidad }}
+                        </td>
+                        <td>
+                            {{ detalle.producto_precio }}
+                        </td>
+                        <td>
+                            {{ detalle.precio_final }}
+                        </td>
+                        <td>
+                            {{ detalle.subtotal }}
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template #footer>
+                    <tr>
+                        <td colspan="3" class="text-right font-bold">Total</td>
+                        <td class="font-bold">S/ {{ totalPedido }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </ng-template>
+</p-splitter>

@@ -8,9 +8,7 @@
             <th style="width:20%">DESCRIPCIÓN</th>
             <th style="width:20%">PRECIO</th>
             <th style="width:20%">IMAGEN</th>
-            <th style="width:20%">USUARIO</th>
             <th style="width:20%">CATEGORÍA</th>
-            <th style="width:20%">ALMACÉN</th>
             <th style="width:20%">PROVEEDOR</th>
             <th style="width:20%">PROMOCIÓN</th>
             <th style="width:20%">OPCIONES</th>
@@ -19,7 +17,7 @@
     <ng-template #body let-producto let-ri="rowIndex">
         <tr>
             <td>
-                {{ producto.id }}
+                {{ producto?.id }}
             </td>
             <td>
                 {{ producto.nombre }}
@@ -33,20 +31,16 @@
             <td>
                 <img src="{{producto.imagen_url}}" class="producto-imagen" alt="Imagen de {{ producto.nombre }}" />
             </td>
+
             <td>
-                {{ producto.usuario }}
+                {{ producto.nombre_categoria }}
+            </td>
+
+            <td>
+                {{ producto.nombre_proveedor }}
             </td>
             <td>
-                {{ producto.categoria }}
-            </td>
-            <td>
-                {{ producto.almacen }}
-            </td>
-            <td>
-                {{ producto.proveedor }}
-            </td>
-            <td>
-                {{ producto.promocion }}
+                {{ producto.nombre_promocion }}
             </td>
             <td>
                 <div class="flex items-center justify-center gap-2">
@@ -97,18 +91,12 @@
         <label for="imagen" class="font-semibold w-24">Imagen</label>
         <p-fileupload mode="basic" name="demo[]" chooseIcon="pi pi-upload" accept="image/*" (onSelect)="onBasicUploadAuto($event)" chooseLabel="Elegir Imagen" />
     </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="usuario" class="font-semibold w-24">Usuario</label>
-        <p-select id="usuario" [options]="usuario" [(ngModel)]="usuarioSeleccionado" optionLabel="nombre" placeholder="Seleccione un usuario" class="w-full md:w-56" />
-    </div>
+
     <div class="flex items-center gap-4 mb-4">
         <label for="categoria" class="font-semibold w-24">Categoría</label>
         <p-select id="categoria" [options]="categorria" [(ngModel)]="categoriaSeleccionada" optionLabel="nombre" placeholder="Seleccione una categoría" class="w-full md:w-56" />
     </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="almacen" class="font-semibold w-24">Almacén</label>
-        <p-select id="almacen" [options]="almacen" [(ngModel)]="almacenSeleccionado" optionLabel="nombre" placeholder="Seleccione un almacén" class="w-full md:w-56" />
-    </div>
+
     <div class="flex items-center gap-4 mb-4">
         <label for="proveedor" class="font-semibold w-24">Proveedor</label>
         <p-select id="proveedor" [options]="proveedor" [(ngModel)]="proveedorSeleccionado" optionLabel="nombre" placeholder="Seleccione un proveedor" class="w-full md:w-56" />

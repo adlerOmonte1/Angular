@@ -19,6 +19,7 @@ import { JugadorComponent } from './jugador/jugador.component';
 import { PartidoComponent } from './partidos/partidos.component';
 import { HistoriaComponent } from './historias/historias.component';
 import { PosthistoriasComponent } from './posthistorias/posthistorias.component';
+import { ProductohinchaComponent } from './productohincha/productohincha.component';
 
 
 const routes: Routes = [
@@ -51,7 +52,7 @@ const routes: Routes = [
     {path: 'administradores', component: AdministradorComponent, canActivate: [AuthGuard]},
     {path: 'tiposadmin', component: TipoAdminComponent, canActivate: [AuthGuard]},
     {path: 'jugadores', component: JugadorComponent, canActivate: [AuthGuard]}, // Asumiendo que el componente Jugador es el mismo que Administrador
-
+    {path: 'pedido',component:ProductohinchaComponent, canActivate: [AuthGuard]},
 
     //VISTA DE USUARIO
 

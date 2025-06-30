@@ -101,9 +101,7 @@ export class ProductoComponent {
     this.visible = true;
     this.nuevoProducto = false;
     this.productoDialogo = producto;
-    this.usuarioSeleccionado = this.usuario.find(u => u.id === producto.usuario.id)!;
     this.categoriaSeleccionada = this.categorria.find(c => c.id === producto.categoria.id)!;
-    this.almacenSeleccionado = this.almacen.find(a => a.id === producto.almacen.id)!;
     this.proveedorSeleccionado = this.proveedor.find(p => p.id === producto.proveedor.id)!;
     this.promocionSeleccionada = this.promocion.find(pr => pr.id === producto.promocion.id)!;
   }
@@ -119,9 +117,7 @@ export class ProductoComponent {
     formDataProducto.append('nombre', this.productoDialogo.nombre);
     formDataProducto.append('descripcion', this.productoDialogo.descripcion);
     formDataProducto.append('precio', this.productoDialogo.precio.toString());
-    formDataProducto.append('usuario', this.usuarioSeleccionado.id.toString());
     formDataProducto.append('categoria', this.categoriaSeleccionada.id.toString());
-    formDataProducto.append('almacen', this.almacenSeleccionado.id.toString());
     formDataProducto.append('proveedor', this.proveedorSeleccionado.id.toString());
     formDataProducto.append('promocion', this.promocionSeleccionada.id.toString());
 

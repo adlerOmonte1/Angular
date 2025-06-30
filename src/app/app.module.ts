@@ -58,6 +58,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { PartidoComponent } from './partidos/partidos.component';
 import { HistoriaComponent } from './historias/historias.component';
 import { PosthistoriasComponent } from './posthistorias/posthistorias.component';
+import { ProductohinchaComponent } from './productohincha/productohincha.component';
+import { Splitter } from 'primeng/splitter';
+import { DataView } from 'primeng/dataview';
 
 
 @NgModule({
@@ -82,6 +85,7 @@ import { PosthistoriasComponent } from './posthistorias/posthistorias.component'
     PartidoComponent,
     HistoriaComponent,
     PosthistoriasComponent,
+    ProductohinchaComponent,
 
   ],
   imports: [
@@ -116,7 +120,9 @@ import { PosthistoriasComponent } from './posthistorias/posthistorias.component'
     SelectModule,
     DialogModule,
     ConfirmDialogModule,
-    DropdownModule
+    DropdownModule,
+    Splitter,
+    DataView
   ],
   providers: [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
