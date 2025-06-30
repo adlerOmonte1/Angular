@@ -167,9 +167,9 @@ export class AppComponent {
             ]
         },
         {
-            label: 'Entradas',
+            label: 'Productos',
             icon: 'pi pi-ticket',
-            command: () => this.router.navigate(['/entradas'])
+            command: () => this.router.navigate(['/pedido'])
         },
         {
             label: 'Cerrar Sesión',

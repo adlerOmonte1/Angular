@@ -61,6 +61,7 @@ import { PosthistoriasComponent } from './posthistorias/posthistorias.component'
 import { ProductohinchaComponent } from './productohincha/productohincha.component';
 import { Splitter } from 'primeng/splitter';
 import { DataView } from 'primeng/dataview';
+import { InputNumber } from 'primeng/inputnumber';
 
 
 @NgModule({
@@ -122,7 +123,8 @@ import { DataView } from 'primeng/dataview';
     ConfirmDialogModule,
     DropdownModule,
     Splitter,
-    DataView
+    DataView,
+    InputNumber
   ],
   providers: [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

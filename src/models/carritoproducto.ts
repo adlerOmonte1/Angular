@@ -6,6 +6,8 @@ export class CarritoProducto {
   cantidad: number;
   producto_nombre: string;
   producto_precio: number;
-  subtotal: number;
+  subtotalxunidad: number;
   imagen_url: string;
+  subtotal: number;
+  total : number;
 }
