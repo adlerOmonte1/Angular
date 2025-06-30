@@ -62,6 +62,7 @@ import { ProductohinchaComponent } from './productohincha/productohincha.compone
 import { Splitter } from 'primeng/splitter';
 import { DataView } from 'primeng/dataview';
 import { InputNumber } from 'primeng/inputnumber';
+import { FormapagoComponent } from './formapago/formapago.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { InputNumber } from 'primeng/inputnumber';
     HistoriaComponent,
     PosthistoriasComponent,
     ProductohinchaComponent,
+    FormapagoComponent,
 
   ],
   imports: [
