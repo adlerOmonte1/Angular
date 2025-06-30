@@ -1,7 +1,8 @@
-export class Noticias {
+export class Noticia {
   id: number;
+  administrador: string;            
   titulo: string;
   contenido: string;
-  fecha_publicacion: Date;
-  imagen_url: string;
+  fecha_publicacion: string;        
+  imagen_url: string;               
 }

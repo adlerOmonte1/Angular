@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { apiService } from '../../service/api.service';
-import { Noticias } from '../../models/noticias.model';
+import { Noticia } from '../../models/noticias.model';
 
 @Component({
   selector: 'app-mi-cuenta',

@@ -12,17 +12,14 @@ import { Menu } from 'primeng/menu';
 })
 export class AppComponent {
   title = 'web_udh';
-
   items: MenuItem[] | undefined;
-
   value3: string | undefined;
-
   loggedIn: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
-
+    this.loggedIn = this.authService.isAuthenticated();
         this.loggedIn = this.authService.isAuthenticated();
         const rol = this.authService.getRol();
         if(rol == 'ADMINISTRADOR') {

@@ -1,93 +1,74 @@
-<!--read ->Tabla -->
 <h1>Noticias</h1>
 
-<p-button label="Nueva categoria" icon="pi pi-plus" class="mr-2" (onClick)="abrirDialogo()" />
+<p-button label="Nueva Noticia" icon="pi pi-plus" class="mb-3" (onClick)="abrirDialogo()" />
 
-<!-- value es mi lista de objetos (cada uno de los elementos), datakey = la PK de mi Objeto-->
-<p-table [value]="noticias" dataKey="id" [tableStyle]="{'min-width': '50rem'}">
-  <!--Encabezado de la tabla-->
-    <ng-template #header>
-        <tr>
-            <th style="width:20%">#</th>
-            <th style="width:20%">Administrador</th>
-            <th style="width:20%">Titulo</th>
-            <th style="width:20%">Contenido</th>
-            <th style="width:20%">fecha de Publicacion</th>
-            <th style="width:20%">Img</th>
-            <th style="width:20%"></th> <!--columna para edit y eliminar -->
-        </tr>
-    </ng-template>
-    <ng-template #body let-noticia let-ri="rowIndex"> <!--Let-Objetos es como un for(una linea por objeto) y el Let-ri ES PARA EL ORDEN (1RA,2DA FILA ...) -->
-        <tr [pEditableRow]="noticia">
-            <td>
-              {{noticia.id}}
-            </td>
-            <td>
-              {{noticia.administrador}}
-            </td>
-            <td>
-              {{noticia.titulo}}
-            </td>
-            <td>
-              {{noticia.contenido}}
-            </td>
-            <td>
-              {{noticia.fechaPublicacion | date:'dd/MM/yyyy'}}
-            </td>
-            <td>
-              <img src="{{noticia.imagen}}" style="width: 10px" alt="Imagen de la noticia" />
-            </td>
-            <td>
-                <div class="flex items-center justify-center gap-2">
-                    <button
-                        pButton
-                        pRipple
-                        type="button"
-                        icon="pi pi-check"
-                        (click)="editarNoticia(noticia)"
-                        text
-                        rounded
-                        severity="secondary"
-                    ></button>
-                    <!--Delete ->Boton -->
-                    <button
-                        pButton
-                        pRipple
-                        type="button"
-                        icon="pi pi-times"
-                        (click)="eliminarNoticia(noticia)"
-                        text
-                        rounded
-                        severity="secondary"
-                    ></button>
-                </div>
-            </td>
-        </tr>
-    </ng-template>
+<p-table [value]="noticias" [tableStyle]="{ 'min-width': '60rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>ID</th>
+      <th>Administrador</th>
+      <th>Título</th>
+      <th>Contenido</th>
+      <th>Fecha</th>
+      <th>Imagen</th>
+      <th>Opciones</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-noticia>
+    <tr>
+      <td>{{ noticia.id }}</td>
+      <td>{{ noticia.administrador }}</td>
+      <td>{{ noticia.titulo }}</td>
+      <td>{{ noticia.contenido }}</td>
+      <td>{{ noticia.fecha_publicacion }}</td>
+      <td>
+        <img [src]="noticia.imagen_url" alt="Imagen" width="80" height="60" *ngIf="noticia.imagen_url">
+      </td>
+      <td>
+        <div class="flex gap-2">
+          <button pButton icon="pi pi-pencil" (click)="editarNoticia(noticia)" title="Editar" text></button>
+          <button pButton icon="pi pi-trash" (click)="eliminarNoticia(noticia)" title="Eliminar" text></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
 </p-table>
 
+<p-dialog header="Crear/Editar Noticia" [(visible)]="visible" [modal]="true" [style]="{ width: '30rem' }">
+  <div class="field mb-3">
+    <label for="administrador">Administrador</label>
+    <p-dropdown 
+      [options]="administradores"
+      [(ngModel)]="administradorSeleccionado"
+      optionLabel="id"
+      placeholder="Selecciona un administrador"
+      [filter]="true"
+      inputId="administrador">
+    </p-dropdown>
+  </div>
 
-<!-- create y update ->Formulario -->
-<p-dialog header="{{tituloDialogo}}" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-    <div class="flex items-center gap-4 mb-4">
-        <label for="titulo" class="font-semibold w-24"></label>
-        <input type="text" pInputText [(ngModel)]="NoticiaDialogo.titulo" />
-    </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="contenido" class="font-semibold w-24"></label>
-        <input type="text" pInputText [(ngModel)]="NoticiaDialogo.contenido" />
-    </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="fecha_publicacion" class="font-semibold w-24"></label>
-        <input type="datetime" pInputText [(ngModel)]="NoticiaDialogo.fecha_publicacion" />
-    </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="imagen_url" class="font-semibold w-24"></label>
-        <input type="image" pInputText [(ngModel)]="NoticiaDialogo.imagen_url" />
-    </div>
+  <div class="field mb-3">
+    <label for="titulo">Título</label>
+    <input pInputText id="titulo" [(ngModel)]="noticiaDialogo.titulo" />
+  </div>
 
-    <div class="flex justify-end gap-2">
-        <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
-        <p-button label="Guardar" (click)="guardar()" />
-    </div>
-  </p-dialog>
+  <div class="field mb-3">
+    <label for="contenido">Contenido</label>
+    <textarea pInputTextarea id="contenido" [(ngModel)]="noticiaDialogo.contenido"></textarea>
+  </div>
+
+  <div class="field mb-3">
+    <label for="fecha">Fecha de Publicación</label>
+    <input type="date" id="fecha" [(ngModel)]="noticiaDialogo.fecha_publicacion" pInputText />
+  </div>
+
+  <div class="field mb-3">
+    <label for="imagen">Imagen URL</label>
+    <input type="text" id="imagen" [(ngModel)]="noticiaDialogo.imagen_url" pInputText />
+  </div>
+
+  <div class="flex justify-end gap-2">
+    <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
+    <p-button label="Guardar" (click)="guardarNoticia()" />
+  </div>
+</p-dialog>

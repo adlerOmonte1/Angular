@@ -1,72 +1,88 @@
-import { Component } from '@angular/core';
-import { Noticias } from '../../models/noticias.model';
+import { Component, OnInit } from '@angular/core';
+import { Noticia } from '../../models/noticias.model';
+import { administrador } from '../../models/administrador.model';
 import { apiService } from '../../service/api.service';
-import { Categoria } from '../../models/categoria.model';
+import { AdministradorService } from '../../service/administrador.service';
 
 @Component({
-  selector: 'app-noticias',
+  selector: 'app-noticia',
   standalone: false,
   templateUrl: './noticias.component.html',
-  styleUrl: './noticias.component.css'
+  styleUrls: ['./noticias.component.css'],
+  providers: [apiService, AdministradorService]
 })
-export class NoticiasComponent {
-  constructor(private apiService: apiService) {}
-  noticias: Noticias[];
+export class NoticiaComponent implements OnInit {
+
+  noticias: Noticia[] = [];
+  administradores: administrador[] = [];
+  administradorSeleccionado: administrador | undefined;
+
   visible: boolean = false;
-  tituloDialogo: string = "Nueva Noticia";
-  NoticiaDialogo: Noticias = new Noticias();
   nuevaNoticia: boolean = true;
-  categorias: Categoria[];
-  imagenSeleccionada: File | null = null;
+  noticiaDialogo: Noticia = new Noticia();
 
+  constructor(
+    private noticiaService: apiService,
+    private administradorService: AdministradorService
+  ) {}
 
-
-
-  obtenerCategorias() {
-
-  }
-  obtenerNoticias() {
-    this.apiService.getNoticias().subscribe(res=>{
-      this.noticias = res;
-    })
-  }
-  ngOnInit() {
-    // para obtener las noticias y categorias al iniciar el componente
+  ngOnInit(): void {
     this.obtenerNoticias();
-    this.obtenerCategorias();
+    this.obtenerAdministradores();
   }
-  editarNoticia(noticia: Noticias) {
-    this.visible = true;
-    this.nuevaNoticia=false;
-    this.NoticiaDialogo = noticia;
-    this.tituloDialogo = "Editar Noticia";
 
+  obtenerNoticias(): void {
+    this.noticiaService.getNoticias().subscribe(res => {
+      this.noticias = res;
+    });
   }
-  eliminarNoticia(noticia: Noticias) {
-    this.apiService.deleteNoticias(noticia.id.toString()).subscribe(()=>
-    this.obtenerNoticias)  }
 
-  abrirDialogo() {
-    this.visible = true;
+  obtenerAdministradores(): void {
+    this.administradorService.getAdministradores().subscribe(res => {
+      this.administradores = res;
+    });
+  }
+
+  abrirDialogo(): void {
     this.nuevaNoticia = true;
-    this.tituloDialogo = "Nueva Noticia";
-    this.NoticiaDialogo = new Noticias();
+    this.noticiaDialogo = new Noticia();
+    this.administradorSeleccionado = undefined;
+    this.visible = true;
   }
-  guardar() {
-    if (this.nuevaNoticia) {
-      this.apiService.postNoticias(this.NoticiaDialogo).subscribe(res => {
-        this.obtenerNoticias();
-      });
-    } else {
-      this.apiService.putNoticias(this.NoticiaDialogo).subscribe(res => {
+
+  editarNoticia(noticia: Noticia): void {
+    this.nuevaNoticia = false;
+    this.noticiaDialogo = { ...noticia };
+    this.administradorSeleccionado = this.administradores.find(adm => adm.id === noticia.administrador);
+    this.visible = true;
+  }
+
+  eliminarNoticia(noticia: Noticia): void {
+    if (noticia.id !== undefined && confirm('¿Estás seguro de eliminar esta noticia?')) {
+      this.noticiaService.deleteNoticias(noticia.id.toString()).subscribe(() => {
         this.obtenerNoticias();
       });
     }
-    this.visible = false;
-  }
-  onBasicUpload(event: any) {
-    this.imagenSeleccionada = event.files[0]; // variable para almacenar la imagen seleccionada
-    console.log(this.imagenSeleccionada);
   }
 
+  guardarNoticia(): void {
+    if (!this.administradorSeleccionado) {
+      alert('Debes seleccionar un administrador');
+      return;
+    }
+
+    this.noticiaDialogo.administrador = this.administradorSeleccionado.id;
+
+    if (this.nuevaNoticia) {
+      this.noticiaService.postNoticias(this.noticiaDialogo).subscribe(() => {
+        this.obtenerNoticias();
+        this.visible = false;
+      });
+    } else {
+      this.noticiaService.putNoticias(this.noticiaDialogo).subscribe(() => {
+        this.obtenerNoticias();
+        this.visible = false;
+      });
+    }
+  }
 }
