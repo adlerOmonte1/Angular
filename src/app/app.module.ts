@@ -61,6 +61,7 @@ import { PosthistoriasComponent } from './posthistorias/posthistorias.component'
 import { ProductohinchaComponent } from './productohincha/productohincha.component';
 import { Splitter } from 'primeng/splitter';
 import { DataView } from 'primeng/dataview';
+import { JugadorHinchaComponent } from './jugador-hincha/jugador-hincha.component';
 import { InputNumber } from 'primeng/inputnumber';
 import { FormapagoComponent } from './formapago/formapago.component';
 
@@ -89,6 +90,7 @@ import { FormapagoComponent } from './formapago/formapago.component';
     PosthistoriasComponent,
     ProductohinchaComponent,
     FormapagoComponent,
+    JugadorHinchaComponent,
 
   ],
   imports: [

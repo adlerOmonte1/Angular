@@ -1,0 +1,29 @@
+<h1>JUGADORES</h1>
+  <p-dataview #dv [value]="jugadores" layout="grid">
+    <ng-template #grid let-jugadores>
+      <div class="grid grid-cols-12 gap-4">
+        <div *ngFor="let jugador of jugadores" class="col-span-12 sm:col-span-6 md:col-span-4 xl:col-span-6 p-2">
+          <div
+            class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded flex flex-col">
+            <div class="bg-surface-50 flex justify-center rounded p-4">
+              <div class="relative mx-auto">
+                <!-- <img class="rounded w-full" [src]="jugador.imagen" [alt]="jugador.nombre" /> -->
+                <img class="rounded w-full" src="https://www.fcbarcelona.com/photo-resources/2024/10/13/350837be-717b-4b17-9e66-ef201caac7ae/08-Pedri-M.jpg?width=470&height=470" alt="jugador"/>
+              </div>
+            </div>
+            <div class="flex flex-col mt-4">
+              <div class="text-sm text-surface-600 dark:text-surface-400">
+                <p><strong>Jugador:</strong> {{ jugador.nombre }} {{ jugador.apellido }}</p>
+                <p><strong>Edad:</strong> {{ jugador.edad }} años</p>
+                <p><strong>Posición:</strong> {{ jugador.posicion }}</p>
+                <p><strong>Dorsal:</strong> {{ jugador.dorsal }}</p>
+                <p><strong>Peso:</strong> {{ jugador.peso }} Kg</p>
+                <p><strong>Altura:</strong> {{ jugador.altura }} M</p>
+                <p><strong>Nacionalidad:</strong> {{ jugador.nacionalidad }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataview>
