@@ -1,16 +1,15 @@
-<!-- src/app/components/tipo-admin/tipo-admin.component.html -->
-
 <h1>TIPOS DE ADMINISTRADORES</h1>
 <p-button label="Crear Tipo Administrador" icon="pi pi-plus" (click)="abrirDialogo()"></p-button>
 
 <p-table [value]="tiposAdmin" [tableStyle]="{'min-width': '50rem'}">
-  <ng-template #header>
+  <ng-template pTemplate="header">
     <tr>
       <th>ID</th>
       <th>TIPO</th>
+      <th>ACCIONES</th>
     </tr>
   </ng-template>
-  <ng-template #body let-tipoAdmin>
+  <ng-template pTemplate="body" let-tipoAdmin>
     <tr>
       <td>{{ tipoAdmin.id }}</td>
       <td>{{ tipoAdmin.tipo }}</td>
@@ -30,6 +29,6 @@
 
   <div class="flex justify-end gap-2">
     <p-button label="Cancelar" severity="secondary" (click)="visible = false"></p-button>
-    <p-button label="Guardar" (click)="guardarTipoAdmin()"></p-button>
+    <p-button label="guardar" (click)="guardarTipoAdmin()"></p-button>
   </div>
 </p-dialog>

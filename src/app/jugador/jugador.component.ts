@@ -1,28 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { jugador } from '../../models/jugador.model';
+import { administrador } from '../../models/administrador.model';
 import { JugadorService } from '../../service/jugador.service';
-import { Jugador } from '../../models/jugador.model';
-import { administrador } from '../../models/administrador.model';  // Importa el modelo de Administrador
-import { AdministradorService } from '../../service/administrador.service'; // Importa el servicio de Administrador
+import { AdministradorService } from '../../service/administrador.service';
 
 @Component({
   selector: 'app-jugador',
   standalone: false,
   templateUrl: './jugador.component.html',
   styleUrls: ['./jugador.component.css'],
-  providers: [JugadorService, AdministradorService]
+  providers: [JugadorService]
 })
-export class JugadorComponent implements OnInit {
+export class JugadorComponent{
 
-  jugadores: Jugador[] = [];
-  administradores: administrador[] = [];  // Lista de administradores
+  jugadores: jugador[] = [];
+  administradores: administrador[] = [];
+  jugadorDialogo: jugador = new jugador();
   tituloDialogo: string = 'Nuevo Jugador';
   visible: boolean = false;
-  jugadorDialogo: Jugador = new Jugador();
-  nuevaJugador: boolean = true;
-administrador: any;
-Administrador: any;
+  nuevoJugador: boolean = true;
 
-  constructor(private api: JugadorService, private apiAdministrador: AdministradorService) {}
+  constructor(
+    private api: JugadorService,
+    private adminService: AdministradorService
+  ) {}
 
   ngOnInit() {
     this.obtenerJugadores();
@@ -30,45 +31,52 @@ Administrador: any;
   }
 
   obtenerJugadores() {
-    this.api.getJugador().subscribe((res) => {
+    this.api.getJugadores().subscribe(res => {
       this.jugadores = res;
     });
   }
 
   obtenerAdministradores() {
-    this.apiAdministrador.getAdministradores().subscribe((res) => {
+    this.adminService.getAdministradores().subscribe(res => {
       this.administradores = res;
-    });
-  }
-
-  editarJugador(jugador: Jugador) {
-    this.visible = true;
-    this.nuevaJugador = false;
-    this.jugadorDialogo = jugador;
-  }
-
-  eliminarJugador(jugador: Jugador) {
-    this.api.deleteJugador(jugador.id.toString()).subscribe(() => {
-      this.obtenerJugadores();
     });
   }
 
   abrirDialogo() {
     this.visible = true;
-    this.nuevaJugador = true;
-    this.jugadorDialogo = new Jugador();
+    this.nuevoJugador = true;
+    this.jugadorDialogo = new jugador();
+  }
+
+  editarJugador(j: jugador) {
+    this.visible = true;
+    this.nuevoJugador = false;
+    this.jugadorDialogo = j;
+  }
+
+  eliminarJugador(j: jugador) {
+    if (j.id) {
+      this.api.deleteJugador(j.id).subscribe(() => {
+        this.obtenerJugadores();
+      });
+    }
   }
 
   guardarJugador() {
-    if (this.nuevaJugador) {
-      this.api.postJugador(this.jugadorDialogo).subscribe(res => {
+    if (this.nuevoJugador) {
+      this.api.postJugador(this.jugadorDialogo).subscribe(() => {
         this.obtenerJugadores();
       });
     } else {
-      this.api.putJugador(this.jugadorDialogo).subscribe(res => {
+      this.api.putJugador(this.jugadorDialogo).subscribe(() => {
         this.obtenerJugadores();
       });
     }
     this.visible = false;
+  }
+
+  obtenerNombreAdmin(id: string): string {
+    const admin = this.administradores.find(a => a.id === id);
+    return admin ? id : '';
   }
 }
