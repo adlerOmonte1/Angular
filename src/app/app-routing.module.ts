@@ -21,6 +21,7 @@ import { HistoriaComponent } from './historias/historias.component';
 import { PosthistoriasComponent } from './posthistorias/posthistorias.component';
 import { ProductohinchaComponent } from './productohincha/productohincha.component';
 import { JugadorHinchaComponent } from './jugador-hincha/jugador-hincha.component';
+import { FormapagoComponent } from './formapago/formapago.component';
 
 
 const routes: Routes = [
@@ -58,6 +59,8 @@ const routes: Routes = [
     //VISTA DE USUARIO
     {path: 'jugadoreshincha', component: JugadorHinchaComponent, canActivate: [AuthGuard]},
     {path: 'pedido',component:ProductohinchaComponent, canActivate: [AuthGuard]},
+    {path: 'formapago',component:FormapagoComponent, canActivate: [AuthGuard]},
+
 
   ];
 

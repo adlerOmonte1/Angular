@@ -161,6 +161,11 @@ export class AppComponent {
             command: () => this.router.navigate(['/jugadoreshincha'])
         },
         {
+            label: 'Formas de pago',
+            icon: 'pi pi-users',
+            command: () => this.router.navigate(['/formapago'])
+        },
+        {
             label: 'Mi Cuenta',
             icon: 'pi pi-user',
             items: [

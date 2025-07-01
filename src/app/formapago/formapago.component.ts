@@ -13,8 +13,6 @@ export class FormapagoComponent {
 constructor(private api: PasarelaService) {}
 
   pasarelas: Pasarela[] = [];
-  visible: boolean = false;
-  nuevaPasarela: boolean = true;
 
   obtenerPasarelas() {
     this.api.getPasarela().subscribe((res) => {
