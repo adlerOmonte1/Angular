@@ -1,84 +1,91 @@
 import { Component } from '@angular/core';
-import { administrador } from '../../models/administrador.model';
-import { tiposadmin } from '../../models/tipo-administrador.model';
 import { AdministradorService } from '../../service/administrador.service';
+import { administrador } from '../../models/administrador.model';
+import { Usuario } from '../../models/usuario.model';
+import { tiposadmin } from '../../models/tipo-administrador.model';
+import { UsuarioService } from '../../service/usuario.service';
 import { TipoAdminService } from '../../service/tiposadmin.service';
 
 @Component({
   selector: 'app-administrador',
   standalone: false,
   templateUrl: './administrador.component.html',
-  styleUrl: './administrador.component.css',
-  providers: [AdministradorService, TipoAdminService]
+  styleUrls: ['./administrador.component.css'],
+  providers: [AdministradorService, UsuarioService, TipoAdminService]
 })
 export class AdministradorComponent {
+  administradores: administrador[] = [];
+  administradorDialogo: administrador = new administrador();
+  visible: boolean = false;
+  crear: boolean = true;
+
+  usuarios: Usuario[] = [];
+  tiposadmin: tiposadmin[] = [];
+
   constructor(
     private administradorService: AdministradorService,
+    private usuarioService: UsuarioService,
     private tipoAdminService: TipoAdminService
   ) {}
 
-  administradores: administrador[] = [];
-  tiposadmin: tiposadmin[] = [];
-  visible: boolean = false;
-  nuevoAdministrador: boolean = true;
-  administradorDialogo: administrador = new administrador();
-
-  tipoSeleccionado: number;
-
   ngOnInit() {
     this.obtenerAdministradores();
+    this.obtenerUsuarios();
     this.obtenerTiposAdmin();
   }
 
   obtenerAdministradores() {
-    this.administradorService.getAdministradores().subscribe(res => {
+    this.administradorService.getAdministrador().subscribe(res => {
       this.administradores = res;
     });
   }
 
+  obtenerUsuarios() {
+    this.usuarioService.getUsuario().subscribe(res => {
+      this.usuarios = res;
+    });
+  }
+
   obtenerTiposAdmin() {
-    this.tipoAdminService.getTipos().subscribe(res => {
+    this.tipoAdminService.getTiposAdmin().subscribe(res => {
       this.tiposadmin = res;
     });
   }
 
-  abrirDialogo() {
+  abrirModal() {
     this.visible = true;
-    this.nuevoAdministrador = true;
+    this.crear = true;
     this.administradorDialogo = new administrador();
   }
 
-  editarAdministrador(adm: administrador) {
+  editarAdministrador(admin: administrador) {
     this.visible = true;
-    this.nuevoAdministrador = false;
-    this.administradorDialogo = adm;
-    this.tipoSeleccionado = adm.tipo_admin;
+    this.crear = false;
+    this.administradorDialogo = { ...admin };
   }
 
-  eliminarAdministrador(adm: administrador) {
-    this.administradorService.deleteAdministrador(adm.id).subscribe(() => {
+  eliminarAdministrador(admin: administrador) {
+    this.administradorService.deleteAdministrador(admin.id.toString()).subscribe(() => {
       this.obtenerAdministradores();
     });
   }
 
-  guardarAdministrador() {
-    this.administradorDialogo.tipo_admin = this.tipoSeleccionado;
+  guardar() {
+    const body = {
+      id: this.administradorDialogo.id,
+      tipo_admin: this.administradorDialogo.tipo_admin
+    };
 
-    if (this.nuevoAdministrador) {
-      this.administradorService.postAdministrador(this.administradorDialogo).subscribe(() => {
+    if (this.crear) {
+      this.administradorService.postAdministrador(body).subscribe(() => {
         this.obtenerAdministradores();
+        this.visible = false;
       });
     } else {
-      this.administradorService.putAdministrador(this.administradorDialogo).subscribe(() => {
-        this.obtenerAdministradores();
+      this.administradorService.putAdministrador(body, this.administradorDialogo.id.id).subscribe(() => {
+  this.obtenerAdministradores();
+  this.visible = false;
       });
     }
-
-    this.visible = false;
-  }
-
-  getNombreTipo(idTipo: number): string {  //Devuelve un string (el nombre del tipo de administrador).
-    const tipo = this.tiposadmin.find(t => t.id === idTipo); //Usa find para encontrar el objeto cuyo id coincida con idTipo.
-    return tipo ? tipo.tipo : 'Sin asignar'; //Si encontró un tipo, retorna su propiedad tipo (es decir, el nombre del tipo).
   }
 }

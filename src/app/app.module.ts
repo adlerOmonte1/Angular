@@ -42,22 +42,26 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 
-import { NoticiaComponent } from './noticias/noticias.component';
+//import { NoticiaComponent } from './noticias/noticias.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PromocionComponent } from './promocion/promocion.component';
 import { ProductoComponent } from './producto/producto.component';
 import { PasarelaComponent } from './pasarela/pasarela.component';
 import { TallasComponent } from './tallas/tallas.component';
 import { AlmacenComponent } from './almacen/almacen.component';
-import { AdministradorComponent } from './administrador/administrador.component';
+
 import { ProveedoresComponent } from './proveedores/proveedores.component';
-import { TipoAdminComponent } from './tiposadmin/tiposadmin.component';
-import { JugadorComponent } from './jugador/jugador.component';
+
 import { Partido } from '../models/partidos.model';
 import { DropdownModule } from 'primeng/dropdown';
-import { PartidoComponent } from './partidos/partidos.component';
+
 import { HistoriaComponent } from './historias/historias.component';
 import { PosthistoriasComponent } from './posthistorias/posthistorias.component';
+import { TiposadminComponent } from './tiposadmin/tiposadmin.component';
+import { AdministradorComponent } from './administrador/administrador.component';
+import { JugadorComponent } from './jugador/jugador.component';
+
+
 
 
 @NgModule({
@@ -67,21 +71,21 @@ import { PosthistoriasComponent } from './posthistorias/posthistorias.component'
     HomeComponent,
     MiCuentaComponent,
     CategoriasComponent,
-    NoticiaComponent,
+   // NoticiaComponent,
     PedidoComponent,
     PromocionComponent,
     ProductoComponent,
     PasarelaComponent,
     TallasComponent,
     AlmacenComponent,
-    AdministradorComponent,
-    AdministradorComponent,
     ProveedoresComponent,
-    TipoAdminComponent,
-    JugadorComponent,
-    PartidoComponent,
+   // PartidoComponent,
     HistoriaComponent,
     PosthistoriasComponent,
+    TiposadminComponent,
+    AdministradorComponent,
+    JugadorComponent
+
 
   ],
   imports: [

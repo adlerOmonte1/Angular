@@ -1,60 +1,61 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TipoAdminService } from '../../service/tiposadmin.service';
 import { tiposadmin } from '../../models/tipo-administrador.model';
 
 @Component({
-  selector: 'app-tipo-admin',
+  selector: 'app-tiposadmin',
   standalone: false,
   templateUrl: './tiposadmin.component.html',
-  styleUrls: ['./tiposadmin.component.css'],
+  styleUrl: './tiposadmin.component.css',
   providers: [TipoAdminService]
 })
-export class TipoAdminComponent{
-
-  tiposAdmin: tiposadmin[] = [];
-  tituloDialogo: string = 'Nuevo Tipo Admin';
-  visible: boolean = false;
-  tipoAdminDialogo: tiposadmin = new tiposadmin();
-  nuevoTipoAdmin: boolean = true;
+export class TiposadminComponent {
 
   constructor(private api: TipoAdminService) {}
 
-  ngOnInit() {
-    this.obtenerTiposAdmin();
-  }
+  tiposadmin: tiposadmin[] = [];
+  tituloDialogo: string = 'Nuevo Tipo de Administrador';
+  visible: boolean = false;
 
-  obtenerTiposAdmin() {
-    this.api.getTipos().subscribe((res) => {
-      this.tiposAdmin = res;
+  tiposadminDialogo: tiposadmin = new tiposadmin();
+  nuevaTiposadmin: boolean = true;
+
+  obtenerTiposadmin() {
+    this.api.getTiposAdmin().subscribe((res) => {
+      this.tiposadmin = res;
     });
   }
 
-  editarTipoAdmin(tipoAdmin: tiposadmin) {
-    this.visible = true;
-    this.nuevoTipoAdmin = false;
-    this.tipoAdminDialogo = tipoAdmin;
+  ngOnInit() {
+    this.obtenerTiposadmin();
   }
 
-  eliminarTipoAdmin(tipoAdmin: tiposadmin) {
-    this.api.deleteTipo(tipoAdmin.id!.toString()).subscribe(() => {
-      this.obtenerTiposAdmin();
+  editarTiposadmin(tiposadmin: tiposadmin) {
+    this.visible = true;
+    this.nuevaTiposadmin = false;
+    this.tiposadminDialogo = tiposadmin;
+  }
+
+  eliminarTiposadmin(tiposadmin: tiposadmin) {
+    this.api.deleteTiposAdmin(tiposadmin.id.toString()).subscribe(() => {
+      this.obtenerTiposadmin();
     });
   }
 
   abrirDialogo() {
     this.visible = true;
-    this.nuevoTipoAdmin = true;
-    this.tipoAdminDialogo = new tiposadmin();
+    this.nuevaTiposadmin = true;
+    this.tiposadminDialogo = new tiposadmin();
   }
 
-  guardarTipoAdmin() {
-    if (this.nuevoTipoAdmin) {
-      this.api.postTipo(this.tipoAdminDialogo).subscribe(() => {
-        this.obtenerTiposAdmin();
+  guardarTiposadmin() {
+    if (this.nuevaTiposadmin) {
+      this.api.postTiposAdmin(this.tiposadminDialogo).subscribe(res => {
+        this.obtenerTiposadmin();
       });
     } else {
-      this.api.putTipo(this.tipoAdminDialogo).subscribe(() => {
-        this.obtenerTiposAdmin();
+      this.api.putTiposAdmin(this.tiposadminDialogo).subscribe(res => {
+        this.obtenerTiposadmin();
       });
     }
     this.visible = false;

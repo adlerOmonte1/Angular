@@ -1,65 +1,53 @@
 <h1>Administradores</h1>
+<p-button label="Nuevo Administrador" icon="pi pi-plus" class="mb-3" (onClick)="abrirModal()"></p-button>
 
-<p-button label="Nuevo Administrador" icon="pi pi-plus" class="mr-2" (onClick)="abrirDialogo()" />
-
-<p-table [value]="administradores" [tableStyle]="{ 'min-width': '50rem' }">
+<p-table [value]="administradores" [tableStyle]="{ 'min-width': '40rem' }">
   <ng-template pTemplate="header">
     <tr>
-      <th>ID</th>
-      <th>Tipo Administrador</th>
+      <th>ID Usuario</th>
+      <th>Tipo</th>
       <th>Opciones</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-adm>
+  <ng-template pTemplate="body" let-admin>
     <tr>
-      <td>{{ adm.id }}</td>
-      <td>{{ getNombreTipo(adm.tipo_admin) }}</td>
+      <td>{{ admin.username }}</td>
+      <td>{{ admin.tipo_nombre }}</td>
       <td>
-        <div class="flex items-center justify-center gap-2">
-          <button
-            pButton
-            pRipple
-            type="button"
-            icon="pi pi-pencil"
-            (click)="editarAdministrador(adm)"
-            text
-            rounded
-            severity="secondary">
-          </button>
-          <button
-            pButton
-            pRipple
-            type="button"
-            icon="pi pi-times"
-            (click)="eliminarAdministrador(adm)"
-            text
-            rounded
-            severity="secondary">
-          </button>
-        </div>
+        <button pButton icon="pi pi-pencil" (click)="editarAdministrador(admin)" text></button>
+        <button pButton icon="pi pi-trash" (click)="eliminarAdministrador(admin)" severity="danger" text></button>
       </td>
     </tr>
   </ng-template>
 </p-table>
 
-<p-dialog header="Creación/Edición de Administrador" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-  <div class="flex items-center gap-4 mb-4">
-    <label for="id" class="font-semibold w-24">ID</label>
-    <input pInputText id="id" class="flex-auto" autocomplete="off" [(ngModel)]="administradorDialogo.id" />
-  </div>
-  <div class="flex items-center gap-4 mb-4">
-    <label for="tipo" class="font-semibold w-24">Tipo</label>
-    <p-dropdown
-      [options]="tiposadmin"
-      [(ngModel)]="tipoSeleccionado"
-      optionLabel="tipo"
-      optionValue="id"
-      placeholder="Seleccionar tipo"
-      class="flex-auto">
-    </p-dropdown>
-  </div>
-  <div class="flex justify-end gap-2">
-    <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
-    <p-button label="guardar" (click)="guardarAdministrador()" />
+<p-dialog header="Formulario Administrador" [(visible)]="visible" [modal]="true" [style]="{ width: '25rem' }">
+  <div class="flex flex-column gap-4">
+    <div class="flex items-center gap-3">
+      <label class="w-24 font-semibold">Usuario</label>
+      <p-dropdown
+        [options]="usuarios"
+        [(ngModel)]="administradorDialogo.id"
+        optionLabel="username"
+        optionValue="id"
+        placeholder="Seleccionar usuario"
+        class="w-full"
+      ></p-dropdown>
+    </div>
+    <div class="flex items-center gap-3">
+      <label class="w-24 font-semibold">Tipo</label>
+      <p-dropdown
+        [options]="tiposadmin"
+        [(ngModel)]="administradorDialogo.tipo_admin"
+        optionLabel="tipo"
+        optionValue="id"
+        placeholder="Seleccionar tipo"
+        class="w-full"
+      ></p-dropdown>
+    </div>
+    <div class="flex justify-end gap-2">
+      <p-button label="Cancelar" (click)="visible = false" severity="secondary"></p-button>
+      <p-button label="Guardar" (click)="guardar()"></p-button>
+    </div>
   </div>
 </p-dialog>

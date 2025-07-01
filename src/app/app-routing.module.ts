@@ -5,7 +5,7 @@ import { HomeComponent} from './home/home.component';
 import { AuthGuard } from '../service/auth.guard';
 import { MiCuentaComponent } from './mi-cuenta/mi-cuenta.component';
 import { CategoriasComponent } from './categorias/categorias.component';
-import { NoticiaComponent } from './noticias/noticias.component';
+//import { NoticiaComponent } from './noticias/noticias.component';
 import { TallasComponent } from './tallas/tallas.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AlmacenComponent } from './almacen/almacen.component';
@@ -13,12 +13,15 @@ import { PasarelaComponent } from './pasarela/pasarela.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { ProductoComponent } from './producto/producto.component';
 import { PromocionComponent } from './promocion/promocion.component';
-import { AdministradorComponent } from './administrador/administrador.component';
-import { TipoAdminComponent } from './tiposadmin/tiposadmin.component';
-import { JugadorComponent } from './jugador/jugador.component';
-import { PartidoComponent } from './partidos/partidos.component';
+
+
+//import { PartidoComponent } from './partidos/partidos.component';
 import { HistoriaComponent } from './historias/historias.component';
 import { PosthistoriasComponent } from './posthistorias/posthistorias.component';
+import { TiposadminComponent } from './tiposadmin/tiposadmin.component';
+import { AdministradorComponent } from './administrador/administrador.component';
+import { JugadorComponent } from './jugador/jugador.component';
+
 
 
 const routes: Routes = [
@@ -40,16 +43,16 @@ const routes: Routes = [
     {path: 'tallas',component:TallasComponent, canActivate: [AuthGuard]},
 
     // By kennet
-    {path: 'partidos',component:PartidoComponent, canActivate: [AuthGuard]},
-    {path: 'noticias',component:NoticiaComponent, canActivate: [AuthGuard]},
+    //{path: 'partidos',component:PartidoComponent, canActivate: [AuthGuard]},
+    //{path: 'noticias',component:NoticiaComponent, canActivate: [AuthGuard]},
     {path: 'historias',component:HistoriaComponent, canActivate: [AuthGuard]},
     {path: 'posthistorias',component:PosthistoriasComponent, canActivate: [AuthGuard]},
 
 
     // By Sidanne
     {path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard]},
-    {path: 'administradores', component: AdministradorComponent, canActivate: [AuthGuard]},
-    {path: 'tiposadmin', component: TipoAdminComponent, canActivate: [AuthGuard]},
+    {path: 'administradores', component: AdministradorComponent, canActivate: [AuthGuard]}, // Asumiendo que el componente Jugador es el mismo que Administrador
+    {path: 'tiposadmin', component: TiposadminComponent, canActivate: [AuthGuard]},
     {path: 'jugadores', component: JugadorComponent, canActivate: [AuthGuard]}, // Asumiendo que el componente Jugador es el mismo que Administrador
 
 
