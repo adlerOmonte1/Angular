@@ -1,28 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { jugador } from '../../models/jugador.model';
+import { administrador } from '../../models/administrador.model';
 import { JugadorService } from '../../service/jugador.service';
-import { Jugador } from '../../models/jugador.model';
-import { administrador } from '../../models/administrador.model';  // Importa el modelo de Administrador
-import { AdministradorService } from '../../service/administrador.service'; // Importa el servicio de Administrador
+import { AdministradorService } from '../../service/administrador.service';
 
 @Component({
   selector: 'app-jugador',
   standalone: false,
   templateUrl: './jugador.component.html',
-  styleUrls: ['./jugador.component.css'],
-  providers: [JugadorService, AdministradorService]
+  styleUrls: ['./jugador.component.css']
 })
-export class JugadorComponent implements OnInit {
-
-  jugadores: Jugador[] = [];
-  administradores: administrador[] = [];  // Lista de administradores
-  tituloDialogo: string = 'Nuevo Jugador';
+export class JugadorComponent {
+  jugadores: jugador[] = [];
+  jugadorDialogo: jugador = new jugador();
   visible: boolean = false;
-  jugadorDialogo: Jugador = new Jugador();
-  nuevaJugador: boolean = true;
-administrador: any;
-Administrador: any;
+  nuevoJugador: boolean = true;
+  tituloDialogo: string = '';
 
-  constructor(private api: JugadorService, private apiAdministrador: AdministradorService) {}
+  administradores: administrador[] = [];
+  administradorSeleccionado: administrador | null = null;
+  imagenSeleccionada: File | null = null;
+
+  constructor(
+    private jugadorService: JugadorService,
+    private administradorService: AdministradorService
+  ) {}
 
   ngOnInit() {
     this.obtenerJugadores();
@@ -30,45 +32,70 @@ Administrador: any;
   }
 
   obtenerJugadores() {
-    this.api.getJugador().subscribe((res) => {
+    this.jugadorService.getJugadores().subscribe(res => {
       this.jugadores = res;
     });
   }
 
   obtenerAdministradores() {
-    this.apiAdministrador.getAdministradores().subscribe((res) => {
+    this.administradorService.getAdministrador().subscribe(res => {
       this.administradores = res;
-    });
-  }
-
-  editarJugador(jugador: Jugador) {
-    this.visible = true;
-    this.nuevaJugador = false;
-    this.jugadorDialogo = jugador;
-  }
-
-  eliminarJugador(jugador: Jugador) {
-    this.api.deleteJugador(jugador.id.toString()).subscribe(() => {
-      this.obtenerJugadores();
     });
   }
 
   abrirDialogo() {
     this.visible = true;
-    this.nuevaJugador = true;
-    this.jugadorDialogo = new Jugador();
+    this.nuevoJugador = true;
+    this.tituloDialogo = 'Nuevo Jugador';
+    this.jugadorDialogo = new jugador();
+    this.imagenSeleccionada = null;
+  }
+
+  editarJugador(j: jugador) {
+    this.visible = true;
+    this.nuevoJugador = false;
+    this.tituloDialogo = 'Editar Jugador';
+    this.jugadorDialogo = { ...j };
+    this.administradorSeleccionado = j.administrador;
+  }
+
+  eliminarJugador(j: jugador) {
+    this.jugadorService.deleteJugador(j.id.toString()).subscribe(() => {
+      this.obtenerJugadores();
+    });
+  }
+
+  onImagenSeleccionada(event: any) {
+    this.imagenSeleccionada = event.files[0];
   }
 
   guardarJugador() {
-    if (this.nuevaJugador) {
-      this.api.postJugador(this.jugadorDialogo).subscribe(res => {
+    const formData = new FormData();
+    formData.append('nombre', this.jugadorDialogo.nombre);
+    formData.append('apellido', this.jugadorDialogo.apellido);
+    formData.append('edad', String(this.jugadorDialogo.edad));
+    formData.append('posicion', this.jugadorDialogo.posicion);
+    formData.append('dorsal', String(this.jugadorDialogo.dorsal));
+    formData.append('peso', String(this.jugadorDialogo.peso));
+    formData.append('altura', String(this.jugadorDialogo.altura));
+    formData.append('nacionalidad', this.jugadorDialogo.nacionalidad);
+    if (this.imagenSeleccionada) {
+      formData.append('imagen', this.imagenSeleccionada);
+    }
+    if (this.administradorSeleccionado) {
+      formData.append('administrador', String(this.administradorSeleccionado.id));
+    }
+
+    if (this.nuevoJugador) {
+      this.jugadorService.postJugadorConImagen(formData).subscribe(() => {
         this.obtenerJugadores();
+        this.visible = false;
       });
     } else {
-      this.api.putJugador(this.jugadorDialogo).subscribe(res => {
+      this.jugadorService.putJugadorConImagen(formData, this.jugadorDialogo.id.toString()).subscribe(() => {
         this.obtenerJugadores();
+        this.visible = false;
       });
     }
-    this.visible = false;
   }
 }

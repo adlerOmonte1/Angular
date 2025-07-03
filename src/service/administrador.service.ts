@@ -1,40 +1,38 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { administrador } from "../models/administrador.model";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { administrador } from '../models/administrador.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AdministradorService {
-    private ApiUrl = "http://127.0.0.1:8000/api/";
-    private httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-    };
+  private apiUrl = 'http://127.0.0.1:8000/api/administradores/';
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    })
+  };
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-    // GET Administradores
-    public getAdministradores(): Observable<administrador[]> {
-        return this.http.get<administrador[]>(this.ApiUrl + 'administradores/');
-    }
+  // GET: obtener lista
+  getAdministrador(): Observable<administrador[]> {
+    return this.http.get<administrador[]>(this.apiUrl);
+  }
 
-    // POST Administrador
-    public postAdministrador(administrador: administrador): Observable<administrador> {
-        let body = JSON.stringify(administrador);
-        return this.http.post<administrador>(this.ApiUrl + 'administrador/', body, this.httpOptions);
-    }
+  // POST: crear administrador
+  postAdministrador(admin: any): Observable<administrador> {
+    return this.http.post<administrador>(this.apiUrl, JSON.stringify(admin), this.httpOptions);
+  }
 
-    // PUT Administrador
-    public putAdministrador(administrador: administrador): Observable<administrador> {
-        let body = JSON.stringify(administrador);
-        return this.http.put<administrador>(this.ApiUrl + 'administrador/' + administrador.id + "/", body, this.httpOptions);
-    } 
+  // PUT: actualizar administrador
+  putAdministrador(admin: any, id: number): Observable<administrador> {
+    return this.http.put<administrador>(`${this.apiUrl}${id}/`, JSON.stringify(admin), this.httpOptions);
+  }
 
-    // DELETE Administrador
-    public deleteAdministrador(id: string): Observable<void> {  // <--- CORREGIDO A string
-        return this.http.delete<void>(this.ApiUrl + 'administradores/' + id + "/");
-    }
+  // DELETE: eliminar administrador
+  deleteAdministrador(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}${id}/`);
+  }
 }

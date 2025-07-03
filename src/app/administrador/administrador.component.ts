@@ -1,61 +1,91 @@
-// src/app/components/administrador/administrador.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AdministradorService } from '../../service/administrador.service';
 import { administrador } from '../../models/administrador.model';
+import { Usuario } from '../../models/usuario.model';
+import { tiposadmin } from '../../models/tipo-administrador.model';
+import { UsuarioService } from '../../service/usuario.service';
+import { TipoAdminService } from '../../service/tiposadmin.service';
 
 @Component({
   selector: 'app-administrador',
   standalone: false,
   templateUrl: './administrador.component.html',
-  styleUrls: ['./administrador.component.css']
+  styleUrls: ['./administrador.component.css'],
+  providers: [AdministradorService, UsuarioService, TipoAdminService]
 })
-export class AdministradorComponent implements OnInit {
+export class AdministradorComponent {
   administradores: administrador[] = [];
-  administradorDialog: administrador = {} as administrador;
-  nuevaAdministracion: boolean = true;
+  administradorDialogo: administrador = new administrador();
   visible: boolean = false;
-  tituloDialogo: string = 'Nuevo Administrador';
+  crear: boolean = true;
 
-  constructor(private administradorService: AdministradorService) {}
+  usuarios: Usuario[] = [];
+  tiposadmin: tiposadmin[] = [];
 
-  ngOnInit(): void {
+  constructor(
+    private administradorService: AdministradorService,
+    private usuarioService: UsuarioService,
+    private tipoAdminService: TipoAdminService
+  ) {}
+
+  ngOnInit() {
     this.obtenerAdministradores();
+    this.obtenerUsuarios();
+    this.obtenerTiposAdmin();
   }
 
-  obtenerAdministradores(): void {
-    this.administradorService.getAdministradores().subscribe((res) => {
+  obtenerAdministradores() {
+    this.administradorService.getAdministrador().subscribe(res => {
       this.administradores = res;
     });
   }
 
-  abrirDialogo(): void {
-    this.visible = true;
-    this.nuevaAdministracion = true;
-    this.administradorDialog = {} as administrador;
+  obtenerUsuarios() {
+    this.usuarioService.getUsuario().subscribe(res => {
+      this.usuarios = res;
+    });
   }
 
-  editarAdministrador(administrador: administrador): void {
-    this.visible = true;
-    this.nuevaAdministracion = false;
-    this.administradorDialog = { ...administrador };
+  obtenerTiposAdmin() {
+    this.tipoAdminService.getTiposAdmin().subscribe(res => {
+      this.tiposadmin = res;
+    });
   }
 
-  eliminarAdministrador(administrador: administrador): void {
-    this.administradorService.deleteAdministrador(administrador.id).subscribe(() => {
+  abrirModal() {
+    this.visible = true;
+    this.crear = true;
+    this.administradorDialogo = new administrador();
+  }
+
+  editarAdministrador(admin: administrador) {
+    this.visible = true;
+    this.crear = false;
+    this.administradorDialogo = { ...admin };
+  }
+
+  eliminarAdministrador(admin: administrador) {
+    this.administradorService.deleteAdministrador(admin.id.toString()).subscribe(() => {
       this.obtenerAdministradores();
     });
   }
 
-  guardarAdministrador(): void {
-    if (this.nuevaAdministracion) {
-      this.administradorService.postAdministrador(this.administradorDialog).subscribe(() => {
+  guardar() {
+    const body = {
+      id: this.administradorDialogo.id,
+      tipo_admin: this.administradorDialogo.tipo_admin
+    };
+
+    if (this.crear) {
+      this.administradorService.postAdministrador(body).subscribe(() => {
         this.obtenerAdministradores();
+        this.visible = false;
       });
     } else {
-      this.administradorService.putAdministrador(this.administradorDialog).subscribe(() => {
-        this.obtenerAdministradores();
+      this.administradorService.putAdministrador(body, this.administradorDialogo.id.id).subscribe(() => {
+      this.obtenerAdministradores();
+      this.visible = false;
       });
     }
-    this.visible = false;
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { JugadorService } from '../../service/jugador.service';
-import { Jugador } from '../../models/jugador.model';
+import { jugador } from '../../models/jugador.model';
 
 @Component({
   selector: 'app-jugador-hincha',
@@ -12,10 +12,10 @@ import { Jugador } from '../../models/jugador.model';
 export class JugadorHinchaComponent {
   constructor(private api: JugadorService) {}
 
-  jugadores: Jugador[] = [];
+  jugadores: jugador[] = [];
 
   obtenerJugadores() {
-    this.api.getJugador().subscribe((res) => {
+    this.api.getJugadores().subscribe((res) => {
       this.jugadores = res;
     });
   }

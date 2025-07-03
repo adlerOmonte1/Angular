@@ -1,63 +1,63 @@
-import { Component, OnInit } from '@angular/core';
-import { TipoAdminService } from '../../service/tiposadmin.service'; // Cambié el nombre del servicio
-import { tiposadmin } from '../../models/tipo-administrador.model'; // Cambié el nombre del modelo
+import { Component } from '@angular/core';
+import { TipoAdminService } from '../../service/tiposadmin.service';
+import { tiposadmin } from '../../models/tipo-administrador.model';
 
 @Component({
-  selector: 'app-tipo-admin',
+  selector: 'app-tiposadmin',
   standalone: false,
   templateUrl: './tiposadmin.component.html',
-  styleUrls: ['./tiposadmin.component.css'],
-  providers: [TipoAdminService]  // Cambié el nombre del servicio
+  styleUrl: './tiposadmin.component.css',
+  providers: [TipoAdminService]
 })
-export class TipoAdminComponent implements OnInit {  // Cambié el nombre del componente
+export class TiposadminComponent {
 
-  tiposAdmin: tiposadmin[] = [];  // Cambié el nombre de la lista
-  tituloDialogo: string = 'Nuevo Tipo Admin';  // Título del diálogo
+  constructor(private api: TipoAdminService) {}
+
+  tiposadmin: tiposadmin[] = [];
+  tituloDialogo: string = 'Nuevo Tipo de Administrador';
   visible: boolean = false;
-  tipoAdminDialogo: tiposadmin = new tiposadmin();  // Cambié la variable
-  nuevoTipoAdmin: boolean = true;  // Flag para saber si estamos creando o editando
 
-  constructor(private api: TipoAdminService) {}  // Cambié el nombre del servicio
+  tiposadminDialogo: tiposadmin = new tiposadmin();
+  nuevaTiposadmin: boolean = true;
 
-  ngOnInit() {
-    this.obtenerTiposAdmin();  // Cambié el nombre del método
-  }
-
-  obtenerTiposAdmin() {
-    this.api.getTipoAdmin().subscribe((res) => {  // Cambié el nombre del método
-      this.tiposAdmin = res;  // Asignamos la lista de tiposAdmin
+  obtenerTiposadmin() {
+    this.api.getTiposAdmin().subscribe((res) => {
+      this.tiposadmin = res;
     });
   }
 
-  editarTipoAdmin(tipoAdmin: tiposadmin) {  // Cambié el nombre del método y parámetro
-    this.visible = true;
-    this.nuevoTipoAdmin = false;
-    this.tipoAdminDialogo = tipoAdmin;
+  ngOnInit() {
+    this.obtenerTiposadmin();
   }
 
-  eliminarTipoAdmin(tipoAdmin: tiposadmin) {  // Cambié el nombre del método y parámetro
-    this.api.deleteTipoAdmin(tipoAdmin.id.toString()).subscribe(() => {  // Cambié el nombre del método
-      this.obtenerTiposAdmin();  // Refresca la lista de tiposAdmin
+  editarTiposadmin(tiposadmin: tiposadmin) {
+    this.visible = true;
+    this.nuevaTiposadmin = false;
+    this.tiposadminDialogo = tiposadmin;
+  }
+
+  eliminarTiposadmin(tiposadmin: tiposadmin) {
+    this.api.deleteTiposAdmin(tiposadmin.id.toString()).subscribe(() => {
+      this.obtenerTiposadmin();
     });
   }
 
   abrirDialogo() {
     this.visible = true;
-    this.nuevoTipoAdmin = true;
-    this.tipoAdminDialogo = new tiposadmin();  // Reinicia el objeto del diálogo
+    this.nuevaTiposadmin = true;
+    this.tiposadminDialogo = new tiposadmin();
   }
 
-  guardarTipoAdmin() {  // Cambié el nombre del método
-    if (this.nuevoTipoAdmin) {
-      this.api.postTipoAdmin(this.tipoAdminDialogo).subscribe(() => {  // Cambié el nombre del método
-        this.obtenerTiposAdmin();
+  guardarTiposadmin() {
+    if (this.nuevaTiposadmin) {
+      this.api.postTiposAdmin(this.tiposadminDialogo).subscribe(res => {
+        this.obtenerTiposadmin();
       });
     } else {
-      this.api.putTipoAdmin(this.tipoAdminDialogo).subscribe(() => {  // Cambié el nombre del método
-        this.obtenerTiposAdmin();
+      this.api.putTiposAdmin(this.tiposadminDialogo).subscribe(res => {
+        this.obtenerTiposadmin();
       });
     }
     this.visible = false;
   }
 }
-

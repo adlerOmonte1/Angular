@@ -64,7 +64,7 @@ export class ProveedoresComponent {
   // Método para editar proveedor
   editarProveedor(proveedor: Proveedores) {
     this.nuevoProveedor = false; // Indicar que es un proveedor existente
-    this.proveedorDialogo = { ...proveedor }; // Copiar los datos del proveedor seleccionado
+    this.proveedorDialogo = proveedor; // Copiar los datos del proveedor seleccionado
     this.abrirDialogo(); // Abre el modal para editar
   }
 

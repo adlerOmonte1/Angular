@@ -45,18 +45,21 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { SplitterModule } from 'primeng/splitter';
 import { DataViewModule } from 'primeng/dataview';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { NoticiaComponent } from './noticias/noticias.component';
+
+//import { NoticiaComponent } from './noticias/noticias.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PromocionComponent } from './promocion/promocion.component';
 import { ProductoComponent } from './producto/producto.component';
 import { PasarelaComponent } from './pasarela/pasarela.component';
 import { TallasComponent } from './tallas/tallas.component';
 import { AlmacenComponent } from './almacen/almacen.component';
+
+import { TiposadminComponent } from './tiposadmin/tiposadmin.component';
 import { AdministradorComponent } from './administrador/administrador.component';
+import { HinchaComponent } from './hincha/hincha.component';
+import { VistaHinchaComponent } from './vista-hincha/vista-hincha.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
-import { TipoAdminComponent } from './tiposadmin/tiposadmin.component';
 import { JugadorComponent } from './jugador/jugador.component';
-import { PartidoComponent } from './partidos/partidos.component';
 import { HistoriaComponent } from './historias/historias.component';
 import { PosthistoriasComponent } from './posthistorias/posthistorias.component';
 import { ProductohinchaComponent } from './productohincha/productohincha.component';
@@ -71,7 +74,6 @@ import { StockComponent } from './stock/stock.component';
   HomeComponent,
   MiCuentaComponent,
   CategoriasComponent,
-  NoticiaComponent,
   PedidoComponent,
   PromocionComponent,
   ProductoComponent,
@@ -80,16 +82,18 @@ import { StockComponent } from './stock/stock.component';
   AlmacenComponent,
   AdministradorComponent,
   ProveedoresComponent,
-  TipoAdminComponent,
+  TiposadminComponent,
   JugadorComponent,
-  PartidoComponent,
   HistoriaComponent,
   PosthistoriasComponent,
   ProductohinchaComponent,
   FormapagoComponent,
   JugadorHinchaComponent,
-  StockComponent
+  StockComponent,
+  HinchaComponent,
+  VistaHinchaComponent
 ],
+
   imports: [
     FileUploadModule,
     CarouselModule,
@@ -108,7 +112,6 @@ import { StockComponent } from './stock/stock.component';
     MenubarModule,
     SliderModule,
     FormsModule,
-    ButtonModule,
     InputTextModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -122,11 +125,12 @@ import { StockComponent } from './stock/stock.component';
     SelectModule,
     DialogModule,
     ConfirmDialogModule,
-    DropdownModule,
     SplitterModule,
     DataViewModule,
     InputNumberModule,
-    
+    ButtonModule,
+    DropdownModule
+
   ],
   providers: [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

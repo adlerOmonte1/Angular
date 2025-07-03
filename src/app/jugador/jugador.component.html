@@ -1,120 +1,89 @@
-<h1>JUGADORES</h1>
+<h1>Jugadores</h1>
+<p-button label="Nuevo Jugador" icon="pi pi-plus" class="mr-2" (onClick)="abrirDialogo()" />
 
-<!-- CREATE -> BOTÓN PARA CREAR UN NUEVO JUGADOR -->
-<p-button
-    label="Crear Jugador"
-    icon="pi pi-plus"
-    class="mr-2"
-    (click)="abrirDialogo()"
-/>
-
-<!-- READ -> TABLA -->
 <p-table [value]="jugadores" [tableStyle]="{'min-width': '50rem'}">
-    <ng-template #header>
-        <tr>
-            <th style="width:10%">ID</th>
-            <th style="width:15%">NOMBRE</th>
-            <th style="width:15%">APELLIDO</th>
-            <th style="width:10%">EDAD</th>
-            <th style="width:15%">POSICIÓN</th>
-            <th style="width:10%">DORSAL</th>
-            <th style="width:10%">PESO</th>
-            <th style="width:10%">ALTURA</th>
-            <th style="width:15%">ADMINISTRADOR</th>
-            <th style="width:15%">OPCIONES</th>
-        </tr>
-    </ng-template>
-    <ng-template #body let-jugador let-ri="rowIndex">
-        <tr [pEditableRow]="jugador">
-            <td>{{ jugador.id }}</td>
-            <td>{{ jugador.nombre }}</td>
-            <td>{{ jugador.apellido }}</td>
-            <td>{{ jugador.edad }}</td>
-            <td>{{ jugador.posicion }}</td>
-            <td>{{ jugador.dorsal }}</td>
-            <td>{{ jugador.peso }}</td>
-            <td>{{ jugador.altura }}</td>
-            <td>
-                <ul>
-                    <li *ngFor="let admin of jugador.administrador">{{ admin.nombre }}</li>
-                </ul>
-            </td>
-            <td>
-                <div class="flex items-center justify-center gap-2">
-                    <button
-                        pButton
-                        pRipple
-                        type="button"
-                        icon="pi pi-pencil"
-                        (click)="editarJugador(jugador)"
-                        text
-                        rounded
-                        severity="secondary"
-                        title="Editar jugador"
-                    ></button>
-                    <button
-                        pButton
-                        pRipple
-                        type="button"
-                        icon="pi pi-times"
-                        (click)="eliminarJugador(jugador)"
-                        text
-                        rounded
-                        severity="secondary"
-                        title="Eliminar jugador"
-                    ></button>
-                </div>
-            </td>
-        </tr>
-    </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Edad</th>
+      <th>Posición</th>
+      <th>Dorsal</th>
+      <th>Peso</th>
+      <th>Altura</th>
+      <th>Nacionalidad</th>
+      <th>Imagen</th>
+      <th>Administrador</th>
+      <th>Opciones</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-jug>
+    <tr>
+      <td>{{ jug.id }}</td>
+      <td>{{ jug.nombre }}</td>
+      <td>{{ jug.apellido }}</td>
+      <td>{{ jug.edad }}</td>
+      <td>{{ jug.posicion }}</td>
+      <td>{{ jug.dorsal }}</td>
+      <td>{{ jug.peso }}</td>
+      <td>{{ jug.altura }}</td>
+      <td>{{ jug.nacionalidad }}</td>
+      <td><img [src]="jug.imagen" alt="Imagen" width="50" height="50" /></td>
+      <td>{{ jug.tipo_param }}</td>
+      <td>
+        <button pButton icon="pi pi-pencil" (click)="editarJugador(jug)" severity="secondary" text rounded></button>
+        <button pButton icon="pi pi-trash" (click)="eliminarJugador(jug)" severity="danger" text rounded></button>
+      </td>
+    </tr>
+  </ng-template>
 </p-table>
 
-<!-- CREATE Y UPDATE -> FORMULARIO -->
-<p-dialog header="{{tituloDialogo}}" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-    <div class="flex items-center gap-4 mb-4">
-        <label for="nombre" class="font-semibold w-24">Nombre</label>
-        <input pInputText id="nombre" class="flex-auto" autocomplete="off" [(ngModel)]="jugadorDialogo.nombre" />
+<p-dialog header="{{ tituloDialogo }}" [(visible)]="visible" [modal]="true" [style]="{ width: '30rem' }">
+  <div class="flex flex-col gap-4">
+    <div class="flex gap-2">
+      <label class="w-32">Nombre</label>
+      <input type="text" pInputText [(ngModel)]="jugadorDialogo.nombre" />
     </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="apellido" class="font-semibold w-24">Apellido</label>
-        <input pInputText id="apellido" class="flex-auto" autocomplete="off" [(ngModel)]="jugadorDialogo.apellido" />
+    <div class="flex gap-2">
+      <label class="w-32">Apellido</label>
+      <input type="text" pInputText [(ngModel)]="jugadorDialogo.apellido" />
     </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="edad" class="font-semibold w-24">Edad</label>
-        <input pInputText id="edad" class="flex-auto" autocomplete="off" [(ngModel)]="jugadorDialogo.edad" />
+    <div class="flex gap-2">
+      <label class="w-32">Edad</label>
+      <input type="number" pInputText [(ngModel)]="jugadorDialogo.edad" />
     </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="posicion" class="font-semibold w-24">Posición</label>
-        <input pInputText id="posicion" class="flex-auto" autocomplete="off" [(ngModel)]="jugadorDialogo.posicion" />
+    <div class="flex gap-2">
+      <label class="w-32">Posición</label>
+      <input type="text" pInputText [(ngModel)]="jugadorDialogo.posicion" />
     </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="dorsal" class="font-semibold w-24">Dorsal</label>
-        <input pInputText id="dorsal" class="flex-auto" autocomplete="off" [(ngModel)]="jugadorDialogo.dorsal" />
+    <div class="flex gap-2">
+      <label class="w-32">Dorsal</label>
+      <input type="number" pInputText [(ngModel)]="jugadorDialogo.dorsal" />
     </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="peso" class="font-semibold w-24">Peso</label>
-        <input pInputText id="peso" class="flex-auto" autocomplete="off" [(ngModel)]="jugadorDialogo.peso" />
+    <div class="flex gap-2">
+      <label class="w-32">Peso</label>
+      <input type="number" pInputText [(ngModel)]="jugadorDialogo.peso" />
     </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="altura" class="font-semibold w-24">Altura</label>
-        <input pInputText id="altura" class="flex-auto" autocomplete="off" [(ngModel)]="jugadorDialogo.altura" />
+    <div class="flex gap-2">
+      <label class="w-32">Altura</label>
+      <input type="number" pInputText [(ngModel)]="jugadorDialogo.altura" />
     </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="nacionalidad" class="font-semibold w-24">Nacionalidad</label>
-        <input pInputText id="nacionalidad" class="flex-auto" autocomplete="off" [(ngModel)]="jugadorDialogo.nacionalidad" />
+    <div class="flex gap-2">
+      <label class="w-32">Nacionalidad</label>
+      <input type="text" pInputText [(ngModel)]="jugadorDialogo.nacionalidad" />
     </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label for="administrador" class="font-semibold w-24">Administrador</label>
-        <p-dropdown
-            [options]="administradores"  
-            [(ngModel)]="jugadorDialogo.administrador"  
-            optionLabel="nombre"  
-            placeholder="Seleccione un Administrador"
-        ></p-dropdown>
+    <div class="flex gap-2">
+      <label class="w-32">Imagen</label>
+      <p-fileUpload mode="basic" name="imagen" accept="image/*" chooseLabel="Elegir Imagen" (onSelect)="onImagenSeleccionada($event)" />
     </div>
-
+    <div class="flex gap-2">
+      <label class="w-32">Administrador</label>
+      <p-dropdown [options]="administradores" [(ngModel)]="administradorSeleccionado" optionLabel="id" placeholder="Seleccione uno" />
+    </div>
     <div class="flex justify-end gap-2">
-        <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
-        <p-button label="Guardar" (click)="guardarJugador()" />
+      <p-button label="Cancelar" (click)="visible = false" severity="secondary" />
+      <p-button label="Guardar" (click)="guardarJugador()" />
     </div>
+  </div>
 </p-dialog>

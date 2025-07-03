@@ -38,7 +38,7 @@ export class HistoriaComponent implements OnInit {
   }
 
   obtenerAdministradores(): void {
-    this.administradorService.getAdministradores().subscribe(res => {
+    this.administradorService.getAdministrador().subscribe(res => {
       this.administradores = res;
     });
   }
@@ -53,7 +53,7 @@ export class HistoriaComponent implements OnInit {
   editarHistoria(historia: Historia): void {
     this.nuevaHistoria = false;
     this.historiaDialogo = { ...historia };
-    this.administradorSeleccionado = this.administradores.find(adm => adm.id === historia.administrador);
+    this.administradorSeleccionado = this.administradores.find(adm => adm.id === (Array.isArray(historia.administrador) ? historia.administrador[0]?.id : historia.administrador));
     this.visible = true;
   }
 
@@ -71,8 +71,8 @@ export class HistoriaComponent implements OnInit {
       return;
     }
 
-    //  Solo asignamos el ID del administrador
-    this.historiaDialogo.administrador = this.administradorSeleccionado.id;
+    //  Solo asignamos el ID del administrador como string
+    this.historiaDialogo.administrador = String(this.administradorSeleccionado.id);
 
     if (this.nuevaHistoria) {
       this.historiaService.postHistoria(this.historiaDialogo).subscribe(() => {

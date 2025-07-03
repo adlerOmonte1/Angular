@@ -8,4 +8,5 @@ export class Usuario {
   ciudad: string;
   fechaNac:Date;
   rol: string;
+nombreUsuario: any;
 }
