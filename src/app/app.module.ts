@@ -60,6 +60,11 @@ import { PosthistoriasComponent } from './posthistorias/posthistorias.component'
 import { TiposadminComponent } from './tiposadmin/tiposadmin.component';
 import { AdministradorComponent } from './administrador/administrador.component';
 import { JugadorComponent } from './jugador/jugador.component';
+import { HinchaComponent } from './hincha/hincha.component';
+import { VistaHinchaComponent } from './vista-hincha/vista-hincha.component';
+
+
+
 
 
 
@@ -84,7 +89,11 @@ import { JugadorComponent } from './jugador/jugador.component';
     PosthistoriasComponent,
     TiposadminComponent,
     AdministradorComponent,
-    JugadorComponent
+    JugadorComponent,
+    HinchaComponent,
+    VistaHinchaComponent,
+  
+   
 
 
   ],
@@ -121,6 +130,7 @@ import { JugadorComponent } from './jugador/jugador.component';
     DialogModule,
     ConfirmDialogModule,
     DropdownModule
+
   ],
   providers: [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

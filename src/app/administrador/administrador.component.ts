@@ -83,8 +83,8 @@ export class AdministradorComponent {
       });
     } else {
       this.administradorService.putAdministrador(body, this.administradorDialogo.id.id).subscribe(() => {
-  this.obtenerAdministradores();
-  this.visible = false;
+      this.obtenerAdministradores();
+      this.visible = false;
       });
     }
   }

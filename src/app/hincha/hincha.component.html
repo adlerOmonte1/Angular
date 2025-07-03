@@ -1,0 +1,16 @@
+<h1>Listado de Hinchas</h1>
+
+<p-table [value]="hinchas" [tableStyle]="{ 'min-width': '40rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Usuario</th>
+      <th>Alias</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-hincha>
+    <tr>
+      <td>{{ hincha.Usuario.username }}</td>
+      <td>{{ hincha.alias }}</td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -21,6 +21,9 @@ import { PosthistoriasComponent } from './posthistorias/posthistorias.component'
 import { TiposadminComponent } from './tiposadmin/tiposadmin.component';
 import { AdministradorComponent } from './administrador/administrador.component';
 import { JugadorComponent } from './jugador/jugador.component';
+import { HinchaComponent } from './hincha/hincha.component';
+import { VistaHinchaComponent } from './vista-hincha/vista-hincha.component';
+import { CategoriaHinchaComponent } from './vistacategoria/vistacategoria.component';
 
 
 
@@ -54,9 +57,15 @@ const routes: Routes = [
     {path: 'administradores', component: AdministradorComponent, canActivate: [AuthGuard]}, // Asumiendo que el componente Jugador es el mismo que Administrador
     {path: 'tiposadmin', component: TiposadminComponent, canActivate: [AuthGuard]},
     {path: 'jugadores', component: JugadorComponent, canActivate: [AuthGuard]}, // Asumiendo que el componente Jugador es el mismo que Administrador
-
+    {path: 'hinchas', component: HinchaComponent, canActivate: [AuthGuard]},
 
     //VISTA DE USUARIO
+
+    //VISTA DE SIDANE
+    {path: 'vistahinchas', component: VistaHinchaComponent, canActivate: [AuthGuard]},
+    {path: 'vistacategoria', component: CategoriaHinchaComponent, canActivate: [AuthGuard]}
+    
+
 
 
   ];
