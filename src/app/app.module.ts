@@ -30,6 +30,7 @@ import { MessageModule } from 'primeng/message';
 import { DatePickerModule } from 'primeng/datepicker';
 import { DatePicker } from 'primeng/datepicker';
 import { Fluid } from 'primeng/fluid';
+import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { CarouselModule } from 'primeng/carousel';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -41,7 +42,9 @@ import { SelectModule } from 'primeng/select';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
-
+import { SplitterModule } from 'primeng/splitter';
+import { DataViewModule } from 'primeng/dataview';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { NoticiaComponent } from './noticias/noticias.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PromocionComponent } from './promocion/promocion.component';
@@ -53,46 +56,40 @@ import { AdministradorComponent } from './administrador/administrador.component'
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { TipoAdminComponent } from './tiposadmin/tiposadmin.component';
 import { JugadorComponent } from './jugador/jugador.component';
-import { Partido } from '../models/partidos.model';
-import { DropdownModule } from 'primeng/dropdown';
 import { PartidoComponent } from './partidos/partidos.component';
 import { HistoriaComponent } from './historias/historias.component';
 import { PosthistoriasComponent } from './posthistorias/posthistorias.component';
 import { ProductohinchaComponent } from './productohincha/productohincha.component';
-import { Splitter } from 'primeng/splitter';
-import { DataView } from 'primeng/dataview';
 import { JugadorHinchaComponent } from './jugador-hincha/jugador-hincha.component';
-import { InputNumber } from 'primeng/inputnumber';
 import { FormapagoComponent } from './formapago/formapago.component';
-
+import { StockComponent } from './stock/stock.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    MiCuentaComponent,
-    CategoriasComponent,
-    NoticiaComponent,
-    PedidoComponent,
-    PromocionComponent,
-    ProductoComponent,
-    PasarelaComponent,
-    TallasComponent,
-    AlmacenComponent,
-    AdministradorComponent,
-    AdministradorComponent,
-    ProveedoresComponent,
-    TipoAdminComponent,
-    JugadorComponent,
-    PartidoComponent,
-    HistoriaComponent,
-    PosthistoriasComponent,
-    ProductohinchaComponent,
-    FormapagoComponent,
-    JugadorHinchaComponent,
-
-  ],
+  AppComponent,
+  LoginComponent,
+  HomeComponent,
+  MiCuentaComponent,
+  CategoriasComponent,
+  NoticiaComponent,
+  PedidoComponent,
+  PromocionComponent,
+  ProductoComponent,
+  PasarelaComponent,
+  TallasComponent,
+  AlmacenComponent,
+  AdministradorComponent,
+  ProveedoresComponent,
+  TipoAdminComponent,
+  JugadorComponent,
+  PartidoComponent,
+  HistoriaComponent,
+  PosthistoriasComponent,
+  ProductohinchaComponent,
+  FormapagoComponent,
+  JugadorHinchaComponent,
+  StockComponent
+],
   imports: [
     FileUploadModule,
     CarouselModule,
@@ -126,9 +123,10 @@ import { FormapagoComponent } from './formapago/formapago.component';
     DialogModule,
     ConfirmDialogModule,
     DropdownModule,
-    Splitter,
-    DataView,
-    InputNumber
+    SplitterModule,
+    DataViewModule,
+    InputNumberModule,
+    
   ],
   providers: [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

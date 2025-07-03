@@ -22,6 +22,7 @@ import { PosthistoriasComponent } from './posthistorias/posthistorias.component'
 import { ProductohinchaComponent } from './productohincha/productohincha.component';
 import { JugadorHinchaComponent } from './jugador-hincha/jugador-hincha.component';
 import { FormapagoComponent } from './formapago/formapago.component';
+import { StockComponent } from './stock/stock.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
     // By Adler
     {path: 'categorias',component:CategoriasComponent, canActivate: [AuthGuard]},
     {path: 'tallas',component:TallasComponent, canActivate: [AuthGuard]},
+    { path: 'stock',component:StockComponent,canActivate:[AuthGuard]},
 
     // By kennet
     {path: 'partidos',component:PartidoComponent, canActivate: [AuthGuard]},

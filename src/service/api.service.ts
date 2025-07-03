@@ -9,6 +9,7 @@ import { UnidadMedida } from "../models/unidadmedida";
 import { Partido } from "../models/partidos.model";
 import { Historia } from "../models/historia.model";
 import { PostHistoria } from "../models/post-historia.model";
+import { Stock} from "../models/stock.model";
 
 @Injectable({
   providedIn: "root"
@@ -160,4 +161,20 @@ public deletePostHistoria(id: number): Observable<void> {
   return this.http.delete<void>(this.ApiUrl + 'post-historias/' + id + '/');
 }
 
+
+public getStock():Observable<Stock[]>{
+  return this.http.get<Stock[]>(this.ApiUrl+'stock/');
+}
+public postStock(stock: Stock): Observable<Stock> {
+  let body = JSON.stringify(stock);
+  return this.http.post<Stock>(this.ApiUrl + 'stock/', body, this.httpOptions);
+}
+public putStock(stock: Stock): Observable<Stock> {
+  let body = JSON.stringify(stock);
+  return this.http.put<Stock>(this.ApiUrl + 'stock/' + stock.id + '/', body, this.httpOptions);
+}
+
+public deleteStock(id: string): Observable<void> {
+  return this.http.delete<void>(this.ApiUrl + 'stock/' + id + '/');
+}
 }

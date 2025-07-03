@@ -1,0 +1,93 @@
+<h1>Productos</h1>
+<p-button label="Control de STOCK" icon="pi pi-plus" class="mr-2" (onClick)="abrirDialogo()" />
+<p-table [value]="recomposicion" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template #header>
+        <tr>
+            <th style="width:20%">ID</th>
+            <th style="width:20%">CANTIDAD</th>
+            <th style="width:20%">FECHA</th>
+            <th style="width:20%">PRODUCTO</th>
+            <th style="width:20%">ALMACEN</th>
+            <th style="width:20%">TALLA</th>
+            <th style="width:20%">OPCIONES</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-stock let-ri="rowIndex">
+        <tr>
+            <td>
+                {{ stock?.id }}
+            </td>
+            <td>
+                {{ stock.cantidad }}
+            </td>
+            <td>
+                {{ stock.fecha }}
+            </td>
+            <td>
+                {{ stock.nombre_almacen }}
+            </td>
+            <td>
+                {{ stock.nombre_producto }}
+            </td>
+            <td>
+                {{ stock.nombre_talla }}
+            </td>
+            
+            <td>
+                <div class="flex items-center justify-center gap-2">
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-pencil"
+                        (click)="editarStock(stock)"
+                        text
+                        rounded
+                        severity="secondary"
+                        title="Editar stock"
+                    ></button>
+                    <!-- DELETE -> Boton -->
+                    <button
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-times"
+                        (click)="eliminarStock(stock)"
+                        text
+                        rounded
+                        severity="secondary"
+                        title="Eliminar producto"
+                    ></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<!-- CREATE y UPDATE -> Formulario -->
+<p-dialog header="Creación/Edición de recomposicion" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+
+    <div class="flex items-center gap-4 mb-4">
+        <label for="stock" class="font-semibold w-24">Cantidad:</label>
+        <input pInputText id="cantidad" class="flex-auto" autocomplete="off" [(ngModel)]="stockDialogo.cantidad"/>
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="almacen" class="font-semibold w-24">almacen:</label>
+        <p-select id="almacen" [options]="almacen" [(ngModel)]="almacenSeleccionado" optionLabel="nombre" placeholder="Seleccione un almacen" class="w-full md:w-56" />
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="producto" class="font-semibold w-24">Producto:</label>
+        <p-select id="producto" [options]="producto" [(ngModel)]="productoSeleccionado" optionLabel="nombre" placeholder="Seleccione un producto" class="w-full md:w-56" />
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="medida" class="font-semibold w-24">Talla:</label>
+        <p-select id="medida" [options]="medida" [(ngModel)]="medidaSeleccionada" optionLabel="nombre" placeholder="Seleccione una talla" class="w-full md:w-56" />
+    </div>
+    
+
+    <div class="flex justify-end gap-2">
+        <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
+        <p-button label="Guardar" (click)="guardarStock()" />
+    </div>
+
+</p-dialog>
