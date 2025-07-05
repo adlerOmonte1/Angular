@@ -4,9 +4,9 @@ import { UnidadMedida } from "./unidadmedida";
 
 export class Stock {
     id:number;
-    almacen:Almacen;
-    producto:Producto;
-    unidadMedida:UnidadMedida;
+    almacen:number;
+    producto:number;
+    unidadMedida:number;
     cantidad:number;
     fecha:Date;
 }

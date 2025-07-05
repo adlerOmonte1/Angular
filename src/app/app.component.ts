@@ -132,6 +132,23 @@ export class AppComponent {
             ]
           },
           {
+            label: 'Punto de Venta',
+            icon: 'pi pi-box',
+            items: [
+              {
+                label: 'Stock',
+                icon: 'pi pi-tags',
+                command: () => this.router.navigate(['/stock'])
+              },
+              {
+                label: 'kardex',
+                icon: 'pi pi-sort-size-down',
+                command: () => this.router.navigate(['/kardex'])
+              },
+
+            ]
+          },
+          {
             label: 'Mi Cuenta',
             icon: 'pi pi-user',
             command: () => {

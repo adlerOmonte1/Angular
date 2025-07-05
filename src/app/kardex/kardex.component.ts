@@ -3,40 +3,44 @@ import { apiService } from '../../service/api.service';
 import { ProductoService } from '../../service/producto.service';
 import { AlmacenService } from '../../service/almacen.service';
 import { Producto } from '../../models/producto.model';
-import { Stock } from '../../models/stock.model';
 import { Almacen } from '../../models/almacen.model';
 import { UnidadMedida } from '../../models/unidadmedida';
+import { Kardex } from '../../models/kardex.model';
 
 @Component({
-  selector: 'app-stock',
+  selector: 'app-kardex',
   standalone: false,
-  templateUrl: './stock.component.html',
-  styleUrl: './stock.component.css',
+  templateUrl: './kardex.component.html',
+  styleUrl: './kardex.component.css',
   providers:[apiService]
 })
-export class StockComponent {
+export class KardexComponent {
  constructor(private productoService: ProductoService,
      private apiService: apiService, private almacenService: AlmacenService
      ) { }
-  recomposicion : Stock[]
+  control : Kardex[]
   visible: boolean = false;
-  nuevoStock: boolean = true;
-  stockDialogo: Stock = new Stock();
+  nuevoKardex: boolean = true;
+  KardexkDialogo: Kardex = new Kardex();
   almacen : Almacen [];
   almacenSeleccionado: Almacen
   medida : UnidadMedida [];
   medidaSeleccionada : UnidadMedida;
   producto : Producto [];
-  productoSeleccionado : Producto
+  productoSeleccionado : Producto;
+  tipos = [
+      { nombre: 'Entrada', value: 'entrada' },
+      { nombre: 'Salida', value: 'salida' }
+    ];
    abrirDialogo() {
      this.visible = true;
-     this.nuevoStock = true;
-     this.stockDialogo = new Stock();
+     this.nuevoKardex = true;
+     this.KardexkDialogo = new Kardex();
    }
 
-   obtenerStock() {
-     this.apiService.getStock().subscribe(res => {
-       this.recomposicion = res;
+   obtenerKardex() {
+     this.apiService.getKardex().subscribe(res => {
+       this.control = res;
      });
    }
 
@@ -57,42 +61,43 @@ export class StockComponent {
     })
    }
 
+
    ngOnInit() {
-    this.obtenerStock();
+    this.obtenerKardex();
     this.obtenerUnidadMedida();
     this.obtenerAlmacenes();
     this.obtenerProductos();
    }
 
-   editarStock(stock: Stock) {
+   editarKardex(control: Kardex) {
      this.visible = true;
-     this.nuevoStock = false;
-     this.stockDialogo = stock;
+     this.nuevoKardex = false;
+     this.KardexkDialogo = control;
      //this.almacenSeleccionado = this.almacen.find(c => c.id === stock.almacen.id)!;
      //this.medidaSeleccionada = this.medida.find(p => p.id === stock.unidadMedida.id)!;
      //this.productoSeleccionado = this.producto.find(i =>i.id === stock.producto.id)!;
    }
 
-   eliminarStock(stock: Stock) {
-     this.apiService.deleteStock(stock.id.toString()).subscribe(() => {
-       this.obtenerStock();
+   eliminarkardex(control: Kardex) {
+     this.apiService.deleteStock(control.id.toString()).subscribe(() => {
+       this.obtenerKardex();
      });
    }
 
-    guardarStock() {
-      this.stockDialogo.almacen = this.almacenSeleccionado.id;
-      this.stockDialogo.unidadMedida = this.medidaSeleccionada.id;
-      this.stockDialogo.producto = this.productoSeleccionado.id;
+    guardarKardex() {
+      this.KardexkDialogo.almacen = this.almacenSeleccionado.id;
+      this.KardexkDialogo.unidadMedida = this.medidaSeleccionada.id;
+      this.KardexkDialogo.producto = this.productoSeleccionado.id;
 
-      if (this.nuevoStock) {
-        this.apiService.postStock(this.stockDialogo).subscribe(() => {
+      if (this.nuevoKardex) {
+        this.apiService.postKardex(this.KardexkDialogo).subscribe(() => {
           console.log("Stock guardado.");
-          this.obtenerStock();
+          this.obtenerKardex();
         });
       } else {
-        this.apiService.putStock(this.stockDialogo).subscribe(() => {
+        this.apiService.putKardex(this.KardexkDialogo).subscribe(() => {
           console.log("Stock actualizado.");
-          this.obtenerStock();
+          this.obtenerKardex();
         });
       }
     }

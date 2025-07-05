@@ -28,6 +28,7 @@ import { JugadorComponent } from './jugador/jugador.component';
 import { HinchaComponent } from './hincha/hincha.component';
 import { VistaHinchaComponent } from './vista-hincha/vista-hincha.component';
 import { CategoriaHinchaComponent } from './vistacategoria/vistacategoria.component';
+import { KardexComponent } from './kardex/kardex.component';
 
 
 
@@ -49,6 +50,7 @@ const routes: Routes = [
     {path: 'categorias',component:CategoriasComponent, canActivate: [AuthGuard]},
     {path: 'tallas',component:TallasComponent, canActivate: [AuthGuard]},
     { path: 'stock',component:StockComponent,canActivate:[AuthGuard]},
+    { path: 'kardex', component: KardexComponent, canActivate: [AuthGuard] }, // Asumiendo que el componente Kardex es el mismo que Stock
 
     // By kennet
     //{path: 'partidos',component:PartidoComponent, canActivate: [AuthGuard]},
@@ -72,7 +74,7 @@ const routes: Routes = [
     //VISTA DE SIDANE
     {path: 'vistahinchas', component: VistaHinchaComponent, canActivate: [AuthGuard]},
     {path: 'vistacategoria', component: CategoriaHinchaComponent, canActivate: [AuthGuard]}
-    
+
 
 
 

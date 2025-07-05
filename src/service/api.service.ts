@@ -10,6 +10,7 @@ import { Partido } from "../models/partidos.model";
 import { Historia } from "../models/historia.model";
 import { PostHistoria } from "../models/post-historia.model";
 import { Stock} from "../models/stock.model";
+import { Kardex } from "../models/kardex.model";
 
 @Injectable({
   providedIn: "root"
@@ -177,4 +178,22 @@ public putStock(stock: Stock): Observable<Stock> {
 public deleteStock(id: string): Observable<void> {
   return this.http.delete<void>(this.ApiUrl + 'stock/' + id + '/');
 }
+
+public getKardex():Observable<Kardex[]>{
+  return this.http.get<Kardex[]>(this.ApiUrl+'kardex/');
+}
+public postKardex(stock: Kardex): Observable<Kardex> {
+  let body = JSON.stringify(stock);
+  return this.http.post<Kardex>(this.ApiUrl + 'kardex/', body, this.httpOptions);
+}
+public putKardex(kardex: Kardex): Observable<Kardex> {
+  let body = JSON.stringify(kardex);
+  return this.http.put<Kardex>(this.ApiUrl + 'kardex/' + kardex.id + '/', body, this.httpOptions);
+}
+
+public deleteKardex(id: string): Observable<void> {
+  return this.http.delete<void>(this.ApiUrl + 'kardex/' + id + '/');
+}
+
+
 }
