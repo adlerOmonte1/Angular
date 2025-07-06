@@ -11,6 +11,7 @@ import { Historia } from "../models/historia.model";
 import { PostHistoria } from "../models/post-historia.model";
 import { Stock} from "../models/stock.model";
 import { Kardex } from "../models/kardex.model";
+import { Usuario } from "../models/usuario.model";
 
 @Injectable({
   providedIn: "root"
@@ -194,6 +195,27 @@ public putKardex(kardex: Kardex): Observable<Kardex> {
 public deleteKardex(id: string): Observable<void> {
   return this.http.delete<void>(this.ApiUrl + 'kardex/' + id + '/');
 }
+
+public getUsuarios(): Observable<Usuario[]> {
+  return this.http.get<Usuario[]>(this.ApiUrl + 'usuarios/');
+}
+
+public getUsuario(id: number): Observable<Usuario> {
+  return this.http.get<Usuario>(this.ApiUrl + 'usuarios/' + id + '/');
+}
+
+public postUsuario(usuario: Usuario): Observable<Usuario> {
+  return this.http.post<Usuario>(this.ApiUrl + 'usuarios/', usuario, this.httpOptions);
+}
+
+public putUsuario(usuario: Usuario): Observable<Usuario> {
+  return this.http.put<Usuario>(this.ApiUrl + 'usuarios/' + usuario.id + '/', usuario, this.httpOptions);
+}
+
+public deleteUsuario(id: number): Observable<void> {
+  return this.http.delete<void>(this.ApiUrl + 'usuarios/' + id + '/');
+}
+
 
 
 }

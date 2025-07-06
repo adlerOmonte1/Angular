@@ -29,6 +29,7 @@ import { HinchaComponent } from './hincha/hincha.component';
 import { VistaHinchaComponent } from './vista-hincha/vista-hincha.component';
 import { CategoriaHinchaComponent } from './vistacategoria/vistacategoria.component';
 import { KardexComponent } from './kardex/kardex.component';
+import { UsuarioComponent } from './usuarios/usuarios.component';
 
 
 
@@ -61,10 +62,11 @@ const routes: Routes = [
 
     // By Sidanne
     {path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard]},
-    {path: 'administradores', component: AdministradorComponent, canActivate: [AuthGuard]}, // Asumiendo que el componente Jugador es el mismo que Administrador
+    {path: 'administradores', component: AdministradorComponent, canActivate: [AuthGuard]}, 
     {path: 'tiposadmin', component: TiposadminComponent, canActivate: [AuthGuard]},
-    {path: 'jugadores', component: JugadorComponent, canActivate: [AuthGuard]}, // Asumiendo que el componente Jugador es el mismo que Administrador
+    {path: 'jugadores', component: JugadorComponent, canActivate: [AuthGuard]}, 
     {path: 'hinchas', component: HinchaComponent, canActivate: [AuthGuard]},
+    {path: 'usuarios', component: UsuarioComponent, canActivate: [AuthGuard]},
 
     //VISTA DE USUARIO
     {path: 'jugadoreshincha', component: JugadorHinchaComponent, canActivate: [AuthGuard]},

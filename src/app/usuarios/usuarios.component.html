@@ -1,0 +1,88 @@
+<h1>Gestión de Usuarios</h1>
+
+<p-button label="Nuevo Usuario" icon="pi pi-user-plus" class="mb-3" (onClick)="abrirModal()"></p-button>
+
+<p-table [value]="usuarios" dataKey="id" [tableStyle]="{ 'min-width': '60rem' }" class="shadow-3 surface-card border-round">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>DNI</th>
+      <th>Rol</th>
+      <th>Acciones</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-usuario>
+    <tr>
+      <td>{{ usuario.id }}</td>
+      <td>{{ usuario.username }}</td>
+      <td>{{ usuario.email }}</td>
+      <td>{{ usuario.telefono }}</td>
+      <td>{{ usuario.dni }}</td>
+      <td>{{ usuario.rol }}</td>
+      <td>
+        <div class="flex gap-2 justify-center">
+          <button pButton icon="pi pi-pencil" (click)="editarUsuario(usuario)" text rounded severity="info"></button>
+          <button pButton icon="pi pi-trash" (click)="eliminarUsuario(usuario)" text rounded severity="danger"></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog header="{{ tituloDialogo }}" [(visible)]="visible" [modal]="true" [style]="{ width: '35rem' }" class="p-fluid">
+  <div class="grid formgrid p-3">
+    <div class="field col-12 md:col-6">
+      <label>nombre del Usuario:</label>
+      <input pInputText [(ngModel)]="usuario.username" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+      <label>Correo:</label>
+      <input pInputText [(ngModel)]="usuario.email" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+      <label>Nombre:</label>
+      <input pInputText [(ngModel)]="usuario.nombre" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+      <label>Apellido:</label>
+      <input pInputText [(ngModel)]="usuario.apellido" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+      <label>Teléfono:</label>
+      <input pInputText [(ngModel)]="usuario.telefono" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+      <label>DNI:</label>
+      <input pInputText [(ngModel)]="usuario.dni" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+      <label>Fecha Nacimiento:</label>
+      <input type="date" pInputText [(ngModel)]="usuario.fechaNac" />
+    </div>
+
+    <div class="field col-12 md:col-6" *ngIf="crearUsuario">
+      <label>Contraseña:</label>
+      <input type="password" pInputText [(ngModel)]="usuario.password" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+      <label>Rol:</label>
+      <input pInputText [(ngModel)]="usuario.rol" />
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-2 px-3 pb-3">
+    <p-button label="Cancelar" severity="secondary" (click)="visible = false"></p-button>
+    <p-button label="Guardar" (click)="guardar()" severity="primary"></p-button>
+  </div>
+</p-dialog>

@@ -67,6 +67,8 @@ import { JugadorHinchaComponent } from './jugador-hincha/jugador-hincha.componen
 import { FormapagoComponent } from './formapago/formapago.component';
 import { StockComponent } from './stock/stock.component';
 import { KardexComponent } from './kardex/kardex.component';
+import { UsuarioComponent } from './usuarios/usuarios.component';
+
 
 @NgModule({
   declarations: [
@@ -93,7 +95,8 @@ import { KardexComponent } from './kardex/kardex.component';
   StockComponent,
   HinchaComponent,
   VistaHinchaComponent,
-  KardexComponent
+  KardexComponent,
+  UsuarioComponent
 ],
 
   imports: [

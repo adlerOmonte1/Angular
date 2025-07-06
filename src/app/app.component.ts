@@ -128,6 +128,11 @@ export class AppComponent {
                 label: 'Tipos de Administradores',
                 icon: 'pi pi-user-plus',
                 command: () => this.router.navigate(['/tiposadmin'])
+              },
+              {
+                label: 'Usuarios',
+                icon: 'pi pi-user-plus',
+                command: () => this.router.navigate(['/usuarios'])
               }
             ]
           },
