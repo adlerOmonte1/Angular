@@ -37,7 +37,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../service/token.interceptor';
 import { MiCuentaComponent } from './mi-cuenta/mi-cuenta.component';
 import { CardModule } from 'primeng/card';
-import { CategoriasComponent } from './categorias/categorias.component';
+
 import { SelectModule } from 'primeng/select';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
@@ -53,7 +53,7 @@ import { ProductoComponent } from './producto/producto.component';
 import { PasarelaComponent } from './pasarela/pasarela.component';
 import { TallasComponent } from './tallas/tallas.component';
 import { AlmacenComponent } from './almacen/almacen.component';
-
+import { CategoriasComponent } from './categorias/categorias.component';
 import { TiposadminComponent } from './tiposadmin/tiposadmin.component';
 import { AdministradorComponent } from './administrador/administrador.component';
 import { HinchaComponent } from './hincha/hincha.component';
