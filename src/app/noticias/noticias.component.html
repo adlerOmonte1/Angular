@@ -1,114 +1,97 @@
 <h1>Noticias</h1>
 
-<!-- Botón para abrir el diálogo -->
-<p-button 
-  label="Nueva Noticia" 
-  icon="pi pi-plus" 
-  class="mb-3" 
-  (onClick)="abrirDialogo()">
-</p-button>
+<p-button label="Nueva Noticia" icon="pi pi-plus" class="mr-2" (onClick)="abrirDialogo()"></p-button>
 
-<!-- Tabla de noticias -->
 <p-table [value]="noticias" [tableStyle]="{'min-width': '60rem'}">
   <ng-template pTemplate="header">
     <tr>
       <th>ID</th>
-      <th>Administrador</th>
-      <th>Título</th>
-      <th>Contenido</th>
-      <th>Fecha</th>
-      <th>Imagen</th>
-      <th>Opciones</th>
+      <th>NOMBRE</th>
+      <th>DESCRIPCIÓN</th>
+      <th>FECHA</th>
+      <th>IMAGEN</th>
+      <th>ADMINISTRADOR</th>
+      <th>OPCIONES</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-noticia>
     <tr>
       <td>{{ noticia.id }}</td>
-      <td>{{ noticia.administrador?.nombre_usuario }}</td>
-      <td>{{ noticia.titulo }}</td>
-      <td>{{ noticia.contenido }}</td>
+      <td>{{ noticia.nombreHistoria }}</td>
+      <td>{{ noticia.descripcion }}</td>
       <td>{{ noticia.fecha_publicacion }}</td>
       <td>
-        <img 
-          *ngIf="noticia.imagen_url" 
-          [src]="'http://127.0.0.1:8000' + noticia.imagen_url" 
-          alt="Imagen" 
-          width="100">
+        <img
+          *ngIf="noticia.imagen"
+          [src]="noticia.imagen"
+          class="noticia-imagen"
+          alt="Imagen de {{ noticia.nombreHistoria }}"
+          width="100"
+        />
       </td>
       <td>
-        <div class="flex gap-2">
-          <button 
-            pButton 
-            icon="pi pi-pencil" 
-            (click)="editarNoticia(noticia)" 
-            title="Editar" 
-            text>
-          </button>
-          <button 
-            pButton 
-            icon="pi pi-trash" 
-            (click)="eliminarNoticia(noticia)" 
-            title="Eliminar" 
-            text 
-            class="p-button-danger">
-          </button>
-        </div>
+        {{ noticia.administrador?.nombre_usuario }}
+      </td>
+      <td>
+        <button
+          pButton
+          icon="pi pi-pencil"
+          (click)="editarNoticia(noticia)"
+          title="Editar"
+          text
+        ></button>
+        <button
+          pButton
+          icon="pi pi-times"
+          (click)="eliminarNoticia(noticia)"
+          title="Eliminar"
+          text
+          severity="danger"
+        ></button>
       </td>
     </tr>
   </ng-template>
 </p-table>
 
-<!-- Diálogo para crear/editar -->
-<p-dialog 
-  header="Crear/Editar Noticia" 
-  [(visible)]="visible" 
-  [modal]="true" 
-  [style]="{ width: '30rem' }"
-  [closable]="false">
+<!-- FORMULARIO -->
+<p-dialog header="Crear/Editar Noticia" [(visible)]="visible" [modal]="true" [style]="{ width: '30rem' }">
+  <div class="mb-3">
+    <label>Nombre</label>
+    <input pInputText [(ngModel)]="noticiaDialogo.nombreHistoria" />
+  </div>
 
-  <div class="field mb-3">
-    <label for="administrador">Administrador</label>
-    <p-dropdown
+  <div class="mb-3">
+    <label>Descripción</label>
+    <textarea pInputTextarea rows="4" [(ngModel)]="noticiaDialogo.descripcion"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label>Fecha</label>
+    <input type="date" pInputText [(ngModel)]="noticiaDialogo.fecha_publicacion" />
+  </div>
+
+  <div class="mb-3">
+    <label>Imagen</label>
+    <p-fileupload 
+      mode="basic"
+      name="demo[]"
+      chooseIcon="pi pi-upload"
+      accept="image/*"
+      (onSelect)="onBasicUploadAuto($event)"
+      chooseLabel="Elegir Imagen" />
+  </div>
+
+  <div class="mb-3">
+    <label>Administrador</label>
+    <p-dropdown 
       [options]="administradores"
       [(ngModel)]="administradorSeleccionado"
       optionLabel="nombre_usuario"
-      placeholder="Selecciona un administrador"
-      [filter]="true"
-      inputId="administrador" />
-  </div>
-
-  <div class="field mb-3">
-    <label for="titulo">Título</label>
-    <input pInputText id="titulo" [(ngModel)]="noticiaDialogo.titulo" />
-  </div>
-
-  <div class="field mb-3">
-    <label for="contenido">Contenido</label>
-    <textarea 
-      pInputTextarea 
-      id="contenido" 
-      [(ngModel)]="noticiaDialogo.contenido" 
-      rows="4" 
-      autoResize="true">
-    </textarea>
-  </div>
-
-  <div class="field mb-3">
-    <label for="fecha">Fecha de Publicación</label>
-    <input type="date" id="fecha" [(ngModel)]="noticiaDialogo.fecha_publicacion" pInputText />
-  </div>
-
-  <div class="field mb-3">
-    <label for="imagen">Imagen</label>
-    <input type="file" (change)="onImagenSeleccionada($event)" />
-    <div *ngIf="imagenTemporal" class="mt-2">
-      <img [src]="imagenTemporal" alt="Vista previa" width="200">
-    </div>
+      placeholder="Selecciona un administrador" />
   </div>
 
   <div class="flex justify-end gap-2">
     <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
     <p-button label="Guardar" (click)="guardarNoticia()" />
   </div>
-  
 </p-dialog>

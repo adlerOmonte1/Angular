@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { apiService } from '../../service/api.service';
+import { Component } from '@angular/core';
 import { PostHistoria } from '../../models/post-historia.model';
 import { Historia } from '../../models/historia.model';
+import { apiService } from '../../service/api.service';
 
 @Component({
   selector: 'app-posthistorias',
@@ -9,62 +9,85 @@ import { Historia } from '../../models/historia.model';
   templateUrl: './posthistorias.component.html',
   styleUrls: ['./posthistorias.component.css']
 })
-export class PosthistoriasComponent implements OnInit {
+export class PosthistoriasComponent {
 
-  posthistorias: PostHistoria[] = [];
-  historias: Historia[] = [];
+  posthistorias: PostHistoria[];
+  historias: Historia[];
+  postDialogo: PostHistoria = new PostHistoria();
 
-  postDialogo: PostHistoria = {} as PostHistoria;
   visible: boolean = false;
-  historiaSeleccionada: number | null = null;
+  nuevaPost: boolean = true;
+
+  imagenSeleccionada: File | null = null;
+  historiaSeleccionada: Historia;
 
   constructor(private api: apiService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.obtenerPostHistorias();
     this.obtenerHistorias();
   }
 
-  obtenerPostHistorias(): void {
-    this.api.getPostHistorias().subscribe(data => this.posthistorias = data);
+  obtenerPostHistorias() {
+    this.api.getPostHistorias().subscribe(data => {
+      this.posthistorias = data;
+    });
   }
 
-  obtenerHistorias(): void {
-    this.api.getHistorias().subscribe(data => this.historias = data);
+  obtenerHistorias() {
+    this.api.getHistorias().subscribe(data => {
+      this.historias = data;
+    });
   }
 
-  abrirDialogo(): void {
-    this.postDialogo = {} as PostHistoria;
-    this.historiaSeleccionada = null;
+  abrirDialogo() {
     this.visible = true;
+    this.nuevaPost = true;
+    this.postDialogo = new PostHistoria();
+    this.historiaSeleccionada = {} as Historia;
+    this.imagenSeleccionada = null;
   }
 
-  editarPost(post: PostHistoria): void {
-    this.postDialogo = {...post};
-    this.historiaSeleccionada = post.historia;
+  editarPost(post: PostHistoria) {
     this.visible = true;
+    this.nuevaPost = false;
+    this.postDialogo = { ...post };
+    const historiaEncontrada = this.historias.find(h => h.id === (post.historia as Historia).id || post.historia);
+    this.historiaSeleccionada = historiaEncontrada ? historiaEncontrada : {} as Historia;
+    this.imagenSeleccionada = null;
   }
 
-  eliminarPost(post: PostHistoria): void {
-    if (post.id) {
-      this.api.deletePostHistoria(post.id).subscribe(() => this.obtenerPostHistorias());
-    }
+  eliminarPost(post: PostHistoria) {
+    this.api.deletePostHistoria(post.id).subscribe(() => {
+      this.obtenerPostHistorias();
+    });
   }
 
-  guardarPost(): void {
-    if (this.historiaSeleccionada !== null) {
-      this.postDialogo.historia = this.historiaSeleccionada;
+  guardarPost() {
+    const formData = new FormData();
+    formData.append('titulo', this.postDialogo.titulo);
+    formData.append('contexto', this.postDialogo.contexto);
+    formData.append('fecha_publicacion', this.postDialogo.fecha_publicacion);
+    formData.append('historia', this.historiaSeleccionada.id.toString());
+
+    if (this.imagenSeleccionada) {
+      formData.append('imagen', this.imagenSeleccionada);
     }
-    if (this.postDialogo.id) {
-      this.api.putPostHistoria(this.postDialogo).subscribe(() => {
+
+    if (this.nuevaPost) {
+      this.api.postPostHistoria(formData).subscribe(() => {
         this.obtenerPostHistorias();
         this.visible = false;
       });
     } else {
-      this.api.postPostHistoria(this.postDialogo).subscribe(() => {
+      this.api.putPostHistoria(this.postDialogo.id, formData).subscribe(() => {
         this.obtenerPostHistorias();
         this.visible = false;
       });
     }
+  }
+
+  onBasicUploadAuto(event: any) {
+    this.imagenSeleccionada = event.files[0];
   }
 }
