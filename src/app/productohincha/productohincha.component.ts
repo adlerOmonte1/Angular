@@ -45,16 +45,22 @@ export class ProductohinchaComponent {
     this.obtenerProductos();
     this.obtenerUnidadMedida();
   }
+  
+    actualizarSubtotal(detalle: CarritoProducto) {
+    detalle.subtotal = detalle.subtotalxunidad * detalle.cantidad;
+    this.calcularTotal(); // Para actualizar el total general
+  }
+  cambiarSubTotal(indice:number){
+    console.log(indice);
+    this.detalles[indice].subtotal = this.detalles[indice].cantidad* this.detalles[indice].producto_precio;
+    this.calcularTotal()
+  }
   calcularTotal(){
     this.totalPedido = 0;
     this.detalles.forEach(detalle => {
       detalle.subtotal = detalle.cantidad * detalle.subtotalxunidad;
       this.totalPedido += Number(detalle.subtotal);
     });
-  }
-    actualizarSubtotal(detalle: CarritoProducto) {
-    detalle.subtotal = detalle.subtotalxunidad * detalle.cantidad;
-    this.calcularTotal(); // Para actualizar el total general
   }
   agregarProducto(producto: Producto, unidadMedida: UnidadMedida) {
     const detalle = new CarritoProducto();

@@ -73,10 +73,9 @@
               </tr>
             </ng-template>
 
-            <ng-template pTemplate="body" let-detalle>
+            <ng-template #body let-detalle let-ri="rowIndex">
               <tr>
                 <td>{{ detalle.producto_nombre }}</td>
-
                 <td>
                   <img
                     [src]="detalle.imagen_url"
@@ -89,7 +88,7 @@
                             [(ngModel)] = "detalle.cantidad"
                             [showButtons] = "true"
                             [min] = "1"
-                            (ngModelChange) = "actualizarSubtotal(detalle)"
+                            (onInput)="cambiarSubTotal(ri)"
                       ></p-inputNumber>
                 </td>
                 <td>
@@ -101,7 +100,7 @@
                 </td>
 
                 <td>
-                  {{ detalle.subtotal | currency: 'PEN' }}
+                  {{ detalle.subtotal | number:'1.2-2' }}
                 </td>
               </tr>
             </ng-template>
