@@ -1,30 +1,41 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Hincha } from '../models/hincha.model';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Hincha } from "../models/hincha.model";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class HinchaService {
-  private apiUrl = 'http://127.0.0.1:8000/api/hinchas/';
+  private ApiUrl = "http://127.0.0.1:8000/api/";
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
-  constructor(private http: HttpClient) {}
-
-  getHinchas(): Observable<Hincha[]> {
-    return this.http.get<Hincha[]>(this.apiUrl);
+  constructor(private http: HttpClient) {
   }
 
-  postHincha(hincha: FormData): Observable<Hincha> {
-    return this.http.post<Hincha>(this.apiUrl, hincha);
+  //GET Hinchas
+  public getHinchas(): Observable<Hincha[]> {
+    return this.http.get<Hincha[]>(this.ApiUrl + 'hinchas/');
   }
 
-  putHincha(hincha: FormData, id: number): Observable<Hincha> {
-    return this.http.put<Hincha>(`${this.apiUrl}${id}/`, hincha);
+  //POST Hincha (con imagen)
+  public postHincha(hincha: FormData): Observable<Hincha> {
+    return this.http.post<Hincha>(this.ApiUrl + 'hinchas/', hincha);
   }
 
-  updateHincha(hincha: Hincha): Observable<Hincha> {
-  const idUsuario = hincha.Usuario.id;  // Usamos el ID del usuario que ya viene en el modelo
-  return this.http.put<Hincha>(`${this.apiUrl}${idUsuario}/`, hincha);
-}
+  //PUT Hincha (con imagen)
+  public putHincha(hincha: FormData, id: number): Observable<Hincha> {
+    return this.http.put<Hincha>(this.ApiUrl + 'hinchas/' + id + "/", hincha);
+  }
+
+  //PUT Hincha (sin imagen, usando JSON)
+  public updateHincha(hincha: Hincha): Observable<Hincha> {
+    const idUsuario = hincha.Usuario.id;
+    let body = JSON.stringify(hincha);
+    return this.http.put<Hincha>(this.ApiUrl + 'hinchas/' + idUsuario + "/", body, this.httpOptions);
+  }
 }

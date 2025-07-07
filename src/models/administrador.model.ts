@@ -1,8 +1,9 @@
 import { Usuario } from "./usuario.model";
 import { tiposadmin } from "./tipo-administrador.model";
 
-export class administrador {
+export class Administrador {
   id: number ;
-  usuario: Usuario ;
-  tipo_admin: tiposadmin ;
+  usuario: number ;
+  tipo_admin: number ;
+
 }
