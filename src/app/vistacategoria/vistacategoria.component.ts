@@ -11,7 +11,7 @@ import { Categoria } from '../../models/categoria.model';
   providers: [apiService]
 })
 export class CategoriaHinchaComponent{
-  categorias: Categoria[] = [];
+  categorias: Categoria[];
 
   constructor(private apiService: apiService) {}
 

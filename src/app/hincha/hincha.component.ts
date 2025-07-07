@@ -11,11 +11,11 @@ import { Usuario } from '../../models/usuario.model';
   providers: [HinchaService]
 })
 export class HinchaComponent implements OnInit {
-  hinchas: Hincha[] = [];
+  hinchas: Hincha[];
 
   constructor(private hinchaService: HinchaService) {}
 
-  usuarios: Usuario[]=[]
+  usuarios: Usuario[];
 
   ngOnInit(): void {
     this.obtenerHinchas();
