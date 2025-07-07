@@ -1,4 +1,4 @@
-import { administrador } from "./administrador.model";
+import { Administrador } from "./administrador.model";
 
 export class jugador {
   id: number;
@@ -11,5 +11,5 @@ export class jugador {
   altura: number;
   nacionalidad: string;
   imagen: string;
-  administrador: administrador; // ID del administrador
+  administrador: Administrador; // ID del administrador
 }

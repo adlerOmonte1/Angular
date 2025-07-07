@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Historia } from '../../models/historia.model';
-import { administrador } from '../../models/administrador.model';
+import { Administrador } from '../../models/administrador.model';
 import { apiService } from '../../service/api.service';
 import { AdministradorService } from '../../service/administrador.service';
 
@@ -14,8 +14,8 @@ import { AdministradorService } from '../../service/administrador.service';
 export class HistoriaComponent implements OnInit {
 
   historias: Historia[] = [];
-  administradores: administrador[] = [];
-  administradorSeleccionado: administrador | undefined;
+  administradores: Administrador[] = [];
+  administradorSeleccionado: Administrador | undefined;
 
   visible: boolean = false;
   nuevaHistoria: boolean = true;

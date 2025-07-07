@@ -10,7 +10,7 @@ import { Usuario } from '../../models/usuario.model';
   styleUrl: './hincha.component.css',
   providers: [HinchaService]
 })
-export class HinchaComponent implements OnInit {
+export class HinchaComponent {
   hinchas: Hincha[] = [];
 
   constructor(private hinchaService: HinchaService) {}

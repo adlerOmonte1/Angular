@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Partido } from '../../models/partidos.model';
-import { administrador } from '../../models/administrador.model';
+import { Administrador } from '../../models/administrador.model';
 import { apiService } from '../../service/api.service';
 import { AdministradorService } from '../../service/administrador.service';
 
@@ -14,8 +14,8 @@ import { AdministradorService } from '../../service/administrador.service';
 export class PartidoComponent implements OnInit {
 
   partidos: Partido[] = [];
-  administradores: administrador[] = [];
-  administradorSeleccionado: administrador | undefined;
+  administradores: Administrador[] = [];
+  administradorSeleccionado: Administrador | undefined;
 
   visible: boolean = false;
   nuevoPartido: boolean = true;

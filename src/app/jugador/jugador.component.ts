@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { jugador } from '../../models/jugador.model';
-import { administrador } from '../../models/administrador.model';
+import { Administrador } from '../../models/administrador.model';
 import { JugadorService } from '../../service/jugador.service';
 import { AdministradorService } from '../../service/administrador.service';
 
@@ -17,8 +17,8 @@ export class JugadorComponent {
   nuevoJugador: boolean = true;
   tituloDialogo: string = '';
 
-  administradores: administrador[] = [];
-  administradorSeleccionado: administrador | null = null;
+  administradores: Administrador[] = [];
+  administradorSeleccionado: Administrador | null = null;
   imagenSeleccionada: File | null = null;
 
   constructor(

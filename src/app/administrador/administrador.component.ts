@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AdministradorService } from '../../service/administrador.service';
-import { administrador } from '../../models/administrador.model';
+import { Administrador } from '../../models/administrador.model';
 import { Usuario } from '../../models/usuario.model';
 import { tiposadmin } from '../../models/tipo-administrador.model';
+import { AdministradorService } from '../../service/administrador.service';
 import { UsuarioService } from '../../service/usuario.service';
 import { TipoAdminService } from '../../service/tiposadmin.service';
 
@@ -14,13 +14,15 @@ import { TipoAdminService } from '../../service/tiposadmin.service';
   providers: [AdministradorService, UsuarioService, TipoAdminService]
 })
 export class AdministradorComponent {
-  administradores: administrador[] = [];
-  administradorDialogo: administrador = new administrador();
+  administradores: Administrador[];
   visible: boolean = false;
   crear: boolean = true;
+  administradorDialogo: Administrador = new Administrador();
 
-  usuarios: Usuario[] = [];
-  tiposadmin: tiposadmin[] = [];
+  usuarios: Usuario[];
+  usuariosSeleccionado: Usuario;
+  tiposadmin: tiposadmin[];
+  tiposadminSeleccionado: tiposadmin;
 
   constructor(
     private administradorService: AdministradorService,
@@ -55,37 +57,38 @@ export class AdministradorComponent {
   abrirModal() {
     this.visible = true;
     this.crear = true;
-    this.administradorDialogo = new administrador();
+    this.administradorDialogo = new Administrador();
   }
 
-  editarAdministrador(admin: administrador) {
+  editarAdministrador(admin: Administrador) {
     this.visible = true;
     this.crear = false;
-    this.administradorDialogo = { ...admin };
+    this.administradorDialogo = admin;
+    this.usuariosSeleccionado = this.usuarios.find(u => u.id === admin.usuario)!;
+    this.tiposadminSeleccionado = this.tiposadmin.find(t => t.id === admin.tipo_admin)!;
   }
 
-  eliminarAdministrador(admin: administrador) {
+  eliminarAdministrador(admin: Administrador) {
     this.administradorService.deleteAdministrador(admin.id.toString()).subscribe(() => {
       this.obtenerAdministradores();
     });
   }
 
-  guardar() {
-    const body = {
-      id: this.administradorDialogo.id,
-      tipo_admin: this.administradorDialogo.tipo_admin
-    };
+guardarAdministrador() {
+  this.administradorDialogo.id = this.usuariosSeleccionado.id;
+  this.administradorDialogo.tipo_admin = this.tiposadminSeleccionado.id;
 
-    if (this.crear) {
-      this.administradorService.postAdministrador(body).subscribe(() => {
-        this.obtenerAdministradores();
-        this.visible = false;
-      });
-    } else {
-      this.administradorService.putAdministrador(body, this.administradorDialogo.id).subscribe(() => {
+  if (this.crear) {
+    this.administradorService.postAdministrador(this.administradorDialogo).subscribe(() => {
       this.obtenerAdministradores();
       this.visible = false;
-      });
-    }
+    });
+  } else {
+    this.administradorService.putAdministrador(this.administradorDialogo).subscribe(() => {
+      this.obtenerAdministradores();
+      this.visible = false;
+    });
   }
+}
+
 }
