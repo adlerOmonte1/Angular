@@ -4,7 +4,6 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent} from './home/home.component';
 import { AuthGuard } from '../service/auth.guard';
 import { CategoriasComponent } from './categorias/categorias.component';
-//import { NoticiaComponent } from './noticias/noticias.component';
 import { TallasComponent } from './tallas/tallas.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { AlmacenComponent } from './almacen/almacen.component';
@@ -13,10 +12,7 @@ import { PedidoComponent } from './pedido/pedido.component';
 import { ProductoComponent } from './producto/producto.component';
 import { PromocionComponent } from './promocion/promocion.component';
 
-
-//import { PartidoComponent } from './partidos/partidos.component';
 import { HistoriaComponent } from './historias/historias.component';
-import { PosthistoriasComponent } from './posthistorias/posthistorias.component';
 import { ProductohinchaComponent } from './productohincha/productohincha.component';
 import { JugadorHinchaComponent } from './jugador-hincha/jugador-hincha.component';
 import { FormapagoComponent } from './formapago/formapago.component';
@@ -31,6 +27,7 @@ import { KardexComponent } from './kardex/kardex.component';
 import { UsuarioComponent } from './usuarios/usuarios.component';
 import { CrearusuarioComponent } from './crearusuario/crearusuario.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { PartidoComponent } from './partidos/partidos.component';
 
 
 
@@ -56,10 +53,9 @@ const routes: Routes = [
     { path: 'kardex', component: KardexComponent, canActivate: [AuthGuard] }, // Asumiendo que el componente Kardex es el mismo que Stock
     { path: 'perfil', component:PerfilComponent, canActivate: [AuthGuard] },
     // By kennet
-    //{path: 'partidos',component:PartidoComponent, canActivate: [AuthGuard]},
-    //{path: 'noticias',component:NoticiaComponent, canActivate: [AuthGuard]},
+
+    {path: 'partidos',component:PartidoComponent, canActivate: [AuthGuard]},
     {path: 'historias',component:HistoriaComponent, canActivate: [AuthGuard]},
-    {path: 'posthistorias',component:PosthistoriasComponent, canActivate: [AuthGuard]},
 
 
     // By Sidanne

@@ -145,94 +145,94 @@ export class apiService {
     return this.http.delete<void>(this.ApiUrl + 'historias/' + id + '/');
   }
 
-// ------------------ CRUD POST_HISTORIA ------------------
-public getPostHistorias(): Observable<PostHistoria[]> {
-  return this.http.get<PostHistoria[]>(this.ApiUrl + 'post-historias/');
-}
+  // ------------------ CRUD POST_HISTORIA ------------------
+  public getPostHistorias(): Observable<PostHistoria[]> {
+    return this.http.get<PostHistoria[]>(this.ApiUrl + 'post-historias/');
+  }
 
-public postPostHistoria(postHistoria: PostHistoria): Observable<PostHistoria> {
-  let body = JSON.stringify(postHistoria);
-  return this.http.post<PostHistoria>(this.ApiUrl + 'post-historias/', body, this.httpOptions);
-}
+  public postPostHistoria(postHistoria: PostHistoria): Observable<PostHistoria> {
+    let body = JSON.stringify(postHistoria);
+    return this.http.post<PostHistoria>(this.ApiUrl + 'post-historias/', body, this.httpOptions);
+  }
 
-public putPostHistoria(postHistoria: PostHistoria): Observable<PostHistoria> {
-  let body = JSON.stringify(postHistoria);
-  return this.http.put<PostHistoria>(this.ApiUrl + 'post-historias/' + postHistoria.id + '/', body, this.httpOptions);
-}
+  public putPostHistoria(postHistoria: PostHistoria): Observable<PostHistoria> {
+    let body = JSON.stringify(postHistoria);
+    return this.http.put<PostHistoria>(this.ApiUrl + 'post-historias/' + postHistoria.id + '/', body, this.httpOptions);
+  }
 
-public deletePostHistoria(id: number): Observable<void> {
-  return this.http.delete<void>(this.ApiUrl + 'post-historias/' + id + '/');
-}
+  public deletePostHistoria(id: number): Observable<void> {
+    return this.http.delete<void>(this.ApiUrl + 'post-historias/' + id + '/');
+  }
 
 
-public getStock():Observable<Stock[]>{
-  return this.http.get<Stock[]>(this.ApiUrl+'stock/');
-}
-public postStock(stock: Stock): Observable<Stock> {
-  let body = JSON.stringify(stock);
-  return this.http.post<Stock>(this.ApiUrl + 'stock/', body, this.httpOptions);
-}
-public putStock(stock: Stock): Observable<Stock> {
-  let body = JSON.stringify(stock);
-  return this.http.put<Stock>(this.ApiUrl + 'stock/' + stock.id + '/', body, this.httpOptions);
-}
+  public getStock():Observable<Stock[]>{
+    return this.http.get<Stock[]>(this.ApiUrl+'stock/');
+  }
+  public postStock(stock: Stock): Observable<Stock> {
+    let body = JSON.stringify(stock);
+    return this.http.post<Stock>(this.ApiUrl + 'stock/', body, this.httpOptions);
+  }
+  public putStock(stock: Stock): Observable<Stock> {
+    let body = JSON.stringify(stock);
+    return this.http.put<Stock>(this.ApiUrl + 'stock/' + stock.id + '/', body, this.httpOptions);
+  }
 
-public deleteStock(id: string): Observable<void> {
-  return this.http.delete<void>(this.ApiUrl + 'stock/' + id + '/');
-}
+  public deleteStock(id: string): Observable<void> {
+    return this.http.delete<void>(this.ApiUrl + 'stock/' + id + '/');
+  }
 
-public getKardex():Observable<Kardex[]>{
-  return this.http.get<Kardex[]>(this.ApiUrl+'kardex/');
-}
-public postKardex(stock: Kardex): Observable<Kardex> {
-  let body = JSON.stringify(stock);
-  return this.http.post<Kardex>(this.ApiUrl + 'kardex/', body, this.httpOptions);
-}
-public putKardex(kardex: Kardex): Observable<Kardex> {
-  let body = JSON.stringify(kardex);
-  return this.http.put<Kardex>(this.ApiUrl + 'kardex/' + kardex.id + '/', body, this.httpOptions);
-}
+  public getKardex():Observable<Kardex[]>{
+    return this.http.get<Kardex[]>(this.ApiUrl+'kardex/');
+  }
+  public postKardex(stock: Kardex): Observable<Kardex> {
+    let body = JSON.stringify(stock);
+    return this.http.post<Kardex>(this.ApiUrl + 'kardex/', body, this.httpOptions);
+  }
+  public putKardex(kardex: Kardex): Observable<Kardex> {
+    let body = JSON.stringify(kardex);
+    return this.http.put<Kardex>(this.ApiUrl + 'kardex/' + kardex.id + '/', body, this.httpOptions);
+  }
 
-public deleteKardex(id: string): Observable<void> {
-  return this.http.delete<void>(this.ApiUrl + 'kardex/' + id + '/');
-}
+  public deleteKardex(id: string): Observable<void> {
+    return this.http.delete<void>(this.ApiUrl + 'kardex/' + id + '/');
+  }
 
-public getUsuarios(): Observable<Usuario[]> {
-  return this.http.get<Usuario[]>(this.ApiUrl + 'usuarios/');
-}
+  public getUsuarios(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.ApiUrl + 'usuarios/');
+  }
 
-public getUsuario(): Observable<Usuario> {
-  return this.http.get<Usuario>(this.ApiUrl + 'usuarios/');
-}
+  public getUsuario(): Observable<Usuario> {
+    return this.http.get<Usuario>(this.ApiUrl + 'usuarios/');
+  }
 
-public postUsuario(usuario: Usuario): Observable<Usuario> {
-  return this.http.post<Usuario>(this.ApiUrl + 'usuarios/', usuario, this.httpOptions);
-}
+  public postUsuario(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(this.ApiUrl + 'usuarios/', usuario, this.httpOptions);
+  }
 
-public putUsuario(usuario: Usuario): Observable<Usuario> {
-  return this.http.put<Usuario>(this.ApiUrl + 'usuarios/' + usuario.id + '/', usuario, this.httpOptions);
-}
+  public putUsuario(usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(this.ApiUrl + 'usuarios/' + usuario.id + '/', usuario, this.httpOptions);
+  }
 
-public deleteUsuario(id: number): Observable<void> {
-  return this.http.delete<void>(this.ApiUrl + 'usuarios/' + id + '/');
-}
-public getHincha(): Observable<Hincha[]> {
-  return this.http.get<Hincha[]>(this.ApiUrl + 'hinchas/');
-}
-public postHincha(hincha: Hincha): Observable<Hincha> {
-  return this.http.post<Hincha>(this.ApiUrl + 'hinchas/', hincha, this.httpOptions);
-}
-public putHincha(hincha: Hincha): Observable<Hincha> {
-  return this.http.put<Hincha>(this.ApiUrl + 'hinchas/' + hincha.id + '/', hincha, this.httpOptions);
-}
-public deleteHincha(id: number): Observable<void> {
-  return this.http.delete<void>(this.ApiUrl + 'hinchas/' + id + '/');
-}
-public getUsuarioconID(id: number): Observable<Usuario> {
-  return this.http.get<Usuario>(this.ApiUrl + 'usuarios/' + id + '/');
-}
-public getHinchaconID(id: number): Observable<Hincha> {
-  return this.http.get<Hincha>(this.ApiUrl + 'hinchas/' + id + '/');
-}
+  public deleteUsuario(id: number): Observable<void> {
+    return this.http.delete<void>(this.ApiUrl + 'usuarios/' + id + '/');
+  }
+  public getHincha(): Observable<Hincha[]> {
+    return this.http.get<Hincha[]>(this.ApiUrl + 'hinchas/');
+  }
+  public postHincha(hincha: Hincha): Observable<Hincha> {
+    return this.http.post<Hincha>(this.ApiUrl + 'hinchas/', hincha, this.httpOptions);
+  }
+  public putHincha(hincha: Hincha): Observable<Hincha> {
+    return this.http.put<Hincha>(this.ApiUrl + 'hinchas/' + hincha.id + '/', hincha, this.httpOptions);
+  }
+  public deleteHincha(id: number): Observable<void> {
+    return this.http.delete<void>(this.ApiUrl + 'hinchas/' + id + '/');
+  }
+  public getUsuarioconID(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(this.ApiUrl + 'usuarios/' + id + '/');
+  }
+  public getHinchaconID(id: number): Observable<Hincha> {
+    return this.http.get<Hincha>(this.ApiUrl + 'hinchas/' + id + '/');
+  }
 
 }

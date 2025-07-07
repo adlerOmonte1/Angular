@@ -60,7 +60,6 @@ import { VistaHinchaComponent } from './vista-hincha/vista-hincha.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { JugadorComponent } from './jugador/jugador.component';
 import { HistoriaComponent } from './historias/historias.component';
-import { PosthistoriasComponent } from './posthistorias/posthistorias.component';
 import { ProductohinchaComponent } from './productohincha/productohincha.component';
 import { JugadorHinchaComponent } from './jugador-hincha/jugador-hincha.component';
 import { FormapagoComponent } from './formapago/formapago.component';
@@ -69,6 +68,7 @@ import { KardexComponent } from './kardex/kardex.component';
 import { UsuarioComponent } from './usuarios/usuarios.component';
 import { CrearusuarioComponent } from './crearusuario/crearusuario.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { PartidoComponent } from './partidos/partidos.component';
 
 
 @NgModule({
@@ -88,7 +88,6 @@ import { PerfilComponent } from './perfil/perfil.component';
   TiposadminComponent,
   JugadorComponent,
   HistoriaComponent,
-  PosthistoriasComponent,
   ProductohinchaComponent,
   FormapagoComponent,
   JugadorHinchaComponent,
@@ -98,7 +97,8 @@ import { PerfilComponent } from './perfil/perfil.component';
   KardexComponent,
   UsuarioComponent,
   CrearusuarioComponent,
-  PerfilComponent
+  PerfilComponent,
+  PartidoComponent
 ],
 
   imports: [

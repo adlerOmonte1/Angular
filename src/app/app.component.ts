@@ -79,24 +79,16 @@ export class AppComponent {
             ]
           },
           {
-            label: 'Noticias y Contenido',
+            label: 'Contenido',
             icon: 'pi pi-megaphone',
             items: [
-              {
-                label: 'Noticias',
-                icon: 'pi pi-book',
-                command: () => this.router.navigate(['/noticias'])
-              },
+
               {
                 label: 'Historias',
                 icon: 'pi pi-calendar',
                 command: () => this.router.navigate(['/historias'])
               },
-              {
-                label: 'Post Historia',
-                icon: 'pi pi-pencil',
-                command: () => this.router.navigate(['/posthistorias'])
-              }
+
             ]
           },
           {
@@ -178,15 +170,31 @@ export class AppComponent {
             command: () => this.router.navigate(['/inicio'])
         },
         {
+            label: 'Productos',
+            icon: 'pi pi-ticket',
+            command: () => this.router.navigate(['/pedido'])
+        },
+        {
             label: 'Jugadores',
             icon: 'pi pi-users',
             command: () => this.router.navigate(['/jugadoreshincha'])
+        },
+        {
+            label: 'Partidos',
+            icon: 'pi pi-calendar',
+            command: () => this.router.navigate(['/partidos'])
+        },
+        {
+            label: 'Historias',
+            icon: 'pi pi-book',
+            command: () => this.router.navigate(['/historias'])
         },
         {
             label: 'Formas de pago',
             icon: 'pi pi-users',
             command: () => this.router.navigate(['/formapago'])
         },
+
         {
             label: 'Mi Cuenta',
             icon: 'pi pi-user',
@@ -197,11 +205,6 @@ export class AppComponent {
                 command: () => this.router.navigate(['/perfil'])
             }
             ]
-        },
-        {
-            label: 'Productos',
-            icon: 'pi pi-ticket',
-            command: () => this.router.navigate(['/pedido'])
         },
         {
             label: 'Cerrar Sesión',

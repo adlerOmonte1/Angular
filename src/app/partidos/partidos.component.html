@@ -8,7 +8,6 @@
   <ng-template pTemplate="header">
     <tr>
       <th>ID</th>
-      <th>Administrador</th>
       <th>Nombre</th>
       <th>Lugar</th>
       <th>Fecha</th>
@@ -20,7 +19,6 @@
   <ng-template pTemplate="body" let-partido>
     <tr>
       <td>{{ partido.id }}</td>
-      <td>{{ partido.administrador?.id }}</td>
       <td>{{ partido.nombre_partido }}</td>
       <td>{{ partido.lugar_partido }}</td>
       <td>{{ partido.fecha_partido }}</td>
@@ -28,7 +26,7 @@
       <td>{{ partido.resultado }}</td>
       <td>
         <div class="flex gap-2">
-          <button pButton icon="pi pi-pencil" (click)="editarPartido(partido)" title="Editar" text></button>
+
           <button pButton icon="pi pi-trash" (click)="eliminarPartido(partido)" title="Eliminar" text></button>
         </div>
       </td>
@@ -38,17 +36,7 @@
 
 <!-- Diálogo para crear/editar -->
 <p-dialog header="Crear/Editar Partido" [(visible)]="visible" [modal]="true" [style]="{ width: '30rem' }">
-  <div class="field mb-3">
-    <label for="administrador">Administrador</label>
-    <p-dropdown
-      [options]="administradores"
-      [(ngModel)]="administradorSeleccionado"
-      optionLabel="id"
-      placeholder="Selecciona un administrador"
-      [filter]="true"
-      inputId="administrador">
-    </p-dropdown>
-  </div>
+
 
   <div class="field mb-3">
     <label for="nombre">Nombre del Partido</label>

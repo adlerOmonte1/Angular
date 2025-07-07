@@ -1,4 +1,4 @@
-/*import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Partido } from '../../models/partidos.model';
 import { administrador } from '../../models/administrador.model';
 import { apiService } from '../../service/api.service';
@@ -50,12 +50,7 @@ export class PartidoComponent implements OnInit {
     this.visible = true;
   }
 
-  editarPartido(partido: Partido): void {
-    this.nuevoPartido = false;
-    this.partidoDialogo = { ...partido };
-    this.administradorSeleccionado = this.administradores.find((adm: administrador) => adm.id === (typeof partido.administrador === 'object' && partido.administrador !== null ? partido.administrador.id : partido.administrador));
-    this.visible = true;
-  }
+
 
   eliminarPartido(partido: Partido): void {
     if (partido.id !== undefined && confirm('¿Estás seguro de eliminar este partido?')) {
@@ -66,13 +61,6 @@ export class PartidoComponent implements OnInit {
   }
 
   guardarPartido(): void {
-    if (!this.administradorSeleccionado) {
-      alert('Debes seleccionar un administrador');
-      return;
-    }
-
-    // Enviar solo el ID del administrador como string
-    this.partidoDialogo.administrador = String(this.administradorSeleccionado.id);
 
     if (this.nuevoPartido) {
       this.partidoService.postPartido(this.partidoDialogo).subscribe(() => {
@@ -87,4 +75,4 @@ export class PartidoComponent implements OnInit {
     }
   }
 }
-*/
+
