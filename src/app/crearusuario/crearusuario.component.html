@@ -1,0 +1,50 @@
+<div class="login2-wrapper">
+  <div class="login-image">
+    <img src="assets/futbol.jpg" alt="Fútbol" />
+  </div>
+  <div class="login2-form">
+    <h2>Crear Cuenta</h2>
+    <p class="subtitle">Ingrese sus datos para crear su cuenta</p>
+
+    <div class="p-fluid form-fields">
+      <div class="form-group">
+        <label for="username">Usuario</label>
+        <input
+          id="username"
+          type="text"
+          pInputText
+          [(ngModel)]="username"
+          placeholder="Usuario"
+        />
+      </div>
+      <div class="form-group">
+        <label for="reg-email">Correo</label>
+        <input
+          id="reg-email"
+          type="email"
+          pInputText
+          [(ngModel)]="email"
+          placeholder="Correo electrónico"
+        />
+      </div>
+      <div class="form-group">
+        <label for="reg-password">Contraseña</label>
+        <input
+          id="reg-password"
+          type="password"
+          pInputText
+          [(ngModel)]="password"
+          placeholder="Contraseña"
+        />
+      </div>
+      <button
+        pButton
+        class="p-button-primary mt-4 full-width"
+        (click)="crearSuperUsuario()"
+        label="Crear Cuenta"
+      ></button>
+      <a class="login2-link mt-3" (click)="navegarLogin()">¿Ya tienes cuenta? Inicia sesión</a>
+    </div>
+  </div>
+</div>
+

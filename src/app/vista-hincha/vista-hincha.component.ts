@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HinchaService } from '../../service/hincha.service';
-import { hinchas } from '../../models/hincha.model';
-import { Usuario } from '../../models/usuario.model';
+import { Hincha } from '../../models/hincha.model';
 
 @Component({
   selector: 'app-vista-hincha',
@@ -11,7 +10,7 @@ import { Usuario } from '../../models/usuario.model';
   providers: [HinchaService]
 })
 export class VistaHinchaComponent {
-  hincha: hinchas = new hinchas();
+  hincha: Hincha = new Hincha();
   visible: boolean = false;
 
   ngOnInit() {

@@ -1,15 +1,13 @@
 export class Usuario {
   id: number;
   username: string;
-  nombre: string;
-  apellido: string;
   email: string;
-  telefono: string;
-  direccion: string;
-  ciudad: string;
-  fechaNac: Date | string;
-  rol: string;
-  nombreUsuario: any;
-  dni: string;
-  password: string;
+  first_name?: string;
+  last_name?: string;
+  telefono?: string;
+  dni?: string;
+  password:string;
+  rol:string;
+  fechaNac?: Date | string; // usar formato yyyy-mm-dd como string
 }
+

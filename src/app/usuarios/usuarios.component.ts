@@ -21,6 +21,10 @@ export class UsuarioComponent {
   ngOnInit(): void {
     this.obtenerUsuarios();
   }
+  roles = [
+    {nombre: 'administrador', value: 'administrador'},
+    {nombre: 'hincha', value: 'hincha'},
+  ]
 
   obtenerUsuarios(): void {
     this.apiService.getUsuarios().subscribe(res => {

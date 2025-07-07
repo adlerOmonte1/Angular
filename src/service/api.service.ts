@@ -12,6 +12,7 @@ import { PostHistoria } from "../models/post-historia.model";
 import { Stock} from "../models/stock.model";
 import { Kardex } from "../models/kardex.model";
 import { Usuario } from "../models/usuario.model";
+import { Hincha } from "../models/hincha.model";
 
 @Injectable({
   providedIn: "root"
@@ -200,8 +201,8 @@ public getUsuarios(): Observable<Usuario[]> {
   return this.http.get<Usuario[]>(this.ApiUrl + 'usuarios/');
 }
 
-public getUsuario(id: number): Observable<Usuario> {
-  return this.http.get<Usuario>(this.ApiUrl + 'usuarios/' + id + '/');
+public getUsuario(): Observable<Usuario> {
+  return this.http.get<Usuario>(this.ApiUrl + 'usuarios/');
 }
 
 public postUsuario(usuario: Usuario): Observable<Usuario> {
@@ -215,7 +216,23 @@ public putUsuario(usuario: Usuario): Observable<Usuario> {
 public deleteUsuario(id: number): Observable<void> {
   return this.http.delete<void>(this.ApiUrl + 'usuarios/' + id + '/');
 }
-
-
+public getHincha(): Observable<Hincha[]> {
+  return this.http.get<Hincha[]>(this.ApiUrl + 'hinchas/');
+}
+public postHincha(hincha: Hincha): Observable<Hincha> {
+  return this.http.post<Hincha>(this.ApiUrl + 'hinchas/', hincha, this.httpOptions);
+}
+public putHincha(hincha: Hincha): Observable<Hincha> {
+  return this.http.put<Hincha>(this.ApiUrl + 'hinchas/' + hincha.id + '/', hincha, this.httpOptions);
+}
+public deleteHincha(id: number): Observable<void> {
+  return this.http.delete<void>(this.ApiUrl + 'hinchas/' + id + '/');
+}
+public getUsuarioconID(id: number): Observable<Usuario> {
+  return this.http.get<Usuario>(this.ApiUrl + 'usuarios/' + id + '/');
+}
+public getHinchaconID(id: number): Observable<Hincha> {
+  return this.http.get<Hincha>(this.ApiUrl + 'hinchas/' + id + '/');
+}
 
 }

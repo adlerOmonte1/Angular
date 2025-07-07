@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent} from './home/home.component';
 import { AuthGuard } from '../service/auth.guard';
-import { MiCuentaComponent } from './mi-cuenta/mi-cuenta.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 //import { NoticiaComponent } from './noticias/noticias.component';
 import { TallasComponent } from './tallas/tallas.component';
@@ -30,14 +29,16 @@ import { VistaHinchaComponent } from './vista-hincha/vista-hincha.component';
 import { CategoriaHinchaComponent } from './vistacategoria/vistacategoria.component';
 import { KardexComponent } from './kardex/kardex.component';
 import { UsuarioComponent } from './usuarios/usuarios.component';
+import { CrearusuarioComponent } from './crearusuario/crearusuario.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 
 const routes: Routes = [
-    {path: 'login',component:LoginComponent},
-    {path: '',component:LoginComponent},
-    {path: 'inicio',component:HomeComponent, canActivate: [AuthGuard]},
-    {path: 'micuenta', component:MiCuentaComponent},
+    { path: '', component: LoginComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'registrarse', component: CrearusuarioComponent },
+    { path: 'inicio', component: HomeComponent },
 
     // VISTA DE ADMINISTRADOR
 
@@ -53,7 +54,7 @@ const routes: Routes = [
     {path: 'tallas',component:TallasComponent, canActivate: [AuthGuard]},
     { path: 'stock',component:StockComponent,canActivate:[AuthGuard]},
     { path: 'kardex', component: KardexComponent, canActivate: [AuthGuard] }, // Asumiendo que el componente Kardex es el mismo que Stock
-
+    { path: 'perfil', component:PerfilComponent, canActivate: [AuthGuard] },
     // By kennet
     //{path: 'partidos',component:PartidoComponent, canActivate: [AuthGuard]},
     //{path: 'noticias',component:NoticiaComponent, canActivate: [AuthGuard]},

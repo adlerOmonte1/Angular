@@ -35,7 +35,6 @@ import { CalendarModule } from 'primeng/calendar';
 import { CarouselModule } from 'primeng/carousel';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../service/token.interceptor';
-import { MiCuentaComponent } from './mi-cuenta/mi-cuenta.component';
 import { CardModule } from 'primeng/card';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { SelectModule } from 'primeng/select';
@@ -68,6 +67,8 @@ import { FormapagoComponent } from './formapago/formapago.component';
 import { StockComponent } from './stock/stock.component';
 import { KardexComponent } from './kardex/kardex.component';
 import { UsuarioComponent } from './usuarios/usuarios.component';
+import { CrearusuarioComponent } from './crearusuario/crearusuario.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 @NgModule({
@@ -75,7 +76,6 @@ import { UsuarioComponent } from './usuarios/usuarios.component';
   AppComponent,
   LoginComponent,
   HomeComponent,
-  MiCuentaComponent,
   CategoriasComponent,
   PedidoComponent,
   PromocionComponent,
@@ -96,7 +96,9 @@ import { UsuarioComponent } from './usuarios/usuarios.component';
   HinchaComponent,
   VistaHinchaComponent,
   KardexComponent,
-  UsuarioComponent
+  UsuarioComponent,
+  CrearusuarioComponent,
+  PerfilComponent
 ],
 
   imports: [

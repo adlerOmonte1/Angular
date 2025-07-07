@@ -1,5 +1,5 @@
 
-<div *ngIf="loggedIn; else loginOnly">
+<div *ngIf="loggedIn; else mostrarLoginORegistro">
   <div>
     <p-menubar [model]="items">
       <ng-template #start>
@@ -88,6 +88,5 @@
 
 </div>
 
-<ng-template #loginOnly>
-  <app-login></app-login>
-</ng-template>
+<ng-template #mostrarLoginORegistro>
+  <router-outlet />

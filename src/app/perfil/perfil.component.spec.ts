@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MiCuentaComponent } from './mi-cuenta.component';
+import { PerfilComponent } from './perfil.component';
 
-describe('MiCuentaComponent', () => {
-  let component: MiCuentaComponent;
-  let fixture: ComponentFixture<MiCuentaComponent>;
+describe('PerfilComponent', () => {
+  let component: PerfilComponent;
+  let fixture: ComponentFixture<PerfilComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MiCuentaComponent]
+      declarations: [PerfilComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MiCuentaComponent);
+    fixture = TestBed.createComponent(PerfilComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HinchaService } from '../../service/hincha.service';
-import { hinchas } from '../../models/hincha.model';
+import { Hincha } from '../../models/hincha.model';
 import { Usuario } from '../../models/usuario.model';
 
 @Component({
@@ -11,7 +11,7 @@ import { Usuario } from '../../models/usuario.model';
   providers: [HinchaService]
 })
 export class HinchaComponent implements OnInit {
-  hinchas: hinchas[] = [];
+  hinchas: Hincha[] = [];
 
   constructor(private hinchaService: HinchaService) {}
 

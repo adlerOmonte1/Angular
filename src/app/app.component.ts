@@ -157,7 +157,7 @@ export class AppComponent {
             label: 'Mi Cuenta',
             icon: 'pi pi-user',
             command: () => {
-              this.router.navigate(['/micuenta']);
+              this.router.navigate(['/perfil']);
             }
           },
           {
@@ -194,7 +194,7 @@ export class AppComponent {
             {
                 label: 'Perfil',
                 icon: 'pi pi-id-card',
-                command: () => this.router.navigate(['/micuenta'])
+                command: () => this.router.navigate(['/perfil'])
             }
             ]
         },
@@ -210,5 +210,9 @@ export class AppComponent {
                   window.location.href = '/login';}
         }
         ];
+      }
+      get mostrarLoginORegistro(): boolean {
+        const ruta  = this.router.url;
+        return ruta === '/login' || ruta === '/registrarse';
       }
   }

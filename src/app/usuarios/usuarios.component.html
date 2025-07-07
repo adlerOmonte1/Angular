@@ -6,8 +6,8 @@
   <ng-template pTemplate="header">
     <tr>
       <th>ID</th>
-      <th>Username</th>
-      <th>Email</th>
+      <th>Usuario</th>
+      <th>Correo</th>
       <th>Teléfono</th>
       <th>DNI</th>
       <th>Rol</th>
@@ -36,7 +36,7 @@
 <p-dialog header="{{ tituloDialogo }}" [(visible)]="visible" [modal]="true" [style]="{ width: '35rem' }" class="p-fluid">
   <div class="grid formgrid p-3">
     <div class="field col-12 md:col-6">
-      <label>nombre del Usuario:</label>
+      <label>Usuario:</label>
       <input pInputText [(ngModel)]="usuario.username" />
     </div>
 
@@ -44,17 +44,6 @@
       <label>Correo:</label>
       <input pInputText [(ngModel)]="usuario.email" />
     </div>
-
-    <div class="field col-12 md:col-6">
-      <label>Nombre:</label>
-      <input pInputText [(ngModel)]="usuario.nombre" />
-    </div>
-
-    <div class="field col-12 md:col-6">
-      <label>Apellido:</label>
-      <input pInputText [(ngModel)]="usuario.apellido" />
-    </div>
-
     <div class="field col-12 md:col-6">
       <label>Teléfono:</label>
       <input pInputText [(ngModel)]="usuario.telefono" />
@@ -65,20 +54,22 @@
       <input pInputText [(ngModel)]="usuario.dni" />
     </div>
 
-    <div class="field col-12 md:col-6">
-      <label>Fecha Nacimiento:</label>
-      <input type="date" pInputText [(ngModel)]="usuario.fechaNac" />
-    </div>
-
     <div class="field col-12 md:col-6" *ngIf="crearUsuario">
       <label>Contraseña:</label>
       <input type="password" pInputText [(ngModel)]="usuario.password" />
     </div>
 
-    <div class="field col-12 md:col-6">
-      <label>Rol:</label>
-      <input pInputText [(ngModel)]="usuario.rol" />
+    <div class="flex items-center gap-4 mb-4">
+      <label for="tipos" class="font-semibold w-24">Rol:</label>
+      <p-dropdown id="rol"
+                  [options]="roles"
+                  [(ngModel)]="usuario.rol"
+                  optionLabel="nombre"
+                  optionValue="value"
+                  placeholder="Seleccione un tipo"
+                  class="w-full md:w-56" />
     </div>
+
   </div>
 
   <div class="flex justify-end gap-2 px-3 pb-3">

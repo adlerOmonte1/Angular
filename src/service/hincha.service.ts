@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { hinchas } from '../models/hincha.model';
+import { Hincha } from '../models/hincha.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +11,20 @@ export class HinchaService {
 
   constructor(private http: HttpClient) {}
 
-  getHinchas(): Observable<hinchas[]> {
-    return this.http.get<hinchas[]>(this.apiUrl);
+  getHinchas(): Observable<Hincha[]> {
+    return this.http.get<Hincha[]>(this.apiUrl);
   }
 
-  postHincha(hincha: FormData): Observable<hinchas> {
-    return this.http.post<hinchas>(this.apiUrl, hincha);
+  postHincha(hincha: FormData): Observable<Hincha> {
+    return this.http.post<Hincha>(this.apiUrl, hincha);
   }
 
-  putHincha(hincha: FormData, id: number): Observable<hinchas> {
-    return this.http.put<hinchas>(`${this.apiUrl}${id}/`, hincha);
+  putHincha(hincha: FormData, id: number): Observable<Hincha> {
+    return this.http.put<Hincha>(`${this.apiUrl}${id}/`, hincha);
   }
 
-  updateHincha(hincha: hinchas): Observable<hinchas> {
+  updateHincha(hincha: Hincha): Observable<Hincha> {
   const idUsuario = hincha.Usuario.id;  // Usamos el ID del usuario que ya viene en el modelo
-  return this.http.put<hinchas>(`${this.apiUrl}${idUsuario}/`, hincha);
+  return this.http.put<Hincha>(`${this.apiUrl}${idUsuario}/`, hincha);
 }
 }
