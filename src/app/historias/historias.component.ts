@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Historia } from '../../models/historia.model';
 import { Administrador } from '../../models/administrador.model';
 import { apiService } from '../../service/api.service';
@@ -11,79 +11,92 @@ import { AdministradorService } from '../../service/administrador.service';
   styleUrls: ['./historias.component.css'],
   providers: [apiService, AdministradorService]
 })
-export class HistoriaComponent implements OnInit {
+export class HistoriaComponent {
 
-  historias: Historia[] = [];
-  administradores: Administrador[] = [];
+  historias: Historia[];
+  visible = false;
+  nuevaHistoria = true;
+  historiaDialogo = new Historia();
+
+  imagenSeleccionada: File | null = null;
+
+  administradores: Administrador[];
   administradorSeleccionado: Administrador | undefined;
-
-  visible: boolean = false;
-  nuevaHistoria: boolean = true;
-  historiaDialogo: Historia = new Historia();
 
   constructor(
     private historiaService: apiService,
     private administradorService: AdministradorService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.obtenerHistorias();
     this.obtenerAdministradores();
   }
 
-  obtenerHistorias(): void {
+  abrirDialogo() {
+    this.visible = true;
+    this.nuevaHistoria = true;
+    this.historiaDialogo = new Historia();
+    this.imagenSeleccionada = null;
+    this.administradorSeleccionado = undefined;
+  }
+
+  obtenerHistorias() {
     this.historiaService.getHistorias().subscribe(res => {
       this.historias = res;
     });
   }
 
-  obtenerAdministradores(): void {
+  obtenerAdministradores() {
     this.administradorService.getAdministrador().subscribe(res => {
       this.administradores = res;
     });
   }
 
-  abrirDialogo(): void {
-    this.nuevaHistoria = true;
-    this.historiaDialogo = new Historia();
-    this.administradorSeleccionado = undefined;
+  editarHistoria(historia: Historia) {
     this.visible = true;
-  }
-
-  editarHistoria(historia: Historia): void {
     this.nuevaHistoria = false;
     this.historiaDialogo = { ...historia };
-    this.administradorSeleccionado = this.administradores.find(adm => adm.id === (Array.isArray(historia.administrador) ? historia.administrador[0]?.id : historia.administrador));
-    this.visible = true;
+    this.administradorSeleccionado = this.administradores.find(a => a.id === historia.administrador.id);
+    this.imagenSeleccionada = null;
   }
 
-  eliminarHistoria(historia: Historia): void {
-    if (historia.id !== undefined && confirm('¿Estás seguro de eliminar esta historia?')) {
-      this.historiaService.deleteHistoria(historia.id).subscribe(() => {
-        this.obtenerHistorias();
-      });
-    }
+  eliminarHistoria(historia: Historia) {
+    this.historiaService.deleteHistoria(historia.id).subscribe(() => {
+      this.obtenerHistorias();
+    });
   }
 
-  guardarHistoria(): void {
+  guardarHistoria() {
     if (!this.administradorSeleccionado) {
       alert('Debes seleccionar un administrador');
       return;
     }
 
-    //  Solo asignamos el ID del administrador como string
-    this.historiaDialogo.administrador = String(this.administradorSeleccionado.id);
+    const formData = new FormData();
+    formData.append('nombreHistoria', this.historiaDialogo.nombreHistoria || '');
+    formData.append('descripcion', this.historiaDialogo.descripcion || '');
+    formData.append('administrador_id', this.administradorSeleccionado.id.toString());
+
+    if (this.imagenSeleccionada) {
+      formData.append('imagen', this.imagenSeleccionada);
+    }
 
     if (this.nuevaHistoria) {
-      this.historiaService.postHistoria(this.historiaDialogo).subscribe(() => {
+      this.historiaService.postHistoriaConImagen(formData).subscribe(() => {
         this.obtenerHistorias();
         this.visible = false;
       });
     } else {
-      this.historiaService.putHistoria(this.historiaDialogo).subscribe(() => {
+      this.historiaService.putHistoriaConImagen(this.historiaDialogo.id, formData).subscribe(() => {
         this.obtenerHistorias();
         this.visible = false;
       });
+    }
+  }
+
+  onBasicUploadAuto(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.imagenSeleccionada = input.files[0];
     }
   }
 }

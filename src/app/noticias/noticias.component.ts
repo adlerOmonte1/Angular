@@ -1,6 +1,6 @@
-/*import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Noticia } from '../../models/noticias.model';
-import { administrador } from '../../models/administrador.model';
+import { Administrador } from '../../models/administrador.model';
 import { apiService } from '../../service/api.service';
 import { AdministradorService } from '../../service/administrador.service';
 
@@ -11,79 +11,93 @@ import { AdministradorService } from '../../service/administrador.service';
   styleUrls: ['./noticias.component.css'],
   providers: [apiService, AdministradorService]
 })
-export class NoticiaComponent implements OnInit {
+export class NoticiaComponent {
 
-  noticias: Noticia[] = [];
-  administradores: administrador[] = [];
-  administradorSeleccionado: administrador | undefined;
-
+  noticias: Noticia[];
   visible: boolean = false;
   nuevaNoticia: boolean = true;
   noticiaDialogo: Noticia = new Noticia();
 
+  imagenSeleccionada: File | null = null;
+
+  administradores: Administrador[];
+  administradorSeleccionado: Administrador | undefined;
+
   constructor(
     private noticiaService: apiService,
     private administradorService: AdministradorService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.obtenerNoticias();
     this.obtenerAdministradores();
   }
 
-  obtenerNoticias(): void {
+  abrirDialogo() {
+    this.visible = true;
+    this.nuevaNoticia = true;
+    this.noticiaDialogo = new Noticia();
+    this.imagenSeleccionada = null;
+    this.administradorSeleccionado = undefined;
+  }
+
+  obtenerNoticias() {
     this.noticiaService.getNoticias().subscribe(res => {
       this.noticias = res;
     });
   }
 
-  obtenerAdministradores(): void {
-    this.administradorService.getAdministradores().subscribe(res => {
+  obtenerAdministradores() {
+    this.administradorService.getAdministrador().subscribe(res => {
       this.administradores = res;
     });
   }
 
-  abrirDialogo(): void {
-    this.nuevaNoticia = true;
-    this.noticiaDialogo = new Noticia();
-    this.administradorSeleccionado = undefined;
+  editarNoticia(noticia: Noticia) {
     this.visible = true;
-  }
-
-  editarNoticia(noticia: Noticia): void {
     this.nuevaNoticia = false;
     this.noticiaDialogo = { ...noticia };
-    this.administradorSeleccionado = this.administradores.find(adm => adm.id === noticia.administrador);
-    this.visible = true;
+    this.administradorSeleccionado = this.administradores.find(a => a.id === noticia.administrador.id)!;
+    this.imagenSeleccionada = null;
   }
 
-  eliminarNoticia(noticia: Noticia): void {
-    if (noticia.id !== undefined && confirm('¿Estás seguro de eliminar esta noticia?')) {
-      this.noticiaService.deleteNoticias(noticia.id.toString()).subscribe(() => {
-        this.obtenerNoticias();
-      });
-    }
+  eliminarNoticia(noticia: Noticia) {
+    this.noticiaService.deleteNoticias(noticia.id).subscribe(() => {
+      this.obtenerNoticias();
+    });
   }
 
-  guardarNoticia(): void {
+  guardarNoticia() {
     if (!this.administradorSeleccionado) {
       alert('Debes seleccionar un administrador');
       return;
     }
 
-    this.noticiaDialogo.administrador = this.administradorSeleccionado.id;
+    const formData = new FormData();
+    formData.append('titulo', this.noticiaDialogo.titulo || '');
+    formData.append('contenido', this.noticiaDialogo.contenido || '');
+    formData.append('fecha_publicacion', this.noticiaDialogo.fecha_publicacion || '');
+    formData.append('administrador_id', this.administradorSeleccionado.id.toString());
+
+    if (this.imagenSeleccionada) {
+      formData.append('imagen', this.imagenSeleccionada);
+    }
 
     if (this.nuevaNoticia) {
-      this.noticiaService.postNoticias(this.noticiaDialogo).subscribe(() => {
+      this.noticiaService.postNoticiasForm(formData).subscribe(() => {
         this.obtenerNoticias();
         this.visible = false;
       });
     } else {
-      this.noticiaService.putNoticias(this.noticiaDialogo).subscribe(() => {
+      this.noticiaService.putNoticiasForm(this.noticiaDialogo.id, formData).subscribe(() => {
         this.obtenerNoticias();
         this.visible = false;
       });
     }
   }
+
+  onBasicUploadAuto(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.imagenSeleccionada = input.files[0];
+    }
+  }
 }
-*/

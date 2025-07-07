@@ -1,6 +1,8 @@
+import { Administrador } from "./administrador.model";
 export class Historia {
   id: number;
   nombreHistoria: string;
   descripcion: string;
-  administrador: string;
+  imagen: string;
+  administrador: Administrador; 
 }

@@ -28,6 +28,8 @@ import { UsuarioComponent } from './usuarios/usuarios.component';
 import { CrearusuarioComponent } from './crearusuario/crearusuario.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PartidoComponent } from './partidos/partidos.component';
+import { NoticiaComponent } from './noticias/noticias.component';
+import { PosthistoriasComponent } from './post-historia/post-historia.component';
 
 
 
@@ -56,6 +58,10 @@ const routes: Routes = [
 
     {path: 'partidos',component:PartidoComponent, canActivate: [AuthGuard]},
     {path: 'historias',component:HistoriaComponent, canActivate: [AuthGuard]},
+    {path: 'noticias',component:NoticiaComponent, canActivate: [AuthGuard]},
+    {path: 'post-historias',component:PosthistoriasComponent, canActivate: [AuthGuard]},
+    
+    
 
 
     // By Sidanne

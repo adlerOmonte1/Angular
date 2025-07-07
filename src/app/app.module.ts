@@ -45,7 +45,7 @@ import { SplitterModule } from 'primeng/splitter';
 import { DataViewModule } from 'primeng/dataview';
 import { InputNumberModule } from 'primeng/inputnumber';
 
-//import { NoticiaComponent } from './noticias/noticias.component';
+import { NoticiaComponent } from './noticias/noticias.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PromocionComponent } from './promocion/promocion.component';
 import { ProductoComponent } from './producto/producto.component';
@@ -69,6 +69,7 @@ import { UsuarioComponent } from './usuarios/usuarios.component';
 import { CrearusuarioComponent } from './crearusuario/crearusuario.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PartidoComponent } from './partidos/partidos.component';
+import { PosthistoriasComponent } from './post-historia/post-historia.component';
 
 
 @NgModule({
@@ -98,7 +99,9 @@ import { PartidoComponent } from './partidos/partidos.component';
   UsuarioComponent,
   CrearusuarioComponent,
   PerfilComponent,
-  PartidoComponent
+  PartidoComponent,
+  NoticiaComponent,
+  PosthistoriasComponent,
 ],
 
   imports: [

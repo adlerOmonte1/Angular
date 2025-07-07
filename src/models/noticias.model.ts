@@ -1,8 +1,10 @@
+import { Administrador } from "./administrador.model";
+
 export class Noticia {
   id: number;
-  administrador: string;            
+  administrador: Administrador;            
   titulo: string;
   contenido: string;
   fecha_publicacion: string;        
-  imagen_url: string;               
+  imagen: string;               
 }

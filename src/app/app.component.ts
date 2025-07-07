@@ -88,7 +88,16 @@ export class AppComponent {
                 icon: 'pi pi-calendar',
                 command: () => this.router.navigate(['/historias'])
               },
-
+              {
+                label: 'Noticias',
+                icon: 'pi pi-file',
+                command: () => this.router.navigate(['/noticias'])
+              },
+              { 
+                label: 'Post-Historias',
+                icon: 'pi pi-file',
+                command: () => this.router.navigate(['/post-historias'])
+              }
             ]
           },
           {

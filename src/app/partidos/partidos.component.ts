@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Partido } from '../../models/partidos.model';
 import { Administrador } from '../../models/administrador.model';
 import { apiService } from '../../service/api.service';
@@ -11,68 +11,82 @@ import { AdministradorService } from '../../service/administrador.service';
   styleUrls: ['./partidos.component.css'],
   providers: [apiService, AdministradorService]
 })
-export class PartidoComponent implements OnInit {
+export class PartidoComponent {
 
-  partidos: Partido[] = [];
-  administradores: Administrador[] = [];
-  administradorSeleccionado: Administrador | undefined;
-
+  partidos: Partido[];
   visible: boolean = false;
   nuevoPartido: boolean = true;
   partidoDialogo: Partido = new Partido();
 
+  administradores: Administrador[];
+  administradorSeleccionado: Administrador | undefined;
+
   constructor(
     private partidoService: apiService,
     private administradorService: AdministradorService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.obtenerPartidos();
     this.obtenerAdministradores();
   }
 
-  obtenerPartidos(): void {
+  abrirDialogo() {
+    this.visible = true;
+    this.nuevoPartido = true;
+    this.partidoDialogo = new Partido();
+    this.administradorSeleccionado = undefined;
+  }
+
+  obtenerPartidos() {
     this.partidoService.getPartidos().subscribe(res => {
       this.partidos = res;
     });
   }
 
-  obtenerAdministradores(): void {
+  obtenerAdministradores() {
     this.administradorService.getAdministrador().subscribe(res => {
       this.administradores = res;
     });
   }
 
-  abrirDialogo(): void {
-    this.nuevoPartido = true;
-    this.partidoDialogo = new Partido();
-    this.administradorSeleccionado = undefined;
+  editarPartido(partido: Partido) {
     this.visible = true;
+    this.nuevoPartido = false;
+    this.partidoDialogo = { ...partido };
+    this.administradorSeleccionado = this.administradores.find(a => a.id === partido.administrador.id)!;
   }
 
+  eliminarPartido(partido: Partido) {
+    this.partidoService.deletePartido(partido.id).subscribe(() => {
+      this.obtenerPartidos();
+    });
+  }
 
-
-  eliminarPartido(partido: Partido): void {
-    if (partido.id !== undefined && confirm('¿Estás seguro de eliminar este partido?')) {
-      this.partidoService.deletePartido(partido.id).subscribe(() => {
-        this.obtenerPartidos();
-      });
+  guardarPartido() {
+    if (!this.administradorSeleccionado) {
+      alert('Debes seleccionar un administrador');
+      return;
     }
-  }
 
-  guardarPartido(): void {
+    const partidoPayload = {
+      nombre_partido: this.partidoDialogo.nombre_partido,
+      lugar_partido: this.partidoDialogo.lugar_partido,
+      fecha_partido: this.partidoDialogo.fecha_partido,
+      hora_partido: this.partidoDialogo.hora_partido,
+      resultado: this.partidoDialogo.resultado,
+      administrador_id: this.administradorSeleccionado.id
+    };
 
     if (this.nuevoPartido) {
-      this.partidoService.postPartido(this.partidoDialogo).subscribe(() => {
+      this.partidoService.postPartido(partidoPayload).subscribe(() => {
         this.obtenerPartidos();
         this.visible = false;
       });
     } else {
-      this.partidoService.putPartido(this.partidoDialogo).subscribe(() => {
+      const id = this.partidoDialogo.id;
+      this.partidoService.putPartido({ id, ...partidoPayload }).subscribe(() => {
         this.obtenerPartidos();
         this.visible = false;
       });
     }
   }
 }
-

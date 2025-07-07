@@ -70,18 +70,16 @@ export class apiService {
     return this.http.get<Noticia[]>(this.ApiUrl + 'noticias/');
   }
 
-  public postNoticias(noticia: Noticia): Observable<Noticia> {
-    let body = JSON.stringify(noticia);
-    return this.http.post<Noticia>(this.ApiUrl + 'noticias/', body, this.httpOptions);
+  public postNoticiasForm(data: FormData): Observable<Noticia> {
+    return this.http.post<Noticia>(this.ApiUrl + 'noticias/', data);
   }
 
-  public putNoticias(noticia: Noticia): Observable<Noticia> {
-    let body = JSON.stringify(noticia);
-    return this.http.put<Noticia>(this.ApiUrl + 'noticias/' + noticia.id + "/", body, this.httpOptions);
+  public putNoticiasForm(id: number, data: FormData): Observable<Noticia> {
+    return this.http.put<Noticia>(`${this.ApiUrl}noticias/${id}/`, data);
   }
 
-  public deleteNoticias(id: string): Observable<void> {
-    return this.http.delete<void>(this.ApiUrl + 'noticias/' + id + "/");
+  public deleteNoticias(id: number): Observable<any> {
+    return this.http.delete(`${this.ApiUrl}noticias/${id}/`);
   }
 
   // ------------------ CRUD TALLAS (UnidadMedida) ------------------
@@ -112,59 +110,49 @@ export class apiService {
     return this.http.get<Partido>(this.ApiUrl + 'partidos/' + id + '/');
   }
 
-  public postPartido(partido: Partido): Observable<Partido> {
-    let body = JSON.stringify(partido);
-    return this.http.post<Partido>(this.ApiUrl + 'partidos/', body, this.httpOptions);
+  public postPartido(partido: any): Observable<Partido> {
+    return this.http.post<Partido>(this.ApiUrl + 'partidos/', JSON.stringify(partido), this.httpOptions);
   }
 
-  public putPartido(partido: Partido): Observable<Partido> {
-    let body = JSON.stringify(partido);
-    return this.http.put<Partido>(this.ApiUrl + 'partidos/' + partido.id + '/', body, this.httpOptions);
+  public putPartido(partido: any): Observable<Partido> {
+    return this.http.put<Partido>(this.ApiUrl + 'partidos/' + partido.id + '/', JSON.stringify(partido), this.httpOptions);
   }
 
   public deletePartido(id: number): Observable<void> {
     return this.http.delete<void>(this.ApiUrl + 'partidos/' + id + '/');
   }
-
   // ------------------ CRUD HISTORIAS ------------------
+  public postHistoriaConImagen(data: FormData): Observable<Historia> {
+    return this.http.post<Historia>(this.ApiUrl + 'historias/', data);
+  }
+  public putHistoriaConImagen(id: number, data: FormData): Observable<Historia> {
+    return this.http.put<Historia>(this.ApiUrl + 'historias/' + id + '/', data);
+  }
+
   public getHistorias(): Observable<Historia[]> {
     return this.http.get<Historia[]>(this.ApiUrl + 'historias/');
   }
 
-  public postHistoria(historia: Historia): Observable<Historia> {
-    let body = JSON.stringify(historia);
-    return this.http.post<Historia>(this.ApiUrl + 'historias/', body, this.httpOptions);
+  public deleteHistoria(id: number): Observable<any> {
+    return this.http.delete(this.ApiUrl + 'historias/' + id + '/');
   }
 
-  public putHistoria(historia: Historia): Observable<Historia> {
-    let body = JSON.stringify(historia);
-    return this.http.put<Historia>(this.ApiUrl + 'historias/' + historia.id + '/', body, this.httpOptions);
-  }
+// ------------------ CRUD POST_HISTORIA ------------------
+public getPostHistorias(): Observable<PostHistoria[]> {
+  return this.http.get<PostHistoria[]>(this.ApiUrl + 'post-historias/');
+}
+public postPostHistoria(data: FormData): Observable<PostHistoria> {
+  return this.http.post<PostHistoria>(this.ApiUrl + 'post-historias/', data);
+}
 
-  public deleteHistoria(id: number): Observable<void> {
-    return this.http.delete<void>(this.ApiUrl + 'historias/' + id + '/');
-  }
+public putPostHistoria(id: number, data: FormData): Observable<PostHistoria> {
+  return this.http.put<PostHistoria>(this.ApiUrl + 'post-historias/' + id + '/', data);
+}
 
-  // ------------------ CRUD POST_HISTORIA ------------------
-  public getPostHistorias(): Observable<PostHistoria[]> {
-    return this.http.get<PostHistoria[]>(this.ApiUrl + 'post-historias/');
-  }
-
-  public postPostHistoria(postHistoria: PostHistoria): Observable<PostHistoria> {
-    let body = JSON.stringify(postHistoria);
-    return this.http.post<PostHistoria>(this.ApiUrl + 'post-historias/', body, this.httpOptions);
-  }
-
-  public putPostHistoria(postHistoria: PostHistoria): Observable<PostHistoria> {
-    let body = JSON.stringify(postHistoria);
-    return this.http.put<PostHistoria>(this.ApiUrl + 'post-historias/' + postHistoria.id + '/', body, this.httpOptions);
-  }
-
-  public deletePostHistoria(id: number): Observable<void> {
-    return this.http.delete<void>(this.ApiUrl + 'post-historias/' + id + '/');
-  }
-
-
+public deletePostHistoria(id: number): Observable<void> {
+  return this.http.delete<void>(this.ApiUrl + 'post-historias/' + id + '/');
+}
+// -------------------------------------------------------------------
   public getStock():Observable<Stock[]>{
     return this.http.get<Stock[]>(this.ApiUrl+'stock/');
   }
