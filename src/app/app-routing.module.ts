@@ -35,6 +35,7 @@ import { UsuarioComponent } from './usuarios/usuarios.component';
 
 const routes: Routes = [
     {path: 'login',component:LoginComponent},
+    {path: '',component:LoginComponent},
     {path: 'inicio',component:HomeComponent, canActivate: [AuthGuard]},
     {path: 'micuenta', component:MiCuentaComponent},
 
@@ -62,9 +63,9 @@ const routes: Routes = [
 
     // By Sidanne
     {path: 'proveedores', component: ProveedoresComponent, canActivate: [AuthGuard]},
-    {path: 'administradores', component: AdministradorComponent, canActivate: [AuthGuard]}, 
+    {path: 'administradores', component: AdministradorComponent, canActivate: [AuthGuard]},
     {path: 'tiposadmin', component: TiposadminComponent, canActivate: [AuthGuard]},
-    {path: 'jugadores', component: JugadorComponent, canActivate: [AuthGuard]}, 
+    {path: 'jugadores', component: JugadorComponent, canActivate: [AuthGuard]},
     {path: 'hinchas', component: HinchaComponent, canActivate: [AuthGuard]},
     {path: 'usuarios', component: UsuarioComponent, canActivate: [AuthGuard]},
 

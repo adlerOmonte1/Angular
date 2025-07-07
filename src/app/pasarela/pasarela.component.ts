@@ -30,11 +30,11 @@ export class PasarelaComponent {
     this.obtenerPasarelas();
   }
 
-  editarPasarela(pasarela: Pasarela) {
-    this.visible = true;
-    this.nuevaPasarela = false;
-    this.pasarelaDialogo = pasarela;
-  }
+    editarPasarela(pasarela: Pasarela) {
+      this.visible = true;
+      this.nuevaPasarela = false;
+      this.pasarelaDialogo = pasarela;
+    }
 
   eliminarPasarela(pasarela: Pasarela) {
     this.api.deletePasarela(pasarela.id.toString()).subscribe(() => {
