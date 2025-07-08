@@ -37,7 +37,7 @@
   </ng-template>
 </p-table>
 
-<!-- Diálogo -->
+<!-- Diálogo para Crear/Editar Historia -->
 <p-dialog header="Crear/Editar Historia" [(visible)]="visible" [modal]="true" [style]="{ width: '30rem' }">
   <div class="field mb-3">
     <label for="administrador">Administrador</label>
@@ -63,7 +63,14 @@
 
   <div class="field mb-3">
     <label for="imagen">Imagen</label>
-    <input type="file" id="imagen" (change)="onBasicUploadAuto($event)" />
+    <p-fileupload 
+      mode="basic"
+      name="imagen"
+      accept="image/*"
+      chooseLabel="Elegir Imagen"
+      chooseIcon="pi pi-upload"
+      (onSelect)="onBasicUploadAuto($event)">
+    </p-fileupload>
   </div>
 
   <div class="flex justify-end gap-2">

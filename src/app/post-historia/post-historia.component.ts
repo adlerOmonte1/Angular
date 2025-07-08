@@ -70,9 +70,9 @@ export class PosthistoriasComponent {
     }
 
     const formData = new FormData();
-    formData.append('titulo', this.postDialogo.titulo || '');
-    formData.append('contexto', this.postDialogo.contexto || '');
-    formData.append('fecha_publicacion', this.postDialogo.fecha_publicacion || '');
+    formData.append('titulo', this.postDialogo.titulo);
+    formData.append('contexto', this.postDialogo.contexto);
+    formData.append('fecha_publicacion', this.postDialogo.fecha_publicacion);
     formData.append('historia', this.historiaSeleccionada.id.toString());
 
     if (this.imagenSeleccionada) {

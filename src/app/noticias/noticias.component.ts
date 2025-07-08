@@ -55,7 +55,9 @@ export class NoticiaComponent {
     this.visible = true;
     this.nuevaNoticia = false;
     this.noticiaDialogo = { ...noticia };
-    this.administradorSeleccionado = this.administradores.find(a => a.id === noticia.administrador.id)!;
+    this.administradorSeleccionado = this.administradores.find(
+      a => a.id === (typeof noticia.administrador === 'object' ? noticia.administrador.id : noticia.administrador)
+    );
     this.imagenSeleccionada = null;
   }
 
@@ -72,9 +74,9 @@ export class NoticiaComponent {
     }
 
     const formData = new FormData();
-    formData.append('titulo', this.noticiaDialogo.titulo || '');
-    formData.append('contenido', this.noticiaDialogo.contenido || '');
-    formData.append('fecha_publicacion', this.noticiaDialogo.fecha_publicacion || '');
+    formData.append('titulo', this.noticiaDialogo.titulo);
+    formData.append('contenido', this.noticiaDialogo.contenido);
+    formData.append('fecha_publicacion', this.noticiaDialogo.fecha_publicacion);
     formData.append('administrador_id', this.administradorSeleccionado.id.toString());
 
     if (this.imagenSeleccionada) {
@@ -94,10 +96,9 @@ export class NoticiaComponent {
     }
   }
 
-  onBasicUploadAuto(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.imagenSeleccionada = input.files[0];
+  onBasicUploadAuto(event: any) {
+    if (event.files && event.files.length > 0) {
+      this.imagenSeleccionada = event.files[0];
     }
   }
 }

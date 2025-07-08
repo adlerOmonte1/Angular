@@ -55,7 +55,9 @@ export class HistoriaComponent {
     this.visible = true;
     this.nuevaHistoria = false;
     this.historiaDialogo = { ...historia };
-    this.administradorSeleccionado = this.administradores.find(a => a.id === historia.administrador.id);
+    this.administradorSeleccionado = this.administradores.find(
+      a => a.id === (typeof historia.administrador === 'object' ? historia.administrador.id : historia.administrador)
+    );
     this.imagenSeleccionada = null;
   }
 
@@ -92,11 +94,9 @@ export class HistoriaComponent {
       });
     }
   }
-
-  onBasicUploadAuto(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.imagenSeleccionada = input.files[0];
+  onBasicUploadAuto(event: any) {
+    if (event.files && event.files.length > 0) {
+      this.imagenSeleccionada = event.files[0];
     }
   }
 }
